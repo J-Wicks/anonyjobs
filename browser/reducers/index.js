@@ -1,4 +1,4 @@
-import {RECEIVE_POSTINGS} from "../action-creators";
+import {RECEIVE_POSTINGS, SET_SELECTED_POSTING} from "../action-creators";
 
 const initialState = {
 	postings: []
@@ -11,9 +11,11 @@ export default function (state = initialState, action) {
   switch (action.type) {
 
     case RECEIVE_POSTINGS:
-      newState.productOrders = action.productOrders;
+      newState.postings = action.postings;
       break;
 
+		case SET_SELECTED_POSTING:
+			newState.selectedPosting = action.posting
     default:
       return state;
 
