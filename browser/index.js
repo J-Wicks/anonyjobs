@@ -11,9 +11,18 @@ import AppContainer from './containers/AppContainer';
 import LoginContainer from './containers/LoginContainer';
 import HomeContainer from './containers/HomeContainer';
 import EmployerDashboardContainer from './containers/EmployerDashboardContainer';
+import UserDashboardContainer from './containers/UserDashboardContainer';
+import UserDashboard from '.components/users/UserDashboard/'
+
+const onUserEnter = () => {
+	/* WE STILL NEED A PROFILE MODEL AND API ROUTE*/
+	// store.dispatch(fetchCurrentProfile());
+	store.dispatch(fetchApplications());
+}
+
 
 ReactDOM.render(
-	<Provider store={store}> 
+	<Provider store={store}>
 	  	<Router history = {hashHistory}>
 
 	  		<Route path='/' component={AppContainer} >
@@ -21,6 +30,9 @@ ReactDOM.render(
 		  		<Route path='/home' component={HomeContainer} />
 		  		<Route path='/employerdashboard' component={EmployerDashboardContainer} />
 		  		<Route path='/login' component={LoginContainer} />
+					<Route path='/userdashboard' component={UserDashboardContainer} onEnter={} />
+							<Route path='/userdashboard' component={UserDashboard} />
+					</Route>
 	  		</Route>
 		</Router>
 	</Provider>,
