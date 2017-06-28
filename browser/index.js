@@ -8,9 +8,10 @@ import store from './store';
 import axios from 'axios';
 
 import AppContainer from './containers/AppContainer';
-import LoginContainer from './containers/LoginContainer';
+import SignUpContainer from './containers/SignUpContainer';
 import HomeContainer from './containers/HomeContainer';
 import EmployerDashboardContainer from './containers/EmployerDashboardContainer';
+import LoginContainer from './containers/LoginContainer'
 
 ReactDOM.render(
 	<Provider store={store}> 
@@ -20,6 +21,7 @@ ReactDOM.render(
 		  		<IndexRedirect to="/home" />
 		  		<Route path='/home' component={HomeContainer} />
 		  		<Route path='/employerdashboard' component={EmployerDashboardContainer} />
+		  		<Route path='/signup' component={SignUpContainer} />
 		  		<Route path='/login' component={LoginContainer} />
 	  		</Route>
 		</Router>
