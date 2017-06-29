@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const Application = require('../models').Application
+const Application = require('../models/Application')
+const Posting = require('../models/Posting')
 
 router.get('/', (req, res) => {
 	Application.findAll()
@@ -17,7 +18,10 @@ router.post('/', (req, res) => {
 		return Posting.findById(req.body.postingId)
 	})
 	.then(foundPosting => {
-		res.status(200).json(foundPosting)
+		return foundPosting.setUser(req.body.userId)
+	})
+	.then(() => {
+		return Posting.findByid(req.body.postingId)
 	})
 })
 
