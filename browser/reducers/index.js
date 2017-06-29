@@ -1,4 +1,8 @@
+
+import {RECEIVE_POSTINGS, SET_SELECTED_POSTING} from "../action-creators";
+
 import {RECEIVE_POSTINGS, LOGIN_USER, MOD_USER_TYPE} from "../action-creators";
+
 
 const initialState = {
 	postings: [],
@@ -23,6 +27,8 @@ export default function (state = initialState, action) {
       newState.loggedInUser = action.loggedInUser;
       break;
 
+		case SET_SELECTED_POSTING:
+			newState.selectedPosting = action.posting
     default:
       return state;
 
