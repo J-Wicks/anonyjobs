@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, Route, hashHistory, IndexRedirect, IndexRoute } from 'react-router'
+import { Router, Route, browserHistory, IndexRedirect, IndexRoute } from 'react-router'
 import store from './store';
 
 
@@ -12,6 +12,7 @@ import HomeContainer from './containers/HomeContainer';
 import EmployerDashboardContainer from './containers/EmployerDashboardContainer';
 import {UserDashboardContainer} from './containers/UserDashboardContainer';
 import {fetchCurrentUser} from './reducers/user'
+import { logIn } from './reducers/user'
 import Application from './components/Application'
 // import UserDashboard from './components/users/UserDashboard/'
 import LoginContainer from './containers/LoginContainer'
@@ -24,12 +25,20 @@ const onUserEnter = (nextRouterState) => {
 	// store.dispatch(fetchApplications());
 }
 
+const onAppEnter = function() {
+	axios.get('/api/auth/me')
+	.then( returnedUser =>{
+		const user = returnedUser.data
+
+		store.dispatch(logIn(user))
+	})
+}
 
 ReactDOM.render(
 	<Provider store={store}>
-	  	<Router history = {hashHistory}>
+	  	<Router history = {browserHistory}>
 
-	  		<Route path='/' component={AppContainer} >
+	  		<Route path='/' component={AppContainer} onEnter={onAppEnter}>
 		  		<IndexRedirect to="/home" />
 		  		<Route path='/home' component={HomeContainer} />
 		  		<Route path='/employerdashboard' component={EmployerDashboardContainer} />
