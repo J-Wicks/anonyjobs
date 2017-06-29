@@ -16,8 +16,6 @@ var Users = db.define('Users', {
 		type: Sequelize.STRING
 	},
 
-	googleId: Sequelize.STRING,
-
 	salt: {
 		type: Sequelize.STRING
 	},
@@ -47,20 +45,12 @@ var Users = db.define('Users', {
       hash.update(salt);
       return hash.digest('hex');
     }
+
 	}
-	,
-	// hooks: {
-	// 	beforeCreate: setSaltAndPassword,
-	// 	beforeUpdate: setSaltAndPassword
-	// }
+	
 })
-//
-// function setSaltAndPassword (user) {
-// 	if (user.changed('password')) {
-//     user.salt = user.Model.generateSalt();
-//     user.password = user.Model.encryptPassword(user.password, user.salt);
-//   }
-// }
+
+
 
 
 
