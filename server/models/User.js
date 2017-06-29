@@ -18,8 +18,39 @@ var Users = db.define('Users', {
 
 	salt: {
 		type: Sequelize.STRING
+	},
+	firstName: {
+		type: Sequelize.STRING
+	},
+	lastName: {
+		type: Sequelize.STRING
+	},
+},{
+	instanceMethods: {
+		sanitize: function () {
+      return _.omit(this.toJSON(), ['password', 'salt']);
+    },
+
+    correctPassword: function (candidatePassword) {
+      return this.Model.encryptPassword(candidatePassword, this.salt) === this.password;
+    }
+	},
+	classMethods: {
+		generateSalt: function () {
+      return crypto.randomBytes(16).toString('base64');
+    },
+    encryptPassword: function (plainText, salt) {
+      const hash = crypto.createHash('sha1');
+      hash.update(plainText);
+      hash.update(salt);
+      return hash.digest('hex');
+    }
+
 	}
+	
 })
+
+
 
 
 

@@ -22,9 +22,7 @@ class AppContainer extends Component {
       <div className="fullscreen-bg">
       </div>
         <Navbar />
-
         <div className="col-xs-12">
-
           { this.props.children }
         </div>
       </div>

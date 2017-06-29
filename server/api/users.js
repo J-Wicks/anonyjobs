@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const User = require('../models').User
 
+
 router.get('/', (req, res) => {
 	User.findAll()
 	.then(foundUsers => {
@@ -15,6 +16,14 @@ router.post('/', (req, res) => {
 	// 	res.send(createdUser)
 	// })
 	res.send('thanks')
+})
+
+router.get('/:id', (req, res) => {
+	// res.send(+req.params.id)
+	User.findById(+req.params.id)
+	.then(foundUser => {
+		res.json(foundUser)
+	})
 })
 
 module.exports = router
