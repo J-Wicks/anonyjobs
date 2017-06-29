@@ -11,7 +11,7 @@ import AppContainer from './containers/AppContainer';
 import SignUpContainer from './containers/SignUpContainer';
 import HomeContainer from './containers/HomeContainer';
 import EmployerDashboardContainer from './containers/EmployerDashboardContainer';
-
+import LoginContainer from './containers/LoginContainer'
 import Application from './components/Application'
 
 ReactDOM.render(
@@ -24,21 +24,6 @@ ReactDOM.render(
 				<Route path='/employerdashboard' component={EmployerDashboardContainer} />
 				<Route path='/login' component={LoginContainer} />
 			</Route>
-
-import LoginContainer from './containers/LoginContainer'
-
-ReactDOM.render(
-	<Provider store={store}> 
-	  	<Router history = {hashHistory}>
-
-	  		<Route path='/' component={AppContainer} >
-		  		<IndexRedirect to="/home" />
-		  		<Route path='/home' component={HomeContainer} />
-		  		<Route path='/employerdashboard' component={EmployerDashboardContainer} />
-		  		<Route path='/signup' component={SignUpContainer} />
-		  		<Route path='/login' component={LoginContainer} />
-	  		</Route>
-
 		</Router>
 	</Provider>,
   document.getElementById('app') // make sure thisa is the same as the id of the div in your index.html
