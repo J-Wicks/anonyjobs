@@ -4,15 +4,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 import pandas as pd
 import urllib.request
+import json
+
+url = 'https://serene-forest-99801.herokuapp.com/api/allData'
+r = urllib.request.urlopen(url)
+data = json.loads(r.read().decode(r.info().get_param('charset') or 'utf-8'))
 
 # statement = <what was sent in the route>
 # transform the input with Pandas
-
-# Import data here
-# urllib 
-# gender = 
-# race = 
-# orientation = 
 
 X = gender.data
 y = gender.target
