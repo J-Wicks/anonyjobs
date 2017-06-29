@@ -10,14 +10,12 @@ export default function Home (props) {
 	return(
 		<div>
 		<h1> Welcome to Anonyjob </h1>
-		<h3> The most well named website on the internet </h3>
+		<h3> What you need, when you need it </h3>
 		<Link to='/signup'>
 		 <button onClick={props.setERUser}> Employers Login Here </button>
 		 </Link>
 		<br />
-		<Link to='/signup'>
-		<button onClick={props.setAppUser}> Applicants Login Here </button>
-		</Link>
+		<a href="/api/auth/linkedin"><button className="btn btn-danger google-btn" type="submit">Login with LinkedIn</button></a>
 		</div>
 		)
 }

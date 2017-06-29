@@ -22,9 +22,20 @@ export default function Navbar(props) {
 		                    </Link>
 		                </li>
 		              	<li>
-		               		<Link to='/login'>
-		                    <p className="yellow">Login</p>
-		                    </Link>
+		              	
+		              	{
+		              		props.loggedInUser.email?
+		              		<div>
+		              		<p>{props.loggedInUser.email}</p>
+		              		<button onClick={props.logout}> Log Out Please</button>
+		              		</div>
+		              		:
+		              		<Link to='/login'> Log In </Link>
+
+		              	}
+
+		              	
+
 		                </li>
 		            </ul>
 		            <ul className="nav navbar-nav navbar-right">

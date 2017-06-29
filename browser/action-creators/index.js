@@ -2,9 +2,9 @@ import axios from "axios";
 
 /* CONSTANTS - ACTION TYPES */
 export const RECEIVE_POSTINGS = "RECEIVE_POSTINGS";
-
-export const LOGIN_USER = "LOGIN_USER"
-export const SET_SELECTED_POSTING = "SET_SELECTED_POSTING"
+export const LOGOUT_USER = "LOGOUT_USER";
+export const LOGIN_USER = "LOGIN_USER";
+export const SET_SELECTED_POSTING = "SET_SELECTED_POSTING";
 
 
 export const MOD_USER_TYPE = "MOD_USER_TYPE"

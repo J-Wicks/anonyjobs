@@ -12,6 +12,7 @@ import HomeContainer from './containers/HomeContainer';
 import EmployerDashboardContainer from './containers/EmployerDashboardContainer';
 import {UserDashboardContainer} from './containers/UserDashboardContainer';
 import {fetchCurrentUser} from './reducers/user'
+import { logIn } from './reducers/user'
 import {getPostings} from './reducers/posting'
 import Application from './components/Application'
 // import UserDashboard from './components/users/UserDashboard/'
@@ -30,9 +31,18 @@ const onPostingsEnter = () => {
 	store.dispatch(getPostings())
 }
 
+const onAppEnter = function() {
+	axios.get('/api/auth/me')
+	.then( returnedUser =>{
+		const user = returnedUser.data
+
+		store.dispatch(logIn(user))
+	})
+}
 
 ReactDOM.render(
 	<Provider store={store}>
+
 	<Router history = {browserHistory}>
 		<Route path='/' component={AppContainer} >
 			<IndexRedirect to="/home" />
