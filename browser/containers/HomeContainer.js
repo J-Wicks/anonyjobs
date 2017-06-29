@@ -4,6 +4,7 @@ import Login from '../components/Login';
 import {connect} from 'react-redux';
 import { loginUser } from '../action-creators';
 import { hashHistory } from 'react-router';
+import { modUser } from '../action-creators';
 import Home from '../components/Home.js'
 
 const mapStateToProps = function (state) {
@@ -12,4 +13,16 @@ const mapStateToProps = function (state) {
 		}
 	}
 
-export default connect(mapStateToProps)(Home)
+const mapDispatchToProps = function (dispatch){
+	return{
+		setERUser: ()=>{
+			dispatch(modUser('employer'))
+		},
+		setAppUser: ()=>{
+			dispatch(modUser('applicant'))
+		},
+
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
