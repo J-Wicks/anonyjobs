@@ -35,7 +35,9 @@ export const fetchCurrentUser = (id) => { return (
 
   dispatch => {
     axios.get(`/api/users/${id}`)
-    .then(res => res.data)
+    .then(res => {
+      return res.data
+    })
     .then(user => {
       dispatch(setCurrentUser(user))
     })

@@ -25,7 +25,7 @@ class UserDashboard extends React.Component {
   render () {
     return (
       <div id="entire-container">
-        <h1>Welcome, {this.props.user.firstname} {this.props.user.lastname}</h1>
+        <h1>Welcome, {this.props.user.firstName} {this.props.user.lastName}</h1>
         <button><small>Create/Edit Profile</small></button>
         <UserApplications />
         <UserOpportunities />

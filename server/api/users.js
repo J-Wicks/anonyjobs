@@ -19,7 +19,6 @@ router.post('/', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-	// res.send(+req.params.id)
 	User.findById(+req.params.id)
 	.then(foundUser => {
 		res.json(foundUser)

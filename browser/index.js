@@ -14,31 +14,37 @@ import {UserDashboardContainer} from './containers/UserDashboardContainer';
 import {fetchCurrentUser} from './reducers/user'
 import Application from './components/Application'
 // import UserDashboard from './components/users/UserDashboard/'
-import LoginContainer from './containers/LoginContainer'
+import LoginContainer from './containers/LoginContainer';
+import CreateProfile from './components/users/CreateProfile'
 
 const onUserEnter = (nextRouterState) => {
 	/* WE STILL NEED A PROFILE MODEL AND API ROUTE*/
-	const userId = nextRouterState.params.profileId
+	const userId = nextRouterState.params.id;
+	console.log('userid from onUserEnter hook is', userId)
 	store.dispatch(fetchCurrentUser(userId))
 	// store.dispatch(fetchCurrentProfile());
 	// store.dispatch(fetchApplications());
 }
 
+// const onCreateProfile = () => {
+// 	store.dispatch(fetchAllSkills());
+//
+// }
 
+console.log('create profile: ', CreateProfile);
 ReactDOM.render(
 	<Provider store={store}>
 	  	<Router history = {hashHistory}>
 
 	  		<Route path='/' component={AppContainer} >
-		  		<IndexRedirect to="/home" />
+		  		<IndexRoute component ={HomeContainer} />
 		  		<Route path='/home' component={HomeContainer} />
+					<Route path='/create' component={CreateProfile} />
 		  		<Route path='/employerdashboard' component={EmployerDashboardContainer} />
 		  		<Route path='/signup' component={SignUpContainer} />
 		  		<Route path='/login' component={LoginContainer} />
 					<Route path='/userdashboard/:id' component={UserDashboardContainer} onEnter={onUserEnter}/>
-					<Route path="/createProfile" />
-					<Route path="/editProfile" />
-					<Route path="/viewProfile" />
+
 	  		</Route>
 		</Router>
 	</Provider>,
