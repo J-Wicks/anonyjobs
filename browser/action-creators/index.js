@@ -7,7 +7,6 @@ export const LOGIN_USER = "LOGIN_USER"
 export const SET_SELECTED_POSTING = "SET_SELECTED_POSTING"
 
 
-export const LOGIN_USER = "LOGIN_USER";
 export const MOD_USER_TYPE = "MOD_USER_TYPE"
 
 

@@ -12,7 +12,9 @@ import HomeContainer from './containers/HomeContainer';
 import EmployerDashboardContainer from './containers/EmployerDashboardContainer';
 import {UserDashboardContainer} from './containers/UserDashboardContainer';
 import {fetchCurrentUser} from './reducers/user'
+import Application from './components/Application'
 // import UserDashboard from './components/users/UserDashboard/'
+import LoginContainer from './containers/LoginContainer'
 
 const onUserEnter = (nextRouterState) => {
 	/* WE STILL NEED A PROFILE MODEL AND API ROUTE*/
@@ -22,24 +24,6 @@ const onUserEnter = (nextRouterState) => {
 	// store.dispatch(fetchApplications());
 }
 
-
-
-
-
-import Application from './components/Application'
-
-ReactDOM.render(
-	<Provider store={store}>
-		<Router history = {browserHistory}>
-			<Route path='/' component={AppContainer} >
-				<IndexRedirect to="/home" />
-				<Route path ='/application' component={Application} />
-				<Route path='/home' component={HomeContainer} />
-				<Route path='/employerdashboard' component={EmployerDashboardContainer} />
-				<Route path='/login' component={LoginContainer} />
-			</Route>
-
-import LoginContainer from './containers/LoginContainer'
 
 ReactDOM.render(
 	<Provider store={store}>
@@ -56,7 +40,6 @@ ReactDOM.render(
 					<Route path="/editProfile" />
 					<Route path="/viewProfile" />
 	  		</Route>
-
 		</Router>
 	</Provider>,
   document.getElementById('app') // make sure thisa is the same as the id of the div in your index.html
