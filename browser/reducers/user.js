@@ -7,8 +7,13 @@ import axios from 'axios';
 
 const SET_ALL_USERS = 'SET_ALL_USERS';
 const SET_CURRENT_USER = 'SET_CURRENT_USER';
+const MOD_USER_TYPE = 'MOD_USER_TYPE';
+const LOGIN_USER = 'LOGIN_USER';
 
 const initialState = {
+  postings: [],
+  loggedInUser: {},
+  UserType: '',
 	allUsers: [],
   currentUser: {},
 }
@@ -48,12 +53,23 @@ export const fetchCurrentUser = (id) => { return (
 export default function (state = initialState, action) {
   const newState = Object.assign({}, state);
   switch (action.type) {
+
     case SET_ALL_USERS:
       newState.allUsers = action.users;
       break;
+
     case SET_CURRENT_USER:
       newState.currentUser = action.user;
       break;
+
+    case MOD_USER_TYPE:
+      newState.userType = action.userType;
+      break;
+
+    case LOGIN_USER:
+      newState.loggedInUser = action.loggedInUser;
+      break;
+
     default:
       return state;
   }
