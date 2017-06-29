@@ -29,9 +29,9 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
 
-db.sync({force:true})
+db.sync()
 .then(() =>{
-  
+
 app.listen(process.env.PORT || 3000, function () {
   console.log("listening on port 3000");
 })

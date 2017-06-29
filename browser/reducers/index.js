@@ -1,22 +1,7 @@
-import {RECEIVE_POSTINGS} from "../action-creators";
+import { combineReducers } from 'redux';
+import profileReducer from './profile';
+import postingReducer from './posting';
+import applicationReducer from './application';
+import userReducer from './user';
 
-const initialState = {
-	postings: []
-}
-
-export default function (state = initialState, action) {
-
-  const newState = Object.assign({}, state);
-
-  switch (action.type) {
-
-    case RECEIVE_POSTINGS:
-      newState.productOrders = action.productOrders;
-      break;
-
-    default:
-      return state;
-
-  }
-  return newState;
-}
+export default combineReducers({ postingReducer, profileReducer, applicationReducer, userReducer });

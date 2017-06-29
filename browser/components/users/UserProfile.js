@@ -13,11 +13,37 @@ export default class UserProfile extends React.Component {
 
   render () {
     return (
-      <div>
-      <h1>Applications will go here</h1>
-      <textarea rows="4"/>
+      <h1>Create Profile</h1>
+      <button>Import LinkedIn Profile</button>
+      <button>Manually Create Profile</button>
+      <small>Maybe </small>
+      <form>
+        <div>
+          <label htmlFor="education">
+
+          </label>
+        </div>
+
+      // first name
+      // last name
+      // Industry
+      // Primary Industry
+      // Secondary Industry
+      // Skills
+      <div className="form-row">
+        <label htmlFor="skils"><small>Enter Skills</small></label>
       </div>
-    )
+      <button className="button">Submit</button>
+      </div>
+    </form>
+
+
+
+    //   <div>
+    //   <h1>Applications will go here</h1>
+    //   <textarea rows="4"/>
+    //   </div>
+    // )
   }
 
 }

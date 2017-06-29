@@ -47,19 +47,20 @@ var Users = db.define('Users', {
       hash.update(salt);
       return hash.digest('hex');
     }
-	},
-	hooks: {
-		beforeCreate: setSaltAndPassword,
-		beforeUpdate: setSaltAndPassword
 	}
+	,
+	// hooks: {
+	// 	beforeCreate: setSaltAndPassword,
+	// 	beforeUpdate: setSaltAndPassword
+	// }
 })
-
-function setSaltAndPassword (user) {
-	if (user.changed('password')) {
-    user.salt = user.Model.generateSalt();
-    user.password = user.Model.encryptPassword(user.password, user.salt);
-  }
-}
+//
+// function setSaltAndPassword (user) {
+// 	if (user.changed('password')) {
+//     user.salt = user.Model.generateSalt();
+//     user.password = user.Model.encryptPassword(user.password, user.salt);
+//   }
+// }
 
 
 

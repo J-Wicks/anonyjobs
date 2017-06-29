@@ -6,19 +6,24 @@ import store from './store';
 // import {getProductOrders, getProducts, receiveCart, getCartByUser, loginUser, receiveProducts, receiveUsers, getUsersOrders, receiveOrders, getUserById, getProductById, getOrderById, receiveReviews } from './action-creators'
 // import scss from '../index.scss';
 import axios from 'axios';
-
 import AppContainer from './containers/AppContainer';
 import LoginContainer from './containers/LoginContainer';
 import HomeContainer from './containers/HomeContainer';
 import EmployerDashboardContainer from './containers/EmployerDashboardContainer';
-import UserDashboardContainer from './containers/UserDashboardContainer';
-import UserDashboard from '.components/users/UserDashboard/'
+import {UserDashboardContainer} from './containers/UserDashboardContainer';
+import {fetchCurrentUser} from './reducers/user'
+// import UserDashboard from './components/users/UserDashboard/'
 
-const onUserEnter = () => {
+const onUserEnter = (nextRouterState) => {
 	/* WE STILL NEED A PROFILE MODEL AND API ROUTE*/
+	const userId = nextRouterState.params.profileId
+	store.dispatch(fetchCurrentUser(userId))
 	// store.dispatch(fetchCurrentProfile());
-	store.dispatch(fetchApplications());
+	// store.dispatch(fetchApplications());
 }
+
+
+
 
 
 ReactDOM.render(
@@ -30,9 +35,10 @@ ReactDOM.render(
 		  		<Route path='/home' component={HomeContainer} />
 		  		<Route path='/employerdashboard' component={EmployerDashboardContainer} />
 		  		<Route path='/login' component={LoginContainer} />
-					<Route path='/userdashboard' component={UserDashboardContainer} onEnter={} />
-							<Route path='/userdashboard' component={UserDashboard} />
-					</Route>
+					<Route path='/userdashboard/:id' component={UserDashboardContainer} onEnter={onUserEnter}/>
+					<Route path="/createProfile" />
+					<Route path="/editProfile" />
+					<Route path="/viewProfile" />
 	  		</Route>
 		</Router>
 	</Provider>,

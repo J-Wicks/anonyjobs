@@ -1,4 +1,4 @@
-import axios fromn 'axios';
+import axios from 'axios';
 ///
 
 
@@ -11,7 +11,7 @@ const SET_CURRENT_PROFILE = 'SET_CURRENT_PROFILE';
 
 const initialState = {
 	allProfiles: [],
-  selectedProfiles: []
+  selectedProfiles: [],
   currentProfile: {},
 }
 
