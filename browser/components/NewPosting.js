@@ -17,8 +17,7 @@ export default function Home (props) {
 			Job Title
 			<input type='text' value={props.jobTitle} onChange={props.handleJobTitle}/>
 			Job Description
-			<textarea value={props.jobDescription} onChange={props.handleJobDescription}></textarea>
-			
+			<textarea value={props.jobDescription} onChange={props.handleJobDescription}></textarea>	
 			Education Level
 			<select onChange = {props.handleEducationLevel}>
 			<option value={'Some High School'}> Some High School </option>
@@ -55,7 +54,7 @@ export default function Home (props) {
 
 			</select>
 			<button className="btn btn-default login-btn" type="submit">Submit</button>
-				
+
 		</form>
 		</div>
 		)

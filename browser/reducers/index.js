@@ -10,6 +10,3 @@ export default combineReducers({ postingReducer, profileReducer, applicationRedu
 
 
 import {RECEIVE_POSTINGS, SET_SELECTED_POSTING,  LOGIN_USER, MOD_USER_TYPE} from "../action-creators";
-
-
-

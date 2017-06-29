@@ -21,23 +21,7 @@ export const loginUser = user => ({
   user
 })
 
-
-export const setSelectedPosting = posting => ({
-  type: SET_SELECTED_POSTING,
-  posting
-})
-
-export const applyAndSetPosting = (coverLetter, postingId) => dispatch => {
-  axios.post('/api/applications/', {coverLetter, postingId})
-  .then(res => res.data)
-  .then(selectedPosting => {
-    dispatch(setSelectedPosting(selectedPosting))
-  })
-  .catch(error => console.error(error))
-}
-
 export const modUser = userType => ({
   type: MOD_USER_TYPE,
   userType
 })
-

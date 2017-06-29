@@ -1,4 +1,13 @@
-import {RECEIVE_POSTINGS} from "../action-creators";
+import {RECEIVE_POSTINGS, receivePostings} from "../action-creators";
+import axios from 'axios'
+
+export const getPostings = dispatch => {
+	axios.get('/api/postings')
+	.then(res => res.data)
+	.then(postings => {
+		dispatch(receivePostings(postings))
+	})
+}
 
 const initialState = {
 	postings: []
@@ -11,7 +20,7 @@ export default function (state = initialState, action) {
   switch (action.type) {
 
     case RECEIVE_POSTINGS:
-      newState.productOrders = action.productOrders;
+      newState.postings = action.postings;
       break;
 
     default:
