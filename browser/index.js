@@ -13,9 +13,12 @@ import EmployerDashboardContainer from './containers/EmployerDashboardContainer'
 import {UserDashboardContainer} from './containers/UserDashboardContainer';
 import {fetchCurrentUser} from './reducers/user'
 import { logIn } from './reducers/user'
+import {getPostings} from './reducers/posting'
 import Application from './components/Application'
 // import UserDashboard from './components/users/UserDashboard/'
 import LoginContainer from './containers/LoginContainer'
+import AllPostings from './components/AllPosting'
+import singlePosting from './components/singlePosting'
 
 const onUserEnter = (nextRouterState) => {
 	/* WE STILL NEED A PROFILE MODEL AND API ROUTE*/
@@ -23,6 +26,9 @@ const onUserEnter = (nextRouterState) => {
 	store.dispatch(fetchCurrentUser(userId))
 	// store.dispatch(fetchCurrentProfile());
 	// store.dispatch(fetchApplications());
+}
+const onPostingsEnter = () => {
+	store.dispatch(getPostings())
 }
 
 const onAppEnter = function() {
@@ -36,19 +42,23 @@ const onAppEnter = function() {
 
 ReactDOM.render(
 	<Provider store={store}>
-	  	<Router history = {browserHistory}>
 
-	  		<Route path='/' component={AppContainer} onEnter={onAppEnter}>
-		  		<IndexRedirect to="/home" />
-		  		<Route path='/home' component={HomeContainer} />
-		  		<Route path='/employerdashboard' component={EmployerDashboardContainer} />
-		  		<Route path='/signup' component={SignUpContainer} />
-		  		<Route path='/login' component={LoginContainer} />
-					<Route path='/userdashboard/:id' component={UserDashboardContainer} onEnter={onUserEnter}/>
-					<Route path="/createProfile" />
-					<Route path="/editProfile" />
-					<Route path="/viewProfile" />
-	  		</Route>
+	<Router history = {browserHistory}>
+		<Route path='/' component={AppContainer} >
+			<IndexRedirect to="/home" />
+			<Route path='/home' component={HomeContainer} />
+			<Route path='/employerdashboard' component={EmployerDashboardContainer} />
+			<Route path='/signup' component={SignUpContainer} />
+			<Route path='/login' component={LoginContainer} />
+			<Route path ='/application' component={Application} />
+			<Route path ='/postings' component={AllPostings} onEnter={onPostingsEnter}>
+				<Route path ='/:id' component={singlePosting} />
+			</Route>
+			<Route path='/userdashboard/:id' component={UserDashboardContainer} onEnter={onUserEnter} />
+			<Route path="/createProfile" />
+			<Route path="/editProfile" />
+			<Route path="/viewProfile" />
+		</Route>
 		</Router>
 	</Provider>,
   document.getElementById('app') // make sure thisa is the same as the id of the div in your index.html
