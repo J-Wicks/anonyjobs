@@ -11,15 +11,32 @@ export default function Navbar(props) {
 		          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		            <ul className="nav navbar-nav">
 		              <li className="dropdown">
-		                <a href="#" className="dropdown-toggle nav-region" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="nav-region">Maybe this will be something <span className="caret"></span></a>
-		                <ul id="nav-dropdown" className="dropdown-menu">
-		                </ul>
+
 		              </li>
 		              	<li>
-		               		<Link to='/home'>
-		                    <p className="yellow">Home</p>
-		                    </Link>
+	               		<Link to='/home'>
+	                    <p className="yellow">Home</p>
+	                    </Link>
 		                </li>
+
+		              	{
+		              		props.loggedInUser.email?
+
+			                  <li className="dropdown">
+			                        <a href="" id="nav-account" className="dropdown-toggle nav-region yellow" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+			                          {props.loggedInUser.email}<span className="caret"></span>
+			                        </a>
+			                    <ul className="dropdown-menu" id="account-dropdown">
+			                    	<li><button onClick={props.logout}> Logout </button> </li>
+			                    </ul>
+			                  </li>
+
+		              		:
+		              		<li>
+		              		<Link to='/login'>Employer Log In </Link>
+		              		</li>
+		              	}
+					</ul>
 		              	<li>
 		              	{
 		              	 props.currentUser &&

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, browserHistory, IndexRedirect, IndexRoute } from 'react-router'
 import store from './store';
-
+import '../index.scss'
 
 import axios from 'axios';
 import AppContainer from './containers/AppContainer';

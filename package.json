@@ -56,9 +56,12 @@
     "webpack": "^3.0.0"
   },
   "scripts": {
-    "start": "webpack -w & nodemon ./server/index.js",
+    "start":"node /server/index.js",
+    "test": "mocha --watch ./tests/*.spec.js --compilers js:babel-register",
+    "start-dev": "webpack -w & nodemon ./server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "webpack"
   }
 }

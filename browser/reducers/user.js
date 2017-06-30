@@ -14,7 +14,6 @@ const LOGOUT_USER = 'Logout_user';
 
 const initialState = {
   postings: [],
-  loggedInUser: {},
   UserType: '',
 	allUsers: [],
   currentUser: {}
