@@ -12,10 +12,9 @@ module.exports = {
         include: [
          path.join(__dirname, "src"),
          "node_modules"
-          }
         ],
         exclude: /(node_modules|bower_components)/,
-        loader: '/node_modules/babel-loader',
+        loader: 'babel-loader',
         options: {
           presets: ['react', 'es2015'] // if you aren't using 'babel-preset-es2015', then omit the 'es2015'
         }
