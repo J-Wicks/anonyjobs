@@ -18,6 +18,10 @@ const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy
 
 
 app.use(morgan('dev'));
+//public routing
+//setting up bodyparser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //using our session for auth
 app.use(session({
@@ -75,22 +79,17 @@ passport.use(new LinkedInStrategy({
 
 }))
 
-
-//setting up bodyparser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-//public routing
-app.use('/files', express.static(path.join(__dirname, '../public')));
+// app.use('/', express.static(path.join(__dirname, '../public')))
 
 //api routes
 app.use('/home/signin-linkedin', apiRoutes);
 app.use('/api', apiRoutes)
+app.use('/files', express.static(path.join(__dirname, '../public')));
+
 
 //serve up the html
-app.get('/*', function (req, res) {
-  console.log(req.user)
-  res.sendFile(path.join(__dirname, '../index.html'))
+app.use('*', function (req, res) {
+  res.sendFile(path.join(__dirname, '../public/index.html'))
 });
 
 app.use(function (err, req, res, next) {

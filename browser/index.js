@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, Route, browserHistory, IndexRedirect, IndexRoute } from 'react-router'
+import { Router, Route, browserHistory, IndexRedirect, IndexRoute, hashHistory } from 'react-router'
 import store from './store';
 import '../index.scss'
 
@@ -27,8 +27,8 @@ import {UserProfileContainer} from './containers/ProfileContainer'
 
 const onUserEnter = (nextRouterState) => {
 	/* WE STILL NEED A PROFILE MODEL AND API ROUTE*/
+	console.log('userid from onUserEnter hook is', nextRouterState.params.id)
 	const userId = nextRouterState.params.id;
-	console.log('userid from onUserEnter hook is', userId)
 	store.dispatch(fetchCurrentUser(userId))
 	// store.dispatch(fetchCurrentProfile());
 	// store.dispatch(fetchApplications());
@@ -52,25 +52,26 @@ const onCreateProfileEnter = () => {
 
 ReactDOM.render(
 	<Provider store={store}>
-	<Router history = {browserHistory}>
+	<Router history = {hashHistory}>
 		<Route path='/' component={AppContainer} onEnter={onAppEnter}>
-			<IndexRedirect to="/home" />
 			<Route path='/home' component={HomeContainer} />
 			<Route path ='/newposting' component={NewPosting} />
 			<Route path='/employerdashboard' component={EmployerDashboardContainer} />
 			<Route path='/signup' component={SignUpContainer} />
 			<Route path='/login' component={LoginContainer} />
-  		<Route path ='/postings' component={AllPostings} onEnter={onPostingsEnter}>
-				<Route path ='/:id' component={singlePosting} />
-      </Route>
 			<Route path ='/application' component={Application} />
 			<Route path="/createProfile" component={CreateProfile} onEnter={onCreateProfileEnter} />
 			<Route path="/editProfile" />
 			<Route path="/viewProfile" component={UserProfileContainer} />
 			<Route path='/userdashboard/:id' component={UserDashboardContainer} onEnter={onUserEnter} />
-			<Route path ='/postings' component={AllPostings} />
-
+		<IndexRedirect to="/home" />
 		</Route>
 	</Router>
 	</Provider>,
   document.getElementById('app')) // make sure thisa is the same as the id of the div in your index.html
+
+
+
+	// <Route path ='/postings' component={AllPostings} onEnter={onPostingsEnter}>
+	// 	<Route path ='/:id' component={singlePosting} />
+	// <Route path ='/postings' component={AllPostings} />
