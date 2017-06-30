@@ -15,7 +15,7 @@ export default function Home (props) {
 		 <button onClick={props.setERUser}> Employers Login Here </button>
 		 </Link>
 		<br />
-		<a href="/api/auth/linkedin"><button className="btn btn-danger google-btn" type="submit">Login with LinkedIn</button></a>
+		<a href="/api/auth/linkedin"><button className="btn btn-primary fa fa-linkedin-square" type="submit"> Login with LinkedIn</button></a>
 		</div>
 		)
 }
