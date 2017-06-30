@@ -36,7 +36,7 @@ class AppContainer extends Component {
 
 const mapStateToProps = function(state) {
     return {
-    loggedInUser: state.userReducer.loggedInUser
+    loggedInUser: state.userReducer.currentUser
   }
 }
 

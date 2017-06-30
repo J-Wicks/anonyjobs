@@ -13,7 +13,6 @@ const LOGOUT_USER = 'LOGOUT_USER';
 
 const initialState = {
   postings: [],
-  loggedInUser: {},
   UserType: '',
 	allUsers: [],
   currentUser: {},
@@ -91,11 +90,11 @@ export default function (state = initialState, action) {
       break;
 
     case LOGIN_USER:
-      newState.loggedInUser = action.user;
+      newState.currentUser = action.user;
       break;
 
     case LOGOUT_USER:
-      newState.loggedInUser = {};
+      newState.currentUser = {};
       break;
 
     default:

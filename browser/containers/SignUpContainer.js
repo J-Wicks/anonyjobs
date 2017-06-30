@@ -84,20 +84,12 @@ class SignUpContainer extends Component{
 		return(
 		<div>
 		
-		<span> {this.props.userType} </span>
 			<EmployerSignUp 
 			handleCompany={this.handleCompany}
 			handleIndustry={this.handleIndustry}
 			signUpEmployer={this.signUpEmployer} 
 			handleEmail={this.handleEmail} 
 			handlePassword={this.handlePassword} />
-			
-			<ApplicantSignUp 
-			signUpUser={this.signUpUser} 
-			handleEmail={this.handleEmail} 
-			handlePassword={this.handlePassword} />
-			
-		
 		</div>
 		)
 	}

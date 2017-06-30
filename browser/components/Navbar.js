@@ -12,14 +12,12 @@ export default function Navbar(props) {
 		          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		            <ul className="nav navbar-nav">
 		              <li className="dropdown">
-		                <a href="#" className="dropdown-toggle nav-region" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="nav-region">Maybe this will be something <span className="caret"></span></a>
-		                <ul id="nav-dropdown" className="dropdown-menu">
-		                </ul>
+
 		              </li>
 		              	<li>
-		               		<Link to='/home'>
-		                    <p className="yellow">Home</p>
-		                    </Link>
+	               		<Link to='/home'>
+	                    <p className="yellow">Home</p>
+	                    </Link>
 		                </li>
 		              	<li>
 		              	
@@ -30,18 +28,14 @@ export default function Navbar(props) {
 		              		<button onClick={props.logout}> Log Out Please</button>
 		              		</div>
 		              		:
-		              		<Link to='/login'> Log In </Link>
+		              		<Link to='/login'>Employer Log In </Link>
 
 		              	}
 
 		              	
 
 		                </li>
-										<li>
-		               		<Link to='/create'>
-		                    <p className="yellow">CREATE</p>
-		                    </Link>
-		                </li>
+
 		            </ul>
 		            <ul className="nav navbar-nav navbar-right">
 		              <li>
