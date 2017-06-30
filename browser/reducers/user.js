@@ -9,6 +9,7 @@ const SET_ALL_USERS = 'SET_ALL_USERS';
 const SET_CURRENT_USER = 'SET_CURRENT_USER';
 const MOD_USER_TYPE = 'MOD_USER_TYPE';
 const LOGIN_USER = 'LOGIN_USER';
+const LOGOUT_USER = 'LOGOUT_USER';
 
 const initialState = {
   postings: [],
@@ -26,9 +27,15 @@ const setCurrentUser = user => ({
 })
 
 
+const logoutUser = user => ({
+  type: LOGOUT_USER,
+  user
+})
 
-
-
+const loginUser = user => ({
+  type: LOGIN_USER,
+  user
+})
 /*--------------------Thunk Action Creators */
 
 export const fetchCurrentUser = (id) => { return (
@@ -44,11 +51,26 @@ export const fetchCurrentUser = (id) => { return (
   }
 )}
 
-// const fetchAllProfiles = /* this is dependent on forthcoming api route*/
+export const logOut = () =>{
+  return(
+      dispatch =>{
+        axios.get('/api/login/logout')
+        .then( response => {
+        dispatch(logoutUser({}))
+        })
+      }
+    )
+}
 
-// const fetchSelectedProfiles = /* this is dependent on forthcoming api route*/
+export const logIn = (user) =>{
+  return(
+      dispatch =>{
 
-// const fetchCurrentProfile = /* this is dependent on forthcoming api route*/
+        dispatch(loginUser(user))
+      }
+  )
+}
+    
 
 /*------------------ REDUCER */
 
@@ -69,7 +91,11 @@ export default function (state = initialState, action) {
       break;
 
     case LOGIN_USER:
-      newState.loggedInUser = action.loggedInUser;
+      newState.loggedInUser = action.user;
+      break;
+
+    case LOGOUT_USER:
+      newState.loggedInUser = {};
       break;
 
     default:

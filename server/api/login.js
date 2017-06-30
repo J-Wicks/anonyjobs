@@ -4,24 +4,37 @@ const Company = require('../models').Company;
 const Promise = require('bluebird')
 
 router.post('/', (req, res, next) => {
+	console.log(req.body)
 	User.findOne({where:{
 		email: req.body.email
 	}})
-	.then( foundUser =>{
-		if(foundUser){
-			res.status(200).send(foundUser)
+	.then( user => {
+		
+		if(user.id){
+			req.login(user, err =>{
+				if(err) next(err)
+				else res.json(user)
+			})
+
 		}
-		else return foundUser
+		else {
+			Company.findOne({where:
+				{
+				HRemail:req.body.email
+				}
+			})
+			.then( user =>{
+			req.login(user, err =>{
+				if(err) next(err)
+				else res.status(201).send(user)
+			})
+			console.log('Req.User ', req.user)
+
 	})
-	.then( foundUser => {
-		return Company.findOne({where:{
-			HRemail:req.body.email
-		}})
+		}
 	})
-	.then( foundCompany =>{
-		console.log(foundCompany)
-		res.status(201).send(foundCompany)
-	})
+
+
 });
 
 router.post('/signup', (req, res, next) => {
@@ -37,6 +50,11 @@ router.post('/signup/employer', (req, res, next) => {
 
 		res.status(200).send(createdCompany)
 	})
+})
+
+router.get('/logout', (req, res, next) => {
+	req.logout()
+	res.send('Success')
 })
 
 
