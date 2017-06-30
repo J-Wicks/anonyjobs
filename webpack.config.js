@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   entry: './browser/index.js', // assumes your entry point is the index.js in the root of your project folder
   output: {
