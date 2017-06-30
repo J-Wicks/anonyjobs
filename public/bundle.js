@@ -16543,7 +16543,7 @@ _reactDom2.default.render(_react2.default.createElement(
 	{ store: _store2.default },
 	_react2.default.createElement(
 		_reactRouter.Router,
-		{ history: _reactRouter.browserHistory },
+		{ history: _reactRouter.hashHistory },
 		_react2.default.createElement(
 			_reactRouter.Route,
 			{ path: '/', component: _AppContainer2.default, onEnter: onAppEnter },
@@ -33355,7 +33355,7 @@ function Home(props) {
 			_react2.default.createElement(
 				'button',
 				{ className: 'btn btn-info', onClick: props.setERUser },
-				' Employers Login Here '
+				' Employers Sign Up Here '
 			)
 		),
 		_react2.default.createElement('br', null),
