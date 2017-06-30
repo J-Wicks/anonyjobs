@@ -11,17 +11,14 @@ export default function Navbar(props) {
 		          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		            <ul className="nav navbar-nav">
 		              <li className="dropdown">
-
 		              </li>
 		              	<li>
 	               		<Link to='/home'>
 	                    <p className="yellow">Home</p>
 	                    </Link>
 		                </li>
-
 		              	{
 		              		props.loggedInUser.email?
-
 			                  <li className="dropdown">
 			                        <a href="" id="nav-account" className="dropdown-toggle nav-region yellow" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 			                          {props.loggedInUser.email}<span className="caret"></span>
@@ -30,13 +27,12 @@ export default function Navbar(props) {
 			                    	<li><button onClick={props.logout}> Logout </button> </li>
 			                    </ul>
 			                  </li>
-
 		              		:
 		              		<li>
 		              		<Link to='/login'>Employer Log In </Link>
 		              		</li>
 		              	}
-					</ul>
+									</ul>
 		              	<li>
 		              	{
 		              	 props.currentUser &&
@@ -58,7 +54,6 @@ export default function Navbar(props) {
 												</Link>
 											 </li>
 										}
-		            </ul>
 		            <ul className="nav navbar-nav navbar-right">
 		              <li>
 		                <form className="navbar-form" id="search" >

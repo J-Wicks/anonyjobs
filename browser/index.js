@@ -11,7 +11,7 @@ import SignUpContainer from './containers/SignUpContainer';
 import HomeContainer from './containers/HomeContainer';
 import EmployerDashboardContainer from './containers/EmployerDashboardContainer';
 import {UserDashboardContainer} from './containers/UserDashboardContainer'
-import {CreateProfileContainer} from './components/users/CreateProfile';
+import {CreateProfileContainer} from './containers/CreateProfile';
 import CreateProfile from './containers/CreateProfile';
 import {fetchAllSkills} from './reducers/skill'
 import {fetchCurrentUser} from './reducers/user'
@@ -34,9 +34,9 @@ const onUserEnter = (nextRouterState) => {
 	// store.dispatch(fetchApplications());
 }
 
-// const onPostingsEnter = () => {
-// 	store.dispatch(getPostings())
-// }
+const onPostingsEnter = () => {
+	store.dispatch(getPostings())
+}
 
 const onAppEnter = function() {
 	axios.get('/api/auth/me')
