@@ -9,14 +9,15 @@ const SET_ALL_USERS = 'SET_ALL_USERS';
 const SET_CURRENT_USER = 'SET_CURRENT_USER';
 const MOD_USER_TYPE = 'MOD_USER_TYPE';
 const LOGIN_USER = 'LOGIN_USER';
-const LOGOUT_USER = 'LOGOUT_USER';
+
+const LOGOUT_USER = 'Logout_user';
 
 const initialState = {
   postings: [],
   loggedInUser: {},
   UserType: '',
 	allUsers: [],
-  currentUser: {},
+  currentUser: {}
 }
 
 /*------------------------Action Creators ----------*/
@@ -25,7 +26,6 @@ const setCurrentUser = user => ({
   type: SET_CURRENT_USER,
   user
 })
-
 
 const logoutUser = user => ({
   type: LOGOUT_USER,
@@ -36,6 +36,9 @@ const loginUser = user => ({
   type: LOGIN_USER,
   user
 })
+
+
+
 /*--------------------Thunk Action Creators */
 
 export const fetchCurrentUser = (id) => { return (
@@ -65,30 +68,28 @@ export const logOut = () =>{
 export const logIn = (user) =>{
   return(
       dispatch =>{
-
         dispatch(loginUser(user))
       }
   )
 }
 
-
 /*------------------ REDUCER */
 
 export default function (state = initialState, action) {
-  const newState = Object.assign({}, state);
-  switch (action.type) {
+ const newState = Object.assign({}, state);
+ switch (action.type) {
 
-    case SET_ALL_USERS:
-      newState.allUsers = action.users;
-      break;
+   case SET_ALL_USERS:
+     newState.allUsers = action.users;
+     break;
 
-    case SET_CURRENT_USER:
-      newState.currentUser = action.user;
-      break;
+   case SET_CURRENT_USER:
+     newState.currentUser = action.user;
+     break;
 
-    case MOD_USER_TYPE:
-      newState.userType = action.userType;
-      break;
+   case MOD_USER_TYPE:
+     newState.userType = action.userType;
+     break;
 
     case LOGIN_USER:
       newState.currentUser = action.user;
@@ -98,8 +99,8 @@ export default function (state = initialState, action) {
       newState.currentUser = {};
       break;
 
-    default:
-      return state;
-  }
-  return newState;
+   default:
+     return state;
+ }
+ return newState;
 }
