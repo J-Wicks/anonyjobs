@@ -11,11 +11,12 @@ import SignUpContainer from './containers/SignUpContainer';
 import HomeContainer from './containers/HomeContainer';
 import EmployerDashboardContainer from './containers/EmployerDashboardContainer';
 import {UserDashboardContainer} from './containers/UserDashboardContainer';
-import {fetchCurrentUser} from './reducers/user'
-import Application from './components/Application'
+import {fetchCurrentUser} from './reducers/user';
+import Application from './components/Application';
 // import UserDashboard from './components/users/UserDashboard/'
 import LoginContainer from './containers/LoginContainer';
-import CreateProfile from './components/users/CreateProfile'
+import {CreateProfileContainer} from './components/users/CreateProfile';
+import {fetchAllSkills} from './reducers/skill'
 
 const onUserEnter = (nextRouterState) => {
 	/* WE STILL NEED A PROFILE MODEL AND API ROUTE*/
@@ -26,12 +27,11 @@ const onUserEnter = (nextRouterState) => {
 	// store.dispatch(fetchApplications());
 }
 
-// const onCreateProfile = () => {
-// 	store.dispatch(fetchAllSkills());
-//
-// }
+const onCreateProfileEnter = () => {
+	store.dispatch(fetchAllSkills());
 
-console.log('create profile: ', CreateProfile);
+}
+
 ReactDOM.render(
 	<Provider store={store}>
 	  	<Router history = {hashHistory}>
@@ -39,7 +39,7 @@ ReactDOM.render(
 	  		<Route path='/' component={AppContainer} >
 		  		<IndexRoute component ={HomeContainer} />
 		  		<Route path='/home' component={HomeContainer} />
-					<Route path='/create' component={CreateProfile} />
+					<Route path='/create' component={CreateProfileContainer} onEnter={onCreateProfileEnter} />
 		  		<Route path='/employerdashboard' component={EmployerDashboardContainer} />
 		  		<Route path='/signup' component={SignUpContainer} />
 		  		<Route path='/login' component={LoginContainer} />

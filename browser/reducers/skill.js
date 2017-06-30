@@ -16,7 +16,30 @@ const initialState = {
 
 /*---- action cretors */
 
+const setAllSkills = skills => ({ type: SET_ALL_SKILLS, skills})
+
+
+
+/*-----thunk action creators*/
+
 // in process...
+
+export const fetchAllSkills = () => {
+	return (
+		dispatch => {
+			axios.get('/api/skills')
+			.then(res => {
+				console.log('hello from fetch all skills')
+				return res.data
+			})
+			.then(skills => {
+				console.log('hello from skills found', skills)
+				dispatch(setAllSkills(skills))
+			})
+		}
+
+	)
+}
 
 /*------------------ REDUCER */
 
