@@ -9,6 +9,11 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
+        include: [
+          resolveLoader: {
+            root: path.join(__dirname, 'node_modules')
+          }
+        ],
         exclude: /(node_modules|bower_components)/,
         loader: '/node_modules/babel-loader',
         options: {
