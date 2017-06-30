@@ -1,5 +1,3 @@
-const path = require('path')
-
 module.exports = {
   entry: './browser/index.js', // assumes your entry point is the index.js in the root of your project folder
   output: {
@@ -16,14 +14,6 @@ module.exports = {
         options: {
           presets: ['react', 'es2015'] // if you aren't using 'babel-preset-es2015', then omit the 'es2015'
         }
-      },
-      {
-            test: /\.scss$/,
-            use: [
-              'style-loader',
-              'css-loader',
-              'sass-loader'
-            ]
       }
     ]
   }
