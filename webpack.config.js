@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   entry: './browser/index.js', // assumes your entry point is the index.js in the root of your project folder
   output: {
@@ -6,9 +8,11 @@ module.exports = {
   },
   devtool: 'source-map',
   module: {
-    { test: /\.js?$/,
-        loader: 'babel',
-        exclude: path.join(__dirname, 'node_modules') },
+    loaders: [
+      { test: /\.js$/,
+      loader: 'babel',
+      exclude: path.join(__dirname, 'node_modules)')}
+    ],
     rules: [
       {
         test: /\.jsx?$/,
