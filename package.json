@@ -62,7 +62,7 @@
     "webpack": "^3.0.0"
   },
   "scripts": {
-    "start": "node /server/index.js",
+    "start": "node ./server/index.js",
     "test": "react-scripts test --env=jsdom",
     "start-dev": "webpack -w & nodemon ./server/index.js"
   }
