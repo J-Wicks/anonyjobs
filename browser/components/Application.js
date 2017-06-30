@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {applyAndSetPosting} from '../reducers/application'
 import axios from 'axios'
@@ -11,31 +11,56 @@ function handleSubmit(event) {
     return something
   })
 }
-export default function Application({selectedPosting})  {
-  return (
-    <div>
-      <h2>Application</h2>
-        <form on submit={handleSubmit}>
-          <label>Cover Letter: </label>
-          <input name="coverLetter" type="textarea" />
-          <label>Make sure your profile information is up to date before submitting your application.</label>
-          <button name="postingId" value={selectedPosting} type="submit">Submit Application</button>
-        </form>
-      </div>
-  )
+class Application extends Component  {
+
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentSummary: ''
+    }
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  handleChange(event) {
+    console.log(event.target.value)
+    this.setState({
+      currentSummary: event.target.value
+    })
+  }
+  render() {
+    return (
+      <div>
+        <h2>Application</h2>
+          <form onSubmit={handleSubmit}>
+            <label>Cover Letter: </label>
+            <input
+              name="coverLetter"
+              type="textarea"
+              wrap="hard"
+              value={this.state.currentSummary || this.props.summary}
+              onChange={this.handleChange}
+              style={{height: '300px', width: '700px'}} />
+            <label>Make sure your profile information is up to date before submitting your application.</label>
+            <button name="postingId" value={this.selectedPosting} type="submit">Submit Application</button>
+          </form>
+        </div>
+    )
+    }
+  }
+const mapState = state => {
+  return {
+    selectedPosting: state.selectedPosting,
+    summary: state.userReducer.currentUser.summary
+  }
 }
-// const mapState = state => {
-//   return {
-//     selectedPosting: state.selectedPosting
-//   }
-// }
-//
-// const mapDispatch = (dispatch, ownProps) => {
-//   return {
-//     handleSubmit: function(event) {
-//       dispatch(applyAndSetPosting(event.target.coverLetter.value, event.target.postingId.value, ownProps.params.userId))
-//     }
-//   }
-// }
-//
-// export default connect(mapState, mapDispatch)(Application)
+
+const mapDispatch = (dispatch, ownProps) => {
+  return {
+    handleSubmit: function(event) {
+      dispatch(applyAndSetPosting(event.target.coverLetter.value, event.target.postingId.value, ownProps.params.userId))
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(Application)

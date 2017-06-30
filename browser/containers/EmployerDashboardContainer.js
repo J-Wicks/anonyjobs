@@ -30,7 +30,6 @@ class EmployerDashboardContainer extends Component {
 
   	handleSubmit (event) {
   		event.preventDefault()
-  		
   		this.props.addPosting({
   			positionTitle: this.state.positionTitle,
   			positionDescription: this.state.positionDescription,
@@ -84,7 +83,7 @@ class EmployerDashboardContainer extends Component {
   render () {
     return (
       <div id="entire-container">
-      <NewPosting 
+      <NewPosting
       handleJobTitle={this.handleJobTitle}
       handleJobDescription={this.handleJobDescription}
       handleEducationField={this.handleEducationField}
@@ -113,7 +112,7 @@ const mapDispatchToProps = function (dispatch) {
 				educationLevel: user.educationLevel,
 				educationField: user.educationField,
 				experienceLevel: user.experienceLevel,
-				experienceField: user.experienceField 
+				experienceField: user.experienceField
 			})
 			.then((result) => {
 				console.log(result.data)
