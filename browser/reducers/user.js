@@ -70,7 +70,7 @@ export const logIn = (user) =>{
       }
   )
 }
-    
+
 
 /*------------------ REDUCER */
 
@@ -91,11 +91,11 @@ export default function (state = initialState, action) {
       break;
 
     case LOGIN_USER:
-      newState.loggedInUser = action.user;
+      newState.currentUser = action.user;
       break;
 
     case LOGOUT_USER:
-      newState.loggedInUser = {};
+      newState.currentUser = {};
       break;
 
     default:

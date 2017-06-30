@@ -25,7 +25,7 @@ class AppContainer extends Component {
       <div id="entire-container">
       <div className="fullscreen-bg">
       </div>
-        <Navbar logout={this.props.logout} loggedInUser={this.props.loggedInUser}/>
+        <Navbar logout={this.props.logout} loggedInUser={this.props.loggedInUser} />
         <div className="col-xs-12">
           { this.props.children }
         </div>
@@ -36,7 +36,7 @@ class AppContainer extends Component {
 
 const mapStateToProps = function(state) {
     return {
-    loggedInUser: state.userReducer.loggedInUser
+    loggedInUser: state.userReducer.currentUser
   }
 }
 

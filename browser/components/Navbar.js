@@ -8,7 +8,6 @@ export default function Navbar(props) {
 		      <nav className="navbar navbar-default" id="nav">
 		        <div className="container-fluid">
 		          </div>
-
 		          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		            <ul className="nav navbar-nav">
 		              <li className="dropdown">
@@ -22,32 +21,32 @@ export default function Navbar(props) {
 		                    </Link>
 		                </li>
 		              	<li>
-		              	
 		              	{
-		              		props.loggedInUser.email?
+		              	 props.currentUser &&
+										 props.currentUser.email ?
 		              		<div>
-		              		<p>{props.loggedInUser.email}</p>
-		              		<button onClick={props.logout}> Log Out Please</button>
+		              		<p>{props.currentUser.email}</p>
+		              		<button onClick={props.logout}> Log Out </button>
 		              		</div>
 		              		:
 		              		<Link to='/login'> Log In </Link>
-
 		              	}
-
-		              	
-
 		                </li>
-										<li>
-		               		<Link to='/create'>
-		                    <p className="yellow">CREATE</p>
-		                    </Link>
-		                </li>
+										{
+											props.currentUser &&
+											props.currentUser.companyName &&
+											 <li>
+											 	<Link to='/newposting'>
+													<p className = "yellow"> Create a New Job Posting</p>
+												</Link>
+											 </li>
+										}
 		            </ul>
 		            <ul className="nav navbar-nav navbar-right">
 		              <li>
 		                <form className="navbar-form" id="search" >
 		                  <div className="form-group">
-		                    <input id="search-input" type="text" className="form-control" placeholder="Search Jobs"/>
+		                    <input id="search-input" type="text" className="form-control" placeholder="Search Jobs" />
 		                  </div>
 
 		                  <button id="search-btn" type="submit" className="btn btn-default">Search</button>

@@ -10,13 +10,14 @@ import AppContainer from './containers/AppContainer';
 import SignUpContainer from './containers/SignUpContainer';
 import HomeContainer from './containers/HomeContainer';
 import EmployerDashboardContainer from './containers/EmployerDashboardContainer';
-import UserDashboardContainer from './containers/UserDashboardContainer'
+import {UserDashboardContainer} from './containers/UserDashboardContainer'
 import {CreateProfileContainer} from './components/users/CreateProfile';
 import {fetchAllSkills} from './reducers/skill'
 import {fetchCurrentUser} from './reducers/user'
 import { logIn } from './reducers/user'
 import {getPostings} from './reducers/posting'
 import Application from './components/Application'
+import NewPosting from './components/NewPosting'
 // import UserDashboard from './components/users/UserDashboard/'
 import LoginContainer from './containers/LoginContainer'
 import AllPostings from './components/AllPosting'
@@ -42,7 +43,7 @@ const onAppEnter = function() {
 		store.dispatch(logIn(user))
 	})
 }
-  
+
 const onCreateProfileEnter = () => {
 	store.dispatch(fetchAllSkills());
 }
@@ -50,9 +51,10 @@ const onCreateProfileEnter = () => {
 ReactDOM.render(
 	<Provider store={store}>
 	<Router history = {browserHistory}>
-		<Route path='/' component={AppContainer} >
+		<Route path='/' component={AppContainer} onEnter={onAppEnter}>
 			<IndexRedirect to="/home" />
 			<Route path='/home' component={HomeContainer} />
+			<Route path ='/newposting' component={NewPosting} />
 			<Route path='/employerdashboard' component={EmployerDashboardContainer} />
 			<Route path='/signup' component={SignUpContainer} />
 			<Route path='/login' component={LoginContainer} />
