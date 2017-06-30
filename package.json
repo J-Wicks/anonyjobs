@@ -64,7 +64,6 @@
   "scripts": {
     "start": "node /server/index.js",
     "test": "react-scripts test --env=jsdom",
-    "start-dev": "webpack -w & nodemon ./server/index.js",
-    "postinstall": "webpack"
+    "start-dev": "webpack -w & nodemon ./server/index.js"
   }
 }
