@@ -8,7 +8,7 @@ export default function Home (props) {
 	// }
 
 	return(
-		<div>
+		<div id='home' className='center'>
 		<h1> Welcome to Anonyjob </h1>
 		<h3> What you need, when you need it </h3>
 		<Link to='/signup'>

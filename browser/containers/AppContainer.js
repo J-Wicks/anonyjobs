@@ -26,7 +26,7 @@ class AppContainer extends Component {
       <div className="fullscreen-bg">
       </div>
         <Navbar logout={this.props.logout} loggedInUser={this.props.loggedInUser}/>
-        <div className="col-xs-12">
+        <div className="col-xs-12 app-body">
           { this.props.children }
         </div>
       </div>

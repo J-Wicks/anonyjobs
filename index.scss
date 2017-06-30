@@ -1,4 +1,28 @@
 .navbar-collapse {
-	background-color: #383163;
+	background-color: #CF0050;
+
 }
 
+.navbar-default .navbar-nav>li>a{
+	color: #E3E3E3;
+	font-size: 1.5em;
+}
+
+body {
+	font-family:  'Halant', serif;
+}
+
+#home div{
+	align-content: center
+
+}
+
+
+
+
+.center{
+	margin: auto;
+	width: 50%;
+	border: 3px solid green;
+	padding: 10px;
+}

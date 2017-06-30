@@ -19,24 +19,25 @@ export default function Navbar(props) {
 	                    <p className="yellow">Home</p>
 	                    </Link>
 		                </li>
-		              	<li>
-		              	
+
 		              	{
 		              		props.loggedInUser.email?
-		              		<div>
-		              		<p>{props.loggedInUser.email}</p>
-		              		<button onClick={props.logout}> Log Out Please</button>
-		              		</div>
+
+			                  <li className="dropdown">
+			                        <a href="" id="nav-account" className="dropdown-toggle nav-region yellow" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+			                          {props.loggedInUser.email}<span className="caret"></span>
+			                        </a>
+			                    <ul className="dropdown-menu" id="account-dropdown">
+			                    	<li><button onClick={props.logout}> Logout </button> </li>
+			                    </ul>
+			                  </li>
+
 		              		:
+		              		<li>
 		              		<Link to='/login'>Employer Log In </Link>
-
+		              		</li>
 		              	}
-
-		              	
-
-		                </li>
-
-		            </ul>
+					</ul>
 		            <ul className="nav navbar-nav navbar-right">
 		              <li>
 		                <form className="navbar-form" id="search" >
