@@ -10,8 +10,8 @@ import AppContainer from './containers/AppContainer';
 import SignUpContainer from './containers/SignUpContainer';
 import HomeContainer from './containers/HomeContainer';
 import EmployerDashboardContainer from './containers/EmployerDashboardContainer';
-import UserDashboardContainer from './containers/UserDashboardContainer'
-import {CreateProfileContainer} from './components/users/CreateProfile';
+import {UserDashboardContainer} from './containers/UserDashboardContainer'
+import CreateProfile from './containers/CreateProfile';
 import {fetchAllSkills} from './reducers/skill'
 import {fetchCurrentUser} from './reducers/user'
 import { logIn } from './reducers/user'
@@ -20,7 +20,8 @@ import Application from './components/Application'
 // import UserDashboard from './components/users/UserDashboard/'
 import LoginContainer from './containers/LoginContainer'
 import AllPostings from './components/AllPosting'
-import singlePosting from './components/singlePosting'
+import singlePosting from './components/singlePosting';
+import {UserProfileContainer} from './containers/ProfileContainer'
 
 const onUserEnter = (nextRouterState) => {
 	/* WE STILL NEED A PROFILE MODEL AND API ROUTE*/
@@ -31,9 +32,9 @@ const onUserEnter = (nextRouterState) => {
 	// store.dispatch(fetchApplications());
 }
 
-const onPostingsEnter = () => {
-	store.dispatch(getPostings())
-}
+// const onPostingsEnter = () => {
+// 	store.dispatch(getPostings())
+// }
 
 const onAppEnter = function() {
 	axios.get('/api/auth/me')
@@ -42,7 +43,7 @@ const onAppEnter = function() {
 		store.dispatch(logIn(user))
 	})
 }
-  
+
 const onCreateProfileEnter = () => {
 	store.dispatch(fetchAllSkills());
 }
@@ -50,20 +51,19 @@ const onCreateProfileEnter = () => {
 ReactDOM.render(
 	<Provider store={store}>
 	<Router history = {browserHistory}>
-		<Route path='/' component={AppContainer} >
+		<Route path='/' component={AppContainer} onEnter={onAppEnter}>
 			<IndexRedirect to="/home" />
 			<Route path='/home' component={HomeContainer} />
 			<Route path='/employerdashboard' component={EmployerDashboardContainer} />
 			<Route path='/signup' component={SignUpContainer} />
 			<Route path='/login' component={LoginContainer} />
 			<Route path ='/application' component={Application} />
-			<Route path ='/postings' component={AllPostings} onEnter={onPostingsEnter}>
-				<Route path ='/:id' component={singlePosting} />
-			</Route>
-			<Route path='/userdashboard/:id' component={UserDashboardContainer} onEnter={onUserEnter} />
-			<Route path="/createProfile" />
+			<Route path="/createProfile" component={CreateProfile} onEnter={onCreateProfileEnter} />
 			<Route path="/editProfile" />
-			<Route path="/viewProfile" />
+			<Route path="/viewProfile" component={UserProfileContainer} />
+			<Route path='/userdashboard/:id' component={UserDashboardContainer} onEnter={onUserEnter} />
+			<Route path ='/postings' component={AllPostings} />
+
 		</Route>
 	</Router>
 	</Provider>,

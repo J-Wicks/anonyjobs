@@ -2,8 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux'
 import axios from 'axios';
 import { hashHistory } from 'react-router';
-import { addExperience } from '../../reducers/experience';
-import { addEducation } from '../../reducers/education';
+import { addExperience } from '../reducers/experience';
+import { addEducation } from '../reducers/education';
 
 
 class CreateProfile extends React.Component {
@@ -36,11 +36,13 @@ class CreateProfile extends React.Component {
 
 
   toggleSkillsClick () {
+
     if (this.state.addSkillsClicked === false) {
       this.setState({addSkillsClicked: true});
     } else if (this.state.addSkillsClicked === true) {
       this.setState({addSkillsClicked: false});
     }
+    console.log('state of addSkillsClicked', this.state.addSkillsClicked)
   }
 
   toggleEducationClick () {
@@ -210,7 +212,7 @@ class CreateProfile extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="profileClass">
         <button>(Possibly) Import LinkedIn Profile</button>
         <button>Manually Create Profile</button>
         <div>
@@ -252,6 +254,4 @@ const mapStateToProps = state => {
   })
 }
 
-// export default connect()(CreateProfile)
-
-export const CreateProfileContainer = connect(mapStateToProps, mapDispatchToProps)(CreateProfile)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateProfile)
