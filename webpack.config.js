@@ -10,8 +10,8 @@ module.exports = {
       {
         test: /\.jsx?$/,
         include: [
-          resolveLoader: {
-            root: path.join(__dirname, 'node_modules')
+         path.join(__dirname, "src"),
+         "node_modules"
           }
         ],
         exclude: /(node_modules|bower_components)/,
