@@ -73,13 +73,6 @@ export const logIn = (user) =>{
   )
 }
 
-
-// const fetchAllProfiles = /* this is dependent on forthcoming api route*/
-
-// const fetchSelectedProfiles = /* this is dependent on forthcoming api route*/
-
-// const fetchCurrentProfile = /* this is dependent on forthcoming api route*/
-
 /*------------------ REDUCER */
 
 export default function (state = initialState, action) {
@@ -98,13 +91,13 @@ export default function (state = initialState, action) {
      newState.userType = action.userType;
      break;
 
-   case LOGIN_USER:
-     newState.loggedInUser = action.user;
-     break;
+    case LOGIN_USER:
+      newState.currentUser = action.user;
+      break;
 
-   case LOGOUT_USER:
-     newState.loggedInUser = {};
-     break;
+    case LOGOUT_USER:
+      newState.currentUser = {};
+      break;
 
    default:
      return state;
