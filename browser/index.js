@@ -10,7 +10,7 @@ import AppContainer from './containers/AppContainer';
 import SignUpContainer from './containers/SignUpContainer';
 import HomeContainer from './containers/HomeContainer';
 import EmployerDashboardContainer from './containers/EmployerDashboardContainer';
-
+import UserDashboardContainer from './containers/UserDashboardContainer'
 import {CreateProfileContainer} from './components/users/CreateProfile';
 import {fetchAllSkills} from './reducers/skill'
 import {fetchCurrentUser} from './reducers/user'
@@ -30,6 +30,7 @@ const onUserEnter = (nextRouterState) => {
 	// store.dispatch(fetchCurrentProfile());
 	// store.dispatch(fetchApplications());
 }
+
 const onPostingsEnter = () => {
 	store.dispatch(getPostings())
 }
@@ -40,7 +41,7 @@ const onAppEnter = function() {
 		const user = returnedUser.data
 		store.dispatch(logIn(user))
 	})
-
+}
   
 const onCreateProfileEnter = () => {
 	store.dispatch(fetchAllSkills());
@@ -48,7 +49,6 @@ const onCreateProfileEnter = () => {
 
 ReactDOM.render(
 	<Provider store={store}>
-
 	<Router history = {browserHistory}>
 		<Route path='/' component={AppContainer} >
 			<IndexRedirect to="/home" />
@@ -65,7 +65,6 @@ ReactDOM.render(
 			<Route path="/editProfile" />
 			<Route path="/viewProfile" />
 		</Route>
-		</Router>
+	</Router>
 	</Provider>,
-  document.getElementById('app') // make sure thisa is the same as the id of the div in your index.html
-);
+  document.getElementById('app')) // make sure thisa is the same as the id of the div in your index.html

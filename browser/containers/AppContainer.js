@@ -34,12 +34,14 @@ class AppContainer extends Component {
   }
 }
 
-
-  return {
+const mapStateToProps = function(state) {
+    return {
     loggedInUser: state.userReducer.loggedInUser
   }
-
 }
+
+
+
 
 const mapDispatchToProps = function(dispatch){
   return{
