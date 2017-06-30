@@ -13,7 +13,14 @@ const Users = require('./models').User
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const dbStore = new SequelizeStore({ db: db });
-const secrets = require('../secrets')
+
+console.log('process env', process.env.HEROKU)
+
+if(!process.env.HEROKU){
+var secrets = require('../secrets')	
+}
+
+
 const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy
 
 
@@ -49,9 +56,9 @@ passport.deserializeUser((id, done) => {
 });
 
 passport.use(new LinkedInStrategy({
-	clientID: secrets.CLIENT_ID,
-	clientSecret: secrets.CLIENT_SECRET,
-	callbackURL: 'http://127.0.0.1:3000/home/signin-linkedin',
+	clientID: process.env.CLIENT_ID || secrets.CLIENT_ID,
+	clientSecret: process.env.CLIENT_SECRET || secrets.CLIENT_SECRET,
+	callbackURL: process.env.HEROKU ? 'https://damp-shelf-63214.herokuapp.com/home/signin-linkedin' : 'http://127.0.0.1:3000/home/signin-linkedin',
 	scope: ['r_emailaddress', 'r_basicprofile']
 }, function(accessToken, refreshToken, profile, done){
 	const _profile = profile._json
