@@ -17,6 +17,10 @@ class AppContainer extends Component {
   }
 
   render () {
+    // console.log('this', this);
+    // // console.log('props', props);
+    // console.log('this.props', this.props);
+    // console.log('children', this.props.children)
     return (
       <div id="entire-container">
       <div className="fullscreen-bg">
@@ -30,10 +34,11 @@ class AppContainer extends Component {
   }
 }
 
-const mapStateToProps = function(state){
+
   return {
     loggedInUser: state.userReducer.loggedInUser
   }
+
 }
 
 const mapDispatchToProps = function(dispatch){

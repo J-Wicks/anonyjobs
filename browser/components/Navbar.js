@@ -37,6 +37,11 @@ export default function Navbar(props) {
 		              	
 
 		                </li>
+										<li>
+		               		<Link to='/create'>
+		                    <p className="yellow">CREATE</p>
+		                    </Link>
+		                </li>
 		            </ul>
 		            <ul className="nav navbar-nav navbar-right">
 		              <li>

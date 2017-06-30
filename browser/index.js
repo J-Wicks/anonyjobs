@@ -10,7 +10,9 @@ import AppContainer from './containers/AppContainer';
 import SignUpContainer from './containers/SignUpContainer';
 import HomeContainer from './containers/HomeContainer';
 import EmployerDashboardContainer from './containers/EmployerDashboardContainer';
-import {UserDashboardContainer} from './containers/UserDashboardContainer';
+
+import {CreateProfileContainer} from './components/users/CreateProfile';
+import {fetchAllSkills} from './reducers/skill'
 import {fetchCurrentUser} from './reducers/user'
 import { logIn } from './reducers/user'
 import {getPostings} from './reducers/posting'
@@ -22,7 +24,8 @@ import singlePosting from './components/singlePosting'
 
 const onUserEnter = (nextRouterState) => {
 	/* WE STILL NEED A PROFILE MODEL AND API ROUTE*/
-	const userId = nextRouterState.params.profileId
+	const userId = nextRouterState.params.id;
+	console.log('userid from onUserEnter hook is', userId)
 	store.dispatch(fetchCurrentUser(userId))
 	// store.dispatch(fetchCurrentProfile());
 	// store.dispatch(fetchApplications());
@@ -35,9 +38,12 @@ const onAppEnter = function() {
 	axios.get('/api/auth/me')
 	.then( returnedUser =>{
 		const user = returnedUser.data
-
 		store.dispatch(logIn(user))
 	})
+
+  
+const onCreateProfileEnter = () => {
+	store.dispatch(fetchAllSkills());
 }
 
 ReactDOM.render(

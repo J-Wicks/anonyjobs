@@ -13,9 +13,6 @@ const genderSelect = function () {
      return "female";
   }
 }
-// console.log('what the ...')
-// console.log('createdUser', createdUser)
-
 const createUser = function () {
   let randomGender = genderSelect();
   var currentName = createFullName(randomGender);
@@ -43,24 +40,89 @@ function createFullName(gender){
   return  firstName + ' ' + lastName
 }
 
+function collectSkillsForDb() {
+  let skillsForDB = [];
+  let categories = Object.keys(skills);
+
+  categories.forEach(function(category){
+    let currentSkillObj = skills[category];
+    let skillCategory = currentSkillObj.name;
+    let exampleSkills = currentSkillObj.exampleSkills;
+    exampleSkills.forEach(function(skill){
+      let newSkillEntry = {};
+      newSkillEntry.name = skill;
+      newSkillEntry.category = skillCategory;
+      skillsForDB.push(newSkillEntry)
+    })
+  })
+  console.log('skillsForDB', skillsForDB)
+  return skillsForDB
+}
 
 
-//
-// function createProfile (gender, inputName) {
-//   //
-//   return (
-//
-//   {
-//     name: inputName,
-//     photoUrl: createPhoto(gender),
-//     description: faker.lorem.paragraph(),
-//     location: locations[Math.floor(Math.random()*locations.length)],
-//     serviceInterests: createServiceInterests(),
-//     sectorInterests: createSectorInterests(),
-//     skills: createSkills(),
-//   }
-// )
+function createUnderGradYear(){
 
+}
+
+function createMastersYear () {
+
+}
+
+function createPhDYear () {
+
+}
+
+function createEducationAndSkills(){
+  let subjects = Object.keys(skills);
+  let subjectIdx = Math.floor(Math.random()*skills.length)
+  let randomSubject = subjects[subjectIdx];
+}
+
+
+
+function createSkills(subject, degree) {
+  let skillsPossibilities = skills[subject]
+}
+
+
+var skills = {
+  technology: {
+    name: 'Technology',
+    exampleSkills: [
+        'Algorithms', 'Product Management', 'Front-End Development', 'Back-End Development', 'JavaScript', 'Ruby on Rails', 'Java', 'Python', 'HTML', 'CSS', 'Test-Driven Development', 'Database Management', 'Data Visualization']
+  },
+  finance: {
+    name: 'Finance',
+    exampleSkills: [
+      'Auditing', 'Internal Controls', 'Accounting', 'Budgeting', 'GAAP', 'Financial Forecasting']
+  },
+  consulting: {
+    name: 'Consulting',
+    exampleSkills: [
+      'Proposal Development', 'Strategic Planning', 'Project Management', 'Monitoring & Evaluation']
+  },
+  humanResources: {
+    name: 'Human Resources',
+    exampleSkills: [
+      'Recruiting', 'Screening', 'Onboarding', 'Scheduling', 'Performance Management', 'Employee Relations']
+  },
+  writing: {
+    name: 'Writing',
+    exampleSkills: [
+      'Editorials', 'Blogging', 'Editing', 'Press Releases']
+  },
+  marketing: {
+    name: 'Marketing',
+    exampleSkills: [
+      'Social Media', 'Storytelling', 'Photoshop', 'Graphic Design', 'Photography', 'Market Analysis']
+  },
+  foreignLanguage: {
+    name: 'Foreign Language',
+    exampleSkills: [
+      'French', 'Spanish', 'Italian', 'Russian', 'Mandarin', 'German', 'Thai', 'Greek', 'Hindi', 'Portuguese'
+    ]
+  }
+}
 
 var lastNames = ['Abbott',
   'Acevedo',
@@ -1146,4 +1208,4 @@ let femaleNames = [
 
 
 
-module.exports = {genderSelect, createUser, createFullName, createLastName, femaleNames, maleNames}
+module.exports = {genderSelect, createUser, createFullName, createLastName, femaleNames, maleNames, collectSkillsForDb}

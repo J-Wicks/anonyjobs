@@ -5,6 +5,8 @@ router.use('/applications', require('./applications'));
 router.use('/companies', require('./companies'));
 router.use('/postings', require('./postings'));
 router.use('/login', require("./login"));
+router.use('/skills', require('./skills'))
+// router.use('/auth', require('./auth'));
 router.use('/auth', require('./auth'));
 router.use('/', require('./auth'));
 
