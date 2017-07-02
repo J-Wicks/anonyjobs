@@ -10,19 +10,16 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-	Application.create(req.body.coverLetter)
+	console.log('on server with', req.body.coverLetter)
+	Application.create({
+		coverLetter: req.body.coverLetter,
+		UserId: req.body.userId
+	})
 	.then(createdApp => {
-		return createdApp.setPosting(req.body.postingId)
+		createdApp.setPosting(req.body.postingId)
+		res.send(createdApp)
 	})
-	.then(() => {
-		return Posting.findById(req.body.postingId)
-	})
-	.then(foundPosting => {
-		return foundPosting.setUser(req.body.userId)
-	})
-	.then(() => {
-		return Posting.findByid(req.body.postingId)
-	})
+
 })
 
 module.exports = router

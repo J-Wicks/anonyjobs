@@ -4170,7 +4170,7 @@ var locationsAreEqual = exports.locationsAreEqual = function locationsAreEqual(a
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.modUser = exports.loginUser = exports.receivePostings = exports.MOD_USER_TYPE = exports.SET_SELECTED_POSTING = exports.LOGIN_USER = exports.LOGOUT_USER = exports.RECEIVE_POSTINGS = undefined;
+exports.modUser = exports.loginUser = exports.MOD_USER_TYPE = exports.RECEIVE_POSTING = exports.SET_SELECTED_POSTING = exports.LOGIN_USER = exports.LOGOUT_USER = exports.RECEIVE_POSTINGS = undefined;
 
 var _axios = __webpack_require__(7);
 
@@ -4179,20 +4179,18 @@ var _axios2 = _interopRequireDefault(_axios);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* CONSTANTS - ACTION TYPES */
-var RECEIVE_POSTINGS = exports.RECEIVE_POSTINGS = "RECEIVE_POSTINGS";
+var RECEIVE_POSTINGS = exports.RECEIVE_POSTINGS = "RECEIVE_POSTINGS"; //it appears this is no longer being used for action creators, 
+//but some constants are still being stored and used from here. 
+//Can we change this to a constants folder? 
+
 var LOGOUT_USER = exports.LOGOUT_USER = "LOGOUT_USER";
 var LOGIN_USER = exports.LOGIN_USER = "LOGIN_USER";
 var SET_SELECTED_POSTING = exports.SET_SELECTED_POSTING = "SET_SELECTED_POSTING";
+var RECEIVE_POSTING = exports.RECEIVE_POSTING = 'RECEIVE_POSTING';
 
 var MOD_USER_TYPE = exports.MOD_USER_TYPE = "MOD_USER_TYPE";
 
 /* ACTION CREATORS */
-var receivePostings = exports.receivePostings = function receivePostings(postings) {
-  return {
-    type: RECEIVE_POSTINGS,
-    postings: postings
-  };
-};
 
 var loginUser = exports.loginUser = function loginUser(user) {
   return {
@@ -15788,7 +15786,7 @@ module.exports = Cancel;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getPostings = undefined;
+exports.getPosting = exports.getPostings = exports.receivePosting = exports.receivePostings = undefined;
 
 exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -15796,11 +15794,14 @@ exports.default = function () {
 
 
   var newState = Object.assign({}, state);
-
   switch (action.type) {
 
     case _actionCreators.RECEIVE_POSTINGS:
       newState.postings = action.postings;
+      break;
+
+    case _actionCreators.RECEIVE_POSTING:
+      newState.selectedPosting = action.posting;
       break;
 
     default:
@@ -15818,16 +15819,45 @@ var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//actions
+var receivePostings = exports.receivePostings = function receivePostings(postings) {
+  return {
+    type: _actionCreators.RECEIVE_POSTINGS,
+    postings: postings
+  };
+};
+
+var receivePosting = exports.receivePosting = function receivePosting(posting) {
+  return {
+    type: _actionCreators.RECEIVE_POSTING,
+    posting: posting
+  };
+};
+
+//Thunk action creators
 var getPostings = exports.getPostings = function getPostings(dispatch) {
   _axios2.default.get('/api/postings').then(function (res) {
     return res.data;
   }).then(function (postings) {
-    dispatch((0, _actionCreators.receivePostings)(postings));
+    dispatch(receivePostings(postings));
   });
 };
 
+//add test case to make sure this is getting a posting
+var getPosting = exports.getPosting = function getPosting(postingId) {
+  return function (dispatch) {
+    _axios2.default.get('api/postings/' + postingId).then(function (response) {
+      dispatch(receivePosting(response.data));
+    });
+  };
+};
+
+//Set Initial State
 var initialState = {
-  postings: []
+  postings: [],
+  selectedPosting: {}
+
+  //Reducer
 };
 
 /***/ }),
@@ -15840,7 +15870,7 @@ var initialState = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.applyAndSetPosting = exports.applyForJob = undefined;
+exports.apply = exports.applyAndSetPosting = exports.applyForJob = undefined;
 
 exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -15858,7 +15888,7 @@ exports.default = function () {
       newState.currentApplication = action.currentApplication;
       break;
     case APPLY_FOR_JOB:
-      newState.allApplications = action.applications.concat([action.newApplication]);
+      newState.allApplications = newState.allApplications.concat([action.newApplication]);
       break;
     default:
       return state;
@@ -15885,7 +15915,7 @@ var SET_CURRENT_APPLICATION = 'SET_CURRENT_APPLICATION';
 var APPLY_FOR_JOB = 'APPLY_FOR_JOB';
 
 var initialState = {
-  allApplications: {},
+  allApplications: [],
   singleUserApplications: [],
   allUserApplications: []
 
@@ -15899,6 +15929,7 @@ var initialState = {
   };
 };
 
+//Thunk Action Creators
 var applyAndSetPosting = exports.applyAndSetPosting = function applyAndSetPosting(coverLetter, postingId, userId) {
   return function (dispatch) {
     _axios2.default.post('/api/applications/', { coverLetter: coverLetter, postingId: postingId, userId: userId }).then(function (res) {
@@ -15907,6 +15938,18 @@ var applyAndSetPosting = exports.applyAndSetPosting = function applyAndSetPostin
       dispatch(applyForJob(selectedPosting));
     }).catch(function (error) {
       return console.error(error);
+    });
+  };
+};
+
+var apply = exports.apply = function apply(application) {
+  return function (dispatch) {
+    console.log('in apply thunk');
+    _axios2.default.post('/api/applications/', application).then(function (res) {
+      return res.data;
+    }).then(function (returnedPosting) {
+
+      dispatch(applyForJob(returnedPosting));
     });
   };
 };
@@ -16477,6 +16520,10 @@ var _EmployerDashboardContainer = __webpack_require__(333);
 
 var _EmployerDashboardContainer2 = _interopRequireDefault(_EmployerDashboardContainer);
 
+var _SinglePostingContainer = __webpack_require__(341);
+
+var _SinglePostingContainer2 = _interopRequireDefault(_SinglePostingContainer);
+
 var _UserDashboardContainer = __webpack_require__(334);
 
 var _CreateProfile = __webpack_require__(335);
@@ -16505,15 +16552,10 @@ var _AllPosting = __webpack_require__(338);
 
 var _AllPosting2 = _interopRequireDefault(_AllPosting);
 
-var _singlePosting = __webpack_require__(339);
-
-var _singlePosting2 = _interopRequireDefault(_singlePosting);
-
 var _ProfileContainer = __webpack_require__(340);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import UserDashboard from './components/users/UserDashboard/'
 var onUserEnter = function onUserEnter(nextRouterState) {
 	/* WE STILL NEED A PROFILE MODEL AND API ROUTE*/
 	var userId = nextRouterState.params.id;
@@ -16522,9 +16564,16 @@ var onUserEnter = function onUserEnter(nextRouterState) {
 	// store.dispatch(fetchCurrentProfile());
 	// store.dispatch(fetchApplications());
 };
+// import UserDashboard from './components/users/UserDashboard/'
 
-var onPostingsEnter = function onPostingsEnter() {
+
+var onPostingsEnter = function onPostingsEnter(nextRouterState) {
 	_store2.default.dispatch((0, _posting.getPostings)());
+};
+
+var onPostingEnter = function onPostingEnter(nextRouterState) {
+	console.log('going to posting', nextRouterState.params.id);
+	_store2.default.dispatch((0, _posting.getPosting)(nextRouterState.params.id));
 };
 
 var onAppEnter = function onAppEnter() {
@@ -16547,23 +16596,18 @@ _reactDom2.default.render(_react2.default.createElement(
 		_react2.default.createElement(
 			_reactRouter.Route,
 			{ path: '/', component: _AppContainer2.default, onEnter: onAppEnter },
-			_react2.default.createElement(_reactRouter.IndexRedirect, { to: '/home' }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/home', component: _HomeContainer2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/newposting', component: _NewPosting2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/employerdashboard', component: _EmployerDashboardContainer2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/signup', component: _SignUpContainer2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/login', component: _LoginContainer2.default }),
-			_react2.default.createElement(
-				_reactRouter.Route,
-				{ path: '/postings', component: _AllPosting2.default, onEnter: onPostingsEnter },
-				_react2.default.createElement(_reactRouter.Route, { path: '/:id', component: _singlePosting2.default })
-			),
+			_react2.default.createElement(_reactRouter.Route, { path: '/postings', component: _AllPosting2.default, onEnter: onPostingsEnter }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/application', component: _Application2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/createProfile', component: _CreateProfile2.default, onEnter: onCreateProfileEnter }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/editProfile' }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/viewProfile', component: _ProfileContainer.UserProfileContainer }),
 			_react2.default.createElement(_reactRouter.Route, { path: '/userdashboard/:id', component: _UserDashboardContainer.UserDashboardContainer, onEnter: onUserEnter }),
-			_react2.default.createElement(_reactRouter.Route, { path: '/postings', component: _AllPosting2.default })
+			_react2.default.createElement(_reactRouter.Route, { path: '/postings/:id', component: _SinglePostingContainer2.default, onEnter: onPostingEnter })
 		)
 	)
 ), document.getElementById('app')); // make sure thisa is the same as the id of the div in your index.html
@@ -34403,7 +34447,7 @@ exports.default = (0, _reactRedux.connect)(mapState)(AllPostings);
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.default = SinglePosting;
 
@@ -34415,8 +34459,95 @@ var _reactRedux = __webpack_require__(14);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function SinglePosting() {
-  return _react2.default.createElement('div', null);
+function SinglePosting(props) {
+
+	var applyHandler = function applyHandler() {
+		console.log('in apply handler');
+		props.apply({
+			postingId: props.posting.id,
+			userId: props.user.id,
+			coverLetter: props.user.summary
+		});
+	};
+	return _react2.default.createElement(
+		'div',
+		null,
+		_react2.default.createElement(
+			'strong',
+			null,
+			'Title '
+		),
+		_react2.default.createElement(
+			'p',
+			null,
+			props.posting && props.posting.positionTitle
+		),
+		_react2.default.createElement(
+			'strong',
+			null,
+			' Company '
+		),
+		_react2.default.createElement(
+			'p',
+			null,
+			'Placeholder for company'
+		),
+		_react2.default.createElement(
+			'strong',
+			null,
+			'Description '
+		),
+		_react2.default.createElement(
+			'p',
+			null,
+			props.posting && props.posting.positionDescription
+		),
+		_react2.default.createElement(
+			'strong',
+			null,
+			' Education Required '
+		),
+		_react2.default.createElement(
+			'p',
+			null,
+			props.posting && props.posting.educationField
+		),
+		_react2.default.createElement(
+			'p',
+			null,
+			props.posting && '' + props.posting.educationLevel
+		),
+		_react2.default.createElement(
+			'strong',
+			null,
+			'Experience Required '
+		),
+		_react2.default.createElement(
+			'p',
+			null,
+			props.posting && props.posting.experienceField
+		),
+		_react2.default.createElement(
+			'p',
+			null,
+			props.posting && props.posting.experienceLevel + '+ years'
+		),
+		_react2.default.createElement(
+			'strong',
+			null,
+			' Your Cover Letter '
+		),
+		_react2.default.createElement(
+			'textarea',
+			{ type: 'textarea', value: props.user.summary },
+			' '
+		),
+		_react2.default.createElement(
+			'button',
+			{ onClick: applyHandler, className: 'btn btn-success' },
+			' Apply Now! '
+		)
+	);
 }
 
 /***/ }),
@@ -34527,6 +34658,55 @@ var UserProfile = function (_React$Component) {
 
 
 var UserProfileContainer = exports.UserProfileContainer = (0, _reactRedux.connect)()(UserProfile);
+
+/***/ }),
+/* 341 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _axios = __webpack_require__(7);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _reactRedux = __webpack_require__(14);
+
+var _application = __webpack_require__(142);
+
+var _reactRouter = __webpack_require__(9);
+
+var _singlePosting = __webpack_require__(339);
+
+var _singlePosting2 = _interopRequireDefault(_singlePosting);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    posting: state.postingReducer.selectedPosting,
+    user: state.userReducer.currentUser
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+
+    apply: function apply(application) {
+      dispatch((0, _application.apply)(application));
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_singlePosting2.default);
 
 /***/ })
 /******/ ]);
