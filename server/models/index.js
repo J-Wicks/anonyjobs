@@ -27,4 +27,3 @@ User.hasMany(Education)
 User.hasMany(Experience)
 
 module.exports = {User, Application, Posting, Company, Education, Experience, Skills};
-

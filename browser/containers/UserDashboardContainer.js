@@ -12,44 +12,32 @@ class UserDashboard extends React.Component {
 
   constructor(props){
     super(props);
-  //   this.state = {
-  //     positionTitle: '',
-  //     positionDescription: '',
-  //     educationField: '',
-  //     educationLevel: '',
-  //     experienceField: '',
-  //     experienceLevel: '',
-  //  };
  }
 
   render () {
     return (
       <div id="entire-container">
         <h1>Welcome, {this.props.user.firstName} {this.props.user.lastName}</h1>
-        <button><small>Create/Edit Profile</small></button>
-        <UserApplications />
-        <UserOpportunities />
+        <div>
+          <h1>Applications</h1>
+        </div>
+        <div>
+          <h1>Saved Job Postings</h1>
+        </div>
+
+        <div>
+          <Link to="viewProfile"><h2>View Profile</h2></Link>
+        </div>
       </div>
     )
   }
 }
+
 
 const mapStateToProps = state => {
   return ({
     user: state.userReducer.currentUser
   })
 }
-
-// const mapDispatchToProps = dispatch => {
-//   return ({
-//
-//       addUser: (body) => {
-//       dispatch(createAndSetUser(body))
-//       }
-//     }
-//
-//   )
-// }
-
 
 export const UserDashboardContainer = connect(mapStateToProps, null)(UserDashboard);

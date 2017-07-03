@@ -12,12 +12,18 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-	console.log('in post route', req)
-	// User.create(req.body)
-	// .then (createdUser => {
-	// 	res.send(createdUser)
-	// })
 	res.send('thanks')
+})
+
+router.post('/setSummary', (req, res) => {
+	let summary = req.body.summary;
+	let id = req.body.userId
+	User.findById(id)
+	.then(foundUser => {
+		foundUser.update({
+			summary: summary
+		})
+	})
 })
 
 router.post('/addexperience', (req, res) => {
@@ -33,10 +39,14 @@ router.post('/addexperience', (req, res) => {
 		return foundUser.addExperience(createdExperience)
 	})
 	.then(() => {
-		res.json(createdExperience)
+		return User.findById(userId, {
+			include: [{model: Experience}]
+		})
+	})
+	.then(returnedUser => {
+		res.json(returnedUser)
 	})
 })
-
 
 router.post('/addEducation', (req, res) => {
 	let education = req.body.education;
@@ -51,13 +61,41 @@ router.post('/addEducation', (req, res) => {
 		return foundUser.addEducation(createdEducation)
 	})
 	.then(() => {
-		res.json(createdEducation)
+		return User.findById(userId, {
+			include: [{model: Education}]
+		})
+	})
+	.then(returnedUser => {
+		res.json(returnedUser)
 	})
 })
 
 
 router.get('/:id', (req, res) => {
-	User.findById(+req.params.id)
+	User.findById(+req.params.id, { include: [{model: Education}, {model: Experience}]
+	})
+	.then(foundUser => {
+		res.json(foundUser)
+	})
+})
+
+router.get('/:id/education', (req, res) => {
+	User.findById(req.params.id, {
+		include: [
+			{model: Education}, {model: Experience}
+		]
+	})
+	.then(foundUser => {
+		res.json(foundUser)
+	})
+})
+
+router.get('/:id/experience', (req, res) => {
+	User.findById(req.params.id, {
+		include: [
+			{model: Experience}, {model: Education}
+		]
+	})
 	.then(foundUser => {
 		res.json(foundUser)
 	})
