@@ -1,10 +1,11 @@
 import React from 'react';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+import { Link } from 'react-router';
 import axios from 'axios';
 import { hashHistory } from 'react-router';
-import { addExperience } from '../reducers/experience';
-import { addEducation } from '../reducers/education';
-
+import { addExperience } from '../reducers/user';
+import { addEducation } from '../reducers/user';
+import { addSummary } from '../reducers/user'
 
 class CreateProfile extends React.Component {
   constructor(props) {
@@ -30,8 +31,10 @@ class CreateProfile extends React.Component {
     this.toggleSummaryClick = this.toggleSummaryClick.bind(this);
     this.handleExperienceSubmit = this.handleExperienceSubmit.bind(this);
     this.handleEducationSubmit = this.handleEducationSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleSummarySubmit = this.handleSummarySubmit.bind(this)
     // this.handleSkillsSubmit = this.handleSkillsSubmit.bind(this)
-
+    // this.handleCategoryClick = this.handleCategoryClick.bind(this)
   }
 
 
@@ -42,7 +45,6 @@ class CreateProfile extends React.Component {
     } else if (this.state.addSkillsClicked === true) {
       this.setState({addSkillsClicked: false});
     }
-    console.log('state of addSkillsClicked', this.state.addSkillsClicked)
   }
 
   toggleEducationClick () {
@@ -69,22 +71,62 @@ class CreateProfile extends React.Component {
       let categories = Object.keys(skillsObj);
       this.setState({skillsObj: skillsObj})
     }
+    console.log(this.state)
     this.toggleSkillsClick();
 
   }
 
   renderSkillsCategories(){
     let skills = Object.keys(this.state.skillsObj)
-    return skills.map(function(skill, index){
-      // return (
-      //   <button key={index} onClick={this.handleCategoryClick(skill)}>{skill}</button>
-      // )
+
+    return skills.map((skill, index) => {
       return (
-        <button key={index}>{skill}</button>
+        <button value={skill} key={index} onClick={handleCategoryClick}>{skill}</button>
       )
     })
+
+
   }
 
+  // handleCategoryClick(event){
+  //
+  //   let currentCategory = event.target.value;
+  //   let subCategories = this.state.skillsObj[currentCategory
+  //   let categoryBoxes = subCategories.map(function(skill){
+  //     return (
+  //       <label>
+  //         {skill} :
+  //         <input
+  //           name=`${category}`
+  //           type="checkbox"
+  //           checked=${category}
+  //           onChange={this.handleInputChange} />
+  //       </label>
+  //     )
+  //   })]
+  // }
+
+  // const value = target.type === 'checkbox' ? target.checked : target.value;
+  // const target = event.target;
+  // const value = target.value;
+  // const name = target.name;
+  //
+  // this.setState({
+  //   [name]: value
+  // })
+// } 
+
+
+
+
+  // <label>
+  //         Is going:
+  //         <input
+  //           name="isGoing"
+  //           type="checkbox"
+  //           checked={this.state.isGoing}
+  //           onChange={this.handleInputChange} />
+  //       </label>
 
   handleEducationClick() {
     this.toggleEducationClick()
@@ -94,38 +136,40 @@ class CreateProfile extends React.Component {
 
   renderEducationInputs(){
     return (
-        <form className="addEducation">
+        <form className="educationUpdate">
           <div>
-            <label htmlFor="addSchool">Add School</label>
-            <input name="addSchool" defaultValue="Enter School Here"/>
+            <label htmlFor="schoolName">Add School</label>
+            <input name="schoolName" defaultValue="Enter School Here" type="text" onChange={this.handleInputChange}/>
           </div>
           <div>
-            <label htmlFor="addYear">Add Graduation Year</label>
-            <input name="addYear" defaultValue="YYYY"/>
+            <label htmlFor="yearGraduated">Add Graduation Year</label>
+            <input name="yearGraduated" defaultValue="YYYY" type="text" onChange={this.handleInputChange}/>
           </div>
           <div>
-            <label htmlFor="addDegree">Add Degree</label>
-            <select name="addDegree">
-              <option>Bachelor of Arts</option>
-              <option>Bachelor of Science</option>
-              <option>Associates</option>
-              <option>Masters</option>
-              <option>MBA</option>
-              <option>JD</option>
-              <option>PhD</option>
+            <label htmlFor="degree" type="text" >Add Degree</label>
+            <select name="degree" onChange={this.handleInputChange}>
+              <option value="Bachelor of Arts">Bachelor of Arts</option>
+              <option value="Bachelor of Science">Bachelor of Science</option>
+              <option value="Associates">Associates</option>
+              <option value="Masters">Masters</option>
+              <option value="MBA">MBA</option>
+              <option value="JD">JD</option>
+              <option value="PhD">PhD</option>
             </select>
           </div>
           <div>
             <label htmlFor="degreeName">Degree Name</label>
-            <input name="degreeName" defaultValue="Add Degree Name Here" />
+            <input name="degreeName" defaultValue="Add Degree Name Here" onChange={this.handleInputChange} />
           </div>
           <div>
-            <label htmlFor="GPA">GPA</label>
-            <input name="GPA " defaultValue="Add GPA Here" />
+            <label htmlFor="finalGPA">GPA</label>
+            <input name="finalGPA " defaultValue="Add GPA Here" onChange={this.handleInputChange}/>
           </div>
+          <button onClick={this.handleEducationSubmit} >Save</button>
         </form>
     )
   }
+
 
     toggleExperienceClick(){
 
@@ -140,23 +184,24 @@ class CreateProfile extends React.Component {
       return (
           <form className="addExperience">
             <div>
-              <label htmlFor="addEmployer">Employe Namer</label>
-              <input name="addEmployer" defaultValue="Enter Employer Name Here"/>
+              <label htmlFor="companyName">Employe Namer</label>
+              <input type="text" name="companyName" defaultValue="Enter Employer Name Here" onChange={this.handleInputChange}/>
             </div>
             <div>
-              <label htmlFor="addRole">Job Title </label>
-              <input name="addRole" defaultValue="YYYY"/>
+              <label htmlFor="role">Job Title </label>
+              <input type="text" name="role" defaultValue="YYYY" onChange={this.handleInputChange}/>
             </div>
             <div>
-              <label htmlFor="startYear">Stary Year</label>
-              <input name="startYear" defaultValue="YYYY"/>
+              <label htmlFor="startYear">Start Year</label>
+              <input type="text" name="startYear" defaultValue="YYYY" onChange={this.handleInputChange}/>
             </div>
             <div>
               <label htmlFor="endYear">End Year</label>
-              <input name="endYear" defaultValue="YYYY"/>
+              <input type="text" name="endYear" defaultValue="YYYY" onChange={this.handleInputChange}/>
             </div>
             <div>
-              <textarea type="text" defaultValue="Describe your roles and responsibilities here."/>
+              <label htmlFor="responsibilities">End Year</label>
+              <textarea name="responsibilities" type="text" defaultValue="Describe your roles and responsibilities here." onChange={this.handleInputChange} />
             </div>
             <button onClick={this.handleExperienceSubmit} type="">Save</button>
           </form>
@@ -165,14 +210,13 @@ class CreateProfile extends React.Component {
 
     handleExperienceSubmit(event){
       event.preventDefault();
-      let companyName = event.target.addEmployer.value;
-      let role = event.target.addRole.value;
-      let startYear = event.target.startYear.value;
-      let endYear = event.target.endYear.value;
-
+      let companyName = this.state.companyName;
+      let role = this.state.role;
+      let startYear = this.state.startYear;
+      let endYear = this.state.endYear;
       let experienceObj = {companyName, role, startYear, endYear}
       // let userId = this.props.currentUser.id
-      dispatch(addExperience(experience, userId))
+      this.props.updateExperience(experienceObj, this.props.currentUser.id)
     }
 
     toggleSummaryClick(){
@@ -183,32 +227,58 @@ class CreateProfile extends React.Component {
       }
     }
 
-    renderSummaryInputs(){
 
-      return (
-        <textarea type="text" defaultValue="Describe your experience, background, and professional objectives."/>
-      )
+    handleEducationSubmit(event){
+      event.preventDefault();
+      let schoolName = this.state.schoolName;
+      let yearGraduated = this.state.yearGraduated;
+      let degree = this.state.degree;
+      let degreeName = this.state.degreeName;
+      let finalGPA = this.state.finalGPA;
+      let educationObj = {
+        schoolName: schoolName,
+        yearGraduated: yearGraduated,
+        degree: degree,
+        degreeName: degreeName,
+        finalGPA: finalGPA}
+      let userId = this.props.currentUser.id;
+      this.props.updateEducation(educationObj, this.props.currentUser.id)
+    }
+
+    handleSummarySubmit(event) {
+      event.preventDefault();
+      let summary = this.state.summary;
+      let userId = this.props.currentUser.id;
+      this.props.updateSummary(summary, this.props.currentUser.id);
 
     }
 
 
-  // toggleEducationClick () {
-  // 	if (this.state.addEducationClicked === false) {
-  // 		this.setState({addEducationClicked: true});
-  // 	} else if (this.state.addEducationClicked === true) {
-  // 		this.setState({addEducationClicked: false});
-  // 	}
-  // }
-
-  // this.handleExperienceSubmit = this.handleExperienceSubmit.bind(this);
-  // this.handleEducationSubmit = this.handleEducationSubmit.bind(this);
-  // this.handleSkillsSubmit = this.handleSkillsSubmit.bind(this)
 
 
-  handleEducationSubmit(event){
-    event.preventDefault();
 
-  }
+    renderSummaryInputs(){
+
+      return (
+
+        <form>
+          <textarea type="text" defaultValue="Describe your experience, background, and professional objectives." onChange={this.handleInputChange} name="summary"/>
+          <button onClick={this.handleSummarySubmit} type="">Save</button>
+      </form>
+      )
+
+    }
+
+  handleInputChange(event) {
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    })
+  } 
 
   render() {
     return (
@@ -227,11 +297,15 @@ class CreateProfile extends React.Component {
           <button onClick={this.toggleExperienceClick}>Add Professional Experience</button>
         </div>
         {(this.state.addExperienceClicked) ? (<div>{this.renderExperienceInputs()}</div>) : null }
-        <div>
+        {(!this.props.currentUser.summary) ? (    <div>
           <button onClick={this.toggleSummaryClick}>Add Personal Summary</button>
-        </div>
+        </div>) : null }
         {(this.state.addSummaryClicked) ? (<div>{this.renderSummaryInputs()}</div>) : null }
 
+        <div>
+          <Link to="viewProfile"><h2>View Profile</h2></Link>
+          <Link to={`userdashboard/${this.props.currentUser.id}`}><h2>View Dashboard</h2></Link>
+        </div>
       </div>
     )
   }
@@ -242,15 +316,15 @@ const mapDispatchToProps = dispatch => {
   return ({
     updateExperience: (experience, userId) => dispatch(addExperience(experience, userId)),
     updateEducation: (education, userId) => dispatch(addEducation(education, userId)),
+    updateSummary: (summary, userId) => dispatch(addSummary(summary, userId))
   })
 }
 
 
 const mapStateToProps = state => {
   return ({
-    skills: state.skillsReducer.allSkills
-    // ,
-    // currentUser: state.userReducer.loggedInUser
+    skills: state.skillsReducer.allSkills,
+    currentUser: state.userReducer.currentUser
   })
 }
 

@@ -18,7 +18,7 @@ function getCollectionOfUsers(n) {
   return users;
 }
 
-let newUsers = getCollectionOfUsers(600);
+let newUsers = getCollectionOfUsers(amountOfUsers);
 let sampleSkills = collectSkillsForDb();
 
 let data = {
@@ -31,7 +31,7 @@ let data = {
 
 function createData() {
 
-  db.sync({force: true})
+  db.sync()
   .then(function () {
     console.log("Dropped old data, now inserting data");
     return Promise.map(Object.keys(data), function (name) {
