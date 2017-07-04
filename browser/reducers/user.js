@@ -7,22 +7,30 @@ import axios from 'axios';
 
 const SET_ALL_USERS = 'SET_ALL_USERS';
 const SET_CURRENT_USER = 'SET_CURRENT_USER';
+const SET_RELEVANT_USER = 'SET_RELEVANT_USER';
 const MOD_USER_TYPE = 'MOD_USER_TYPE';
 const LOGIN_USER = 'LOGIN_USER';
-
-const LOGOUT_USER = 'Logout_user';
+const LOGOUT_USER = 'LOGOUT_USER';
+const SET_USER_SUMMARY = 'SET_USER_SUMMARY';
+const SET_USER_SKILLS = 'SET_USER_SKILLS' ;
 
 const initialState = {
   postings: [],
   UserType: '',
 	allUsers: [],
-  currentUser: {}
+  currentUser: {},
+  relevantUser: {}
 }
 
 /*------------------------Action Creators ----------*/
 
 const setCurrentUser = user => ({
   type: SET_CURRENT_USER,
+  user
+})
+
+const setRelevantUser = user => ({
+  type: SET_RELEVANT_USER,
   user
 })
 
@@ -36,11 +44,21 @@ const loginUser = user => ({
   user
 })
 
+const setUserSummary = summary => ({
+  type: SET_USER_SUMMARY,
+  summary
+})
+
+const setUserSkills = skills => ({
+  type: SET_USER_SKILLS,
+  skills
+})
+
 
 
 /*--------------------Thunk Action Creators */
 
-export const fetchCurrentUser = (id) => { return (
+export const fetchRelevantUser = (id) => { return (
 
   dispatch => {
     axios.get(`/api/users/${id}`)
@@ -48,7 +66,7 @@ export const fetchCurrentUser = (id) => { return (
       return res.data
     })
     .then(user => {
-      dispatch(setCurrentUser(user))
+      dispatch(setRelevantUser(user))
     })
   }
 )}
@@ -72,6 +90,52 @@ export const logIn = (user) =>{
   )
 }
 
+export const addEducation = (education, userId) => {
+	 return (
+    dispatch => {
+      axios.post('/api/users/addeducation', {education, userId})
+      .then(res => res.data)
+      .then(returnedUser => {
+        dispatch(setCurrentUser(returnedUser))
+      })
+    }
+  )
+}
+
+export const addExperience = (experience, userId) => { return (
+    dispatch => {
+      axios.post('/api/users/addexperience', {experience, userId})
+      .then(res => res.data)
+      .then(returnedUser => {
+        dispatch(setCurrentUser(returnedUser))
+      })
+    }
+  )
+}
+
+export const addSummary = (summary, userId) => {
+  return (
+    dispatch => {
+      axios.post('/api/users/setSummary', {summary, userId})
+      .then(returnedSummary => {
+        dispatch(setUserSummary(returnedSummary))
+      })
+    }
+  )
+}
+
+export const addSkills = (skills, userId) => {
+  return (
+    dispatch => {
+      axios.post('/api/users/addskills', {skills, userId})
+      .then(res=> res.data)
+      .then(returnedUser => {
+        dispatch(setCurrentUser(returnedUser))
+      })
+    }
+  )
+}
+
 /*------------------ REDUCER */
 
 export default function (state = initialState, action) {
@@ -81,23 +145,27 @@ export default function (state = initialState, action) {
    case SET_ALL_USERS:
      newState.allUsers = action.users;
      break;
-
    case SET_CURRENT_USER:
      newState.currentUser = action.user;
      break;
-
    case MOD_USER_TYPE:
      newState.userType = action.userType;
      break;
-
     case LOGIN_USER:
       newState.currentUser = action.user;
       break;
-
     case LOGOUT_USER:
       newState.currentUser = {};
       break;
-
+    case SET_RELEVANT_USER:
+      newState.relevantUser = {};
+      break;
+    case SET_USER_SUMMARY:
+      newState.currentUser.summary = action.summary;
+      break;
+    case SET_USER_SKILLS:
+      newState.currentUser.skills = action.skills;
+      break;
    default:
      return state;
  }

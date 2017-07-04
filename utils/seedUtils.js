@@ -2,7 +2,6 @@ const faker = require('faker');
 // const chance = require('chance');
 // const randomName = require('node-random-name');
 // const createName = require('./nameUtils').createFullName
-console.log('what up')
 
 
 const genderSelect = function () {

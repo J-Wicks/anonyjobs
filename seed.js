@@ -1,7 +1,7 @@
 const Promise = require('bluebird');
 const db = require('./server/db');
 const User = require('./server/models/User');
-const Skills = require('./server/models/Skills')
+const Skill = require('./server/models/Skill')
 const createUser = require('./utils/seedUtils').createUser;
 const collectSkillsForDb = require('./utils/seedUtils').collectSkillsForDb;
 
@@ -18,12 +18,12 @@ function getCollectionOfUsers(n) {
   return users;
 }
 
-let newUsers = getCollectionOfUsers(600);
+let newUsers = getCollectionOfUsers(amountOfUsers);
 let sampleSkills = collectSkillsForDb();
 
 let data = {
   Users: newUsers,
-  skills: sampleSkills
+  skill: sampleSkills
   // skills: []
   // company: companies
 };
@@ -31,7 +31,7 @@ let data = {
 
 function createData() {
 
-  db.sync({force: true})
+  db.sync()
   .then(function () {
     console.log("Dropped old data, now inserting data");
     return Promise.map(Object.keys(data), function (name) {
