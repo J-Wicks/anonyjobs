@@ -18,6 +18,9 @@ const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy
 
 
 app.use(morgan('dev'));
+//setting up bodyparser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //using our session for auth
 app.use(session({
@@ -32,7 +35,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser((user, done) => {
-	console.log("SERIALIZING")
+	console.log('SERIALIZING')
   try {
     done(null, user.id);
   } catch (err) {
@@ -74,24 +77,19 @@ passport.use(new LinkedInStrategy({
 
 
 }))
-
-
-//setting up bodyparser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
 //public routing
 app.use('/files', express.static(path.join(__dirname, '../public')));
 
 //api routes
 app.use('/home/signin-linkedin', apiRoutes);
 app.use('/api', apiRoutes)
-
-//serve up the html
-app.get('/*', function (req, res) {
-  console.log(req.user)
+app.use((req, res, next) =>
+  path.extname(req.path).length > 0 ? res.status(404).send('Not found') : next())
+app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, '../index.html'))
 });
+
+//serve up the html
 
 app.use(function (err, req, res, next) {
   console.error(err);
@@ -100,10 +98,10 @@ app.use(function (err, req, res, next) {
 });
 
 db.sync()
-.then(() =>{
+.then(() => {
 
 app.listen(process.env.PORT || 3000, function () {
-  console.log("listening on port 3000");
+  console.log('listening on port 3000');
 })
 
 })
