@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const Skills = require('../models/').Skills;
+const Skill = require('../models/').Skill;
 
 router.get('/', (req, res) => {
-	Skills.findAll(
+	Skill.findAll(
 		{
 		order: [['category', 'ASC']]
 	}
@@ -12,13 +12,4 @@ router.get('/', (req, res) => {
 	})
 })
 
-//
-// router.post('/', (req, res) => {
-// 	console.log(req.body)
-// 	Posting.create(req.body)
-// 	.then( createdPosting => {
-// 		res.send(createdPosting)
-// 	})
-// })
-//
 module.exports = router

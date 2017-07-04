@@ -2,7 +2,7 @@ const db = require('../db');
 const Sequelize = require('sequelize');
 
 const Education = db.define('education', {
-  name: {
+  schoolName: {
     type: Sequelize.STRING,
     allowNull: false
   },
@@ -10,11 +10,15 @@ const Education = db.define('education', {
     type: Sequelize.INTEGER,
     allowNull: false
   },
+  degreeName: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   degree: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  GPA: {
+  finalGPA: {
     type: Sequelize.FLOAT,
     allowNull: true
   }

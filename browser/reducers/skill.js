@@ -29,11 +29,9 @@ export const fetchAllSkills = () => {
 		dispatch => {
 			axios.get('/api/skills')
 			.then(res => {
-				console.log('hello from fetch all skills')
 				return res.data
 			})
 			.then(skills => {
-				console.log('hello from skills found', skills)
 				dispatch(setAllSkills(skills))
 			})
 		}
