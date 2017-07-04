@@ -11,6 +11,7 @@ import SignUpContainer from './containers/SignUpContainer';
 import HomeContainer from './containers/HomeContainer';
 import EmployerDashboardContainer from './containers/EmployerDashboardContainer';
 import SinglePostingContainer from './containers/SinglePostingContainer'
+import singlePosting from './components/singlePosting'
 import {UserDashboardContainer} from './containers/UserDashboardContainer'
 import {CreateProfileContainer} from './containers/CreateProfile';
 import CreateProfile from './containers/CreateProfile';

@@ -39,7 +39,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser((user, done) => {
-	console.log("SERIALIZING")
+
   try {
     done(null, user.id);
   } catch (err) {
@@ -48,7 +48,6 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-	console.log('DESERIALIZING')
 	const numberId = Number(id)
   Users.findById(numberId)
     .then(user => done(null, user))
@@ -66,8 +65,7 @@ passport.use(new LinkedInStrategy({
 	scope: ['r_emailaddress', 'r_basicprofile']
 }, function(accessToken, refreshToken, profile, done){
 	const _profile = profile._json
-	console.log('PROFILE',_profile.headline, _profile.industry, _profile.location.name, _profile.summary)
-	Users.findOrCreate({
+		Users.findOrCreate({
 		where: {
 			email: profile.emails[0].value,
 			firstName: profile.name.givenName,
@@ -111,7 +109,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
 
-db.sync()
+db.sync({force:true})
 .then(() =>{
 
 app.listen(process.env.PORT || 3000, function () {
