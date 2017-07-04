@@ -55,10 +55,14 @@ passport.deserializeUser((id, done) => {
     .catch(done);
 });
 
+
 passport.use(new LinkedInStrategy({
-	clientID: secrets.CLIENT_ID,
-	clientSecret: secrets.CLIENT_SECRET,
-	callbackURL: 'http://127.0.0.1:3000/home/signin-linkedin',
+	// clientID: secrets.CLIENT_ID,
+	// clientSecret: secrets.CLIENT_SECRET,
+	// callbackURL: 'http://127.0.0.1:3000/home/signin-linkedin',
+  clientID: process.env.CLIENT_ID || secrets.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET || secrets.CLIENT_SECRET,
+  callbackURL: process.env.HEROKU ? 'https://damp-shelf-63214.herokuapp.com/home/signin-linkedin' : 'http://127.0.0.1:3000/home/signin-linkedin',
 	scope: ['r_emailaddress', 'r_basicprofile']
 }, function(accessToken, refreshToken, profile, done){
 	const _profile = profile._json
