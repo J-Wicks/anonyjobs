@@ -2,6 +2,8 @@ const router = require('express').Router();
 const User = require('../models').User;
 const Experience = require('../models').Experience;
 const Education = require('../models').Education;
+const Skill = require('../models').Skill;
+const UserSkill = require('../models').UserSkill
 
 
 router.get('/', (req, res) => {
@@ -69,6 +71,35 @@ router.post('/addEducation', (req, res) => {
 		res.json(returnedUser)
 	})
 })
+
+router.post('/addskills', (req, res) => {
+	let skills = req.body.skills;
+	let userId = req.body.userId
+	let createdEducation;
+	let skillPromiseArray;
+	let currentUser;
+	User.findById(userId)
+	.then(foundUser => {
+		skillPromiseArray = skills.map(skill => {
+			return Skill.findOne({where: {
+				category: skill.category,
+				name: skill.name
+			}})
+			.then(foundSkill => {
+				foundUser.addSkill(foundSkill)
+			})
+		})
+		return Promise.all(skillPromiseArray)
+	})
+	.then(() => {
+		return User.findById(userId, { include: [{model: Education}, {model: Experience}, {model: Skill}]
+		})
+	})
+	.then(foundUser => {
+		res.json(foundUser)
+	})
+})
+
 
 
 router.get('/:id', (req, res) => {

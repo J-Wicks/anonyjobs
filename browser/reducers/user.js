@@ -11,7 +11,8 @@ const SET_RELEVANT_USER = 'SET_RELEVANT_USER';
 const MOD_USER_TYPE = 'MOD_USER_TYPE';
 const LOGIN_USER = 'LOGIN_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
-const SET_USER_SUMMARY = 'SET_USER_SUMMARY'
+const SET_USER_SUMMARY = 'SET_USER_SUMMARY';
+const SET_USER_SKILLS = 'SET_USER_SKILLS' ;
 
 const initialState = {
   postings: [],
@@ -43,12 +44,15 @@ const loginUser = user => ({
   user
 })
 
-const setUserSummary = sumMary => ({
+const setUserSummary = summary => ({
   type: SET_USER_SUMMARY,
   summary
 })
 
-
+const setUserSkills = skills => ({
+  type: SET_USER_SKILLS,
+  skills
+})
 
 
 
@@ -98,7 +102,6 @@ export const addEducation = (education, userId) => {
   )
 }
 
-
 export const addExperience = (experience, userId) => { return (
     dispatch => {
       axios.post('/api/users/addexperience', {experience, userId})
@@ -121,6 +124,18 @@ export const addSummary = (summary, userId) => {
   )
 }
 
+export const addSkills = (skills, userId) => {
+  return (
+    dispatch => {
+      axios.post('/api/users/addskills', {skills, userId})
+      .then(res=> res.data)
+      .then(returnedUser => {
+        dispatch(setCurrentUser(returnedUser))
+      })
+    }
+  )
+}
+
 /*------------------ REDUCER */
 
 export default function (state = initialState, action) {
@@ -130,19 +145,15 @@ export default function (state = initialState, action) {
    case SET_ALL_USERS:
      newState.allUsers = action.users;
      break;
-
    case SET_CURRENT_USER:
      newState.currentUser = action.user;
      break;
-
    case MOD_USER_TYPE:
      newState.userType = action.userType;
      break;
-
     case LOGIN_USER:
       newState.currentUser = action.user;
       break;
-
     case LOGOUT_USER:
       newState.currentUser = {};
       break;
@@ -151,6 +162,9 @@ export default function (state = initialState, action) {
       break;
     case SET_USER_SUMMARY:
       newState.currentUser.summary = action.summary;
+      break;
+    case SET_USER_SKILLS:
+      newState.currentUser.skills = action.skills;
       break;
    default:
      return state;

@@ -6,8 +6,8 @@ const Posting = require('./Posting')
 const Company = require('./Company')
 const Education = require('./Education')
 const Experience = require('./Experience');
-const Skills = require('./Skills');
-
+const Skill = require('./Skill');
+const UserSkill = require('./UserSkill');
 
 
 //Associate application with user. User has zero to many applications.
@@ -25,5 +25,7 @@ Education.belongsTo(User);
 Experience.belongsTo(User)
 User.hasMany(Education)
 User.hasMany(Experience)
+User.belongsToMany(Skill, {through: UserSkill})
+Skill.belongsToMany(User, {through: UserSkill})
 
-module.exports = {User, Application, Posting, Company, Education, Experience, Skills};
+module.exports = {User, Application, Posting, Company, Education, Experience, Skill, UserSkill};
