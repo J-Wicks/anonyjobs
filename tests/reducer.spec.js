@@ -13,7 +13,7 @@ describe('Main reducer', () => {
     it('has expected initial state', () => {
         expect(testStore.getState()).to.be.deep.equal({
 			  users: [],
-	
+
         });
     });
 

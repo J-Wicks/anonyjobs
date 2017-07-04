@@ -1,14 +1,18 @@
 const User = require ('../models').User
+const Education = require('../models').Education;
+const Experience = require('../models').Experience;
 var router = require('express').Router();
 const passport = require('passport');
 
 
 router.get('/me', (req, res, next) => {
 	let userId = req.user ? Number(req.user.id) : 0
-
-	User.findOne({ 
-		where: {id: userId}, 
-	} )
+	
+	User.findOne({
+		where: {id: userId}, include: [
+			{model: Education}, {model: Experience}
+		]
+	})
 	.then((foundUser) => {
 		if(foundUser)
 		res.send(foundUser)
@@ -16,9 +20,9 @@ router.get('/me', (req, res, next) => {
 	}).catch(next);
 });
 
-router.get('/linkedin', 
-	passport.authenticate('linkedin', 
-		{ state: 'SOME STATE'  }), 
+router.get('/linkedin',
+	passport.authenticate('linkedin',
+		{ state: 'SOME STATE'  }),
 	(req, res, next)=>{})
 
 router.get('/', passport.authenticate('linkedin', {

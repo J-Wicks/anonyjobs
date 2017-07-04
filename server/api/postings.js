@@ -16,7 +16,6 @@ router.get('/:postingId', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-	console.log(req.body)
 	Posting.create(req.body)
 	.then( createdPosting => {
 		res.send(createdPosting)
