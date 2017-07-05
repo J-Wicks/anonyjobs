@@ -83,6 +83,7 @@ class EmployerDashboardContainer extends Component {
   render () {
     return (
       <div id="entire-container">
+      <p> What's up</p>
       <NewPosting
       handleJobTitle={this.handleJobTitle}
       handleJobDescription={this.handleJobDescription}
