@@ -14,6 +14,8 @@ const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const dbStore = new SequelizeStore({ db: db });
 
+console.log('process env', process.env.HEROKU)
+
 if (!process.env.HEROKU){
 var secrets = require('../secrets')
 }
@@ -54,7 +56,6 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-	console.log('DESERIALIZING')
 	const numberId = Number(id)
   Users.findById(numberId)
     .then(user => done(null, user))
@@ -90,6 +91,11 @@ passport.use(new LinkedInStrategy({
 	})
 
 }))
+//public routing
+app.use(express.static(path.join(__dirname, '../public')));
+
+//api routes
+app.use('/home/signin-linkedin', apiRoutes);
 app.use('/api', apiRoutes)
 app.use((req, res, next) =>
   path.extname(req.path).length > 0 ? res.status(404).send('Not found') : next())
@@ -108,9 +114,7 @@ app.use(function (err, req, res, next) {
 
 db.sync({force: true})
 .then(() => {
-
-app.listen(process.env.PORT || 3000, function () {
-  console.log('listening on port 3000');
-})
-
+  app.listen(process.env.PORT || 3000, function () {
+    console.log('listening on port 3000');
+  })
 })

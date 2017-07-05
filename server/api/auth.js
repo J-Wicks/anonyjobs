@@ -24,6 +24,7 @@ router.get('/linkedin',
 		{ state: 'SOME STATE'  }),
 	(req, res, next) => {})
 
+
 router.get('/', passport.authenticate('linkedin', {
   successRedirect: '/',
   failureRedirect: '/login'

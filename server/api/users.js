@@ -101,8 +101,8 @@ router.post('/addskills', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-	User.findById(req.params.id /*{ include: [{model: Education}, {model: Experience}]
-	}*/)
+	User.findById(+req.params.id, { include: [{model: Education}, {model: Experience}]
+	})
 	.then(foundUser => {
 		res.json(foundUser)
 	})

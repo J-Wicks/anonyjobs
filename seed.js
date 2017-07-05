@@ -31,7 +31,7 @@ let data = {
 
 function createData() {
 
-  db.sync({force: true})
+  db.sync()
   .then(function () {
     console.log("Dropped old data, now inserting data");
     return Promise.map(Object.keys(data), function (name) {
