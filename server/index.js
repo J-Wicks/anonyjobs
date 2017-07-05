@@ -76,21 +76,6 @@ passport.use(new LinkedInStrategy({
 			location: _profile.location.name,
 			summary: _profile.summary
 		}
-  console.log('newUserObj', newUserObj)
-	Users.findOrCreate({
-		where: {
-      email: _profile.emailAddress,
-			// email: profile.emails[0].value,
-      firstName: _profile.firstName,
-			// firstName: profile.name.givenName,
-      lastName: _profile.lastName,
-			// lastName: profile.name.familyName,
-			headline: _profile.headline,
-			industry: _profile.industry,
-			location: _profile.location.name
-      // ,
-			// summary: _profile.summary
-		}
 	})
 	.then((createdUser) =>{
     // console.log('createdUser', createdUser)
