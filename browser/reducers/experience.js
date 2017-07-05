@@ -1,8 +1,6 @@
 import axios from 'axios';
 ///
 
-
-
 /* ----------------------- CONSTANTS -----------*/
 // All applications for all users
 
@@ -39,8 +37,6 @@ export const addExperience = (experience, userId) => { return (
     }
   )
 }
-
-
 
 // awaiting model completion
 

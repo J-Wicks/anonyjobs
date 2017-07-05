@@ -1,8 +1,6 @@
 import axios from 'axios';
 ///
 
-
-
 /* ----------------------- CONSTANTS -----------*/
 // All applications for all users
 
@@ -17,8 +15,6 @@ const initialState = {
 	userEducation: [],
 }
 
-
-
 /*---- action cretors */
 
 
@@ -30,7 +26,8 @@ const addUserEducation = education => ({
 
 /*------------------------Thunk Action Creators ----------*/
 
-export const addEducation = (education, userId) => { return (
+export const addEducation = (education, userId) => {
+	 return (
     dispatch => {
       axios.post('/api/users/addeducation', {education, userId})
       .then(res => res.data)
@@ -41,6 +38,17 @@ export const addEducation = (education, userId) => { return (
   )
 }
 
+export const fetchEducation = () => {
+	 return (
+    dispatch => {
+      axios.get(`/api/users/:id/Education/`)
+      .then(res => res.data)
+      .then(returnedEducation => {
+        dispatch(addUserEducation(returnedEducation))
+      })
+    }
+  )
+}
 
 
 // awaiting model completion

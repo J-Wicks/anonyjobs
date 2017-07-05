@@ -8,8 +8,14 @@ router.get('/', (req, res) => {
 	})
 })
 
+router.get('/:postingId', (req, res) => {
+	Posting.findById(req.params.postingId)
+	.then(foundPosting => {
+		res.send(foundPosting)
+	})
+})
+
 router.post('/', (req, res) => {
-	console.log(req.body)
 	Posting.create(req.body)
 	.then( createdPosting => {
 		res.send(createdPosting)
