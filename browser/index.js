@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, Route, hashHistory, IndexRedirect, IndexRoute } from 'react-router'
+import { Router, Route, browserHistory, IndexRedirect} from 'react-router'
 import store from './store';
 import '../index.scss'
 
@@ -61,8 +61,9 @@ const onCreateProfileEnter = () => {
 
 ReactDOM.render(
 	<Provider store={store}>
-	<Router history = {hashHistory}>
+	<Router history = {browserHistory}>
 		<Route path='/' component={AppContainer} onEnter={onAppEnter}>
+			<IndexRedirect to='/home' />
 			<Route path='/home' component={HomeContainer} />
 			<Route path ='/newposting' component={NewPosting} />
 			<Route path='/employerdashboard' component={EmployerDashboardContainer} />
