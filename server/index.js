@@ -93,7 +93,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //public routing
-app.use('/files', express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, '../node_modules/bootstrap/dist')))
 
@@ -103,8 +103,7 @@ app.use('/api', apiRoutes);
 
 
 //serve up the html
-app.get('/*', function (req, res) {
-  console.log(req.user)
+app.use('/*', function (req, res) {
   res.sendFile(path.join(__dirname, '../index.html'))
 });
 
