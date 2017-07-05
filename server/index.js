@@ -39,7 +39,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser((user, done) => {
-	console.log("SERIALIZING")
+
   try {
     done(null, user.id);
   } catch (err) {
@@ -48,7 +48,6 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-	console.log('DESERIALIZING')
 	const numberId = Number(id)
   Users.findById(numberId)
     .then(user => done(null, user))
@@ -65,17 +64,13 @@ passport.use(new LinkedInStrategy({
   // callbackURL: process.env.HEROKU ? 'https://damp-shelf-63214.herokuapp.com/home/signin-linkedin' : 'http://127.0.0.1:3000/home/signin-linkedin',
 	scope: ['r_emailaddress', 'r_basicprofile']
 }, function(accessToken, refreshToken, profile, done){
-	const _profile = profile._json;
-  console.log('profile', _profile);
-	// console.log('PROFILE',_profile.headline, _profile.industry, _profile.location.name, _profile.summary)
 
-  let newUserObj = {
-      email: _profile.emailAddress,
-			// email: profile.emails[0].value,
-      firstName: _profile.firstName,
-			// firstName: profile.name.givenName,
-      lastName: _profile.lastName,
-			// lastName: profile.name.familyName,
+	const _profile = profile._json
+		Users.findOrCreate({
+		where: {
+			email: profile.emails[0].value,
+			firstName: profile.name.givenName,
+			lastName: profile.name.familyName,
 			headline: _profile.headline,
 			industry: _profile.industry,
 			location: _profile.location.name,
@@ -134,7 +129,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
 
-db.sync()
+db.sync({force:true})
 .then(() =>{
 
 app.listen(process.env.PORT || 3000, function () {

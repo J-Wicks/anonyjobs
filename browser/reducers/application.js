@@ -12,7 +12,7 @@ const SET_CURRENT_APPLICATION = 'SET_CURRENT_APPLICATION';
 const APPLY_FOR_JOB = 'APPLY_FOR_JOB'
 
 const initialState = {
-	allApplications: {},
+	allApplications: [],
 	singleUserApplications: [],
   allUserApplications: []
 }
@@ -25,6 +25,8 @@ export const applyForJob = newApplication => ({
   newApplication
 })
 
+
+//Thunk Action Creators
 export const applyAndSetPosting = (coverLetter, postingId, userId) => dispatch => {
   axios.post('/api/applications/', {coverLetter, postingId, userId})
   .then(res => res.data)
@@ -33,6 +35,21 @@ export const applyAndSetPosting = (coverLetter, postingId, userId) => dispatch =
   })
   .catch(error => console.error(error))
 }
+
+
+export const apply = (application) => {
+  return dispatch => {
+    console.log('in apply thunk')
+    axios.post('/api/applications/', application)
+    .then(res => res.data)
+    .then (returnedPosting => {
+
+      dispatch(applyForJob(returnedPosting))
+    })
+  }
+}
+
+
 
 
 /*------------------ REDUCER */
@@ -50,7 +67,7 @@ export default function (state = initialState, action) {
       newState.currentApplication = action.currentApplication;
       break;
 		case APPLY_FOR_JOB:
-			newState.allApplications = action.applications.concat([action.newApplication])
+			newState.allApplications = newState.allApplications.concat([action.newApplication])
 			break
     default:
       return state;
