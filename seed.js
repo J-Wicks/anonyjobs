@@ -18,6 +18,7 @@ function getCollectionOfUsers(n) {
   return users;
 }
 
+
 let newUsers = getCollectionOfUsers(amountOfUsers);
 let sampleSkills = collectSkillsForDb();
 
@@ -44,6 +45,7 @@ function createData() {
   .then(function(){
     console.log('New users and skills added to the database!')
   })
+
   // .then(function() {
   //    User.findAll()
   //    .then(function(foundUsers){

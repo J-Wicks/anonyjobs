@@ -56,14 +56,15 @@ passport.deserializeUser((id, done) => {
 
 
 passport.use(new LinkedInStrategy({
-	// clientID: secrets.CLIENT_ID,
-	// clientSecret: secrets.CLIENT_SECRET,
-	// callbackURL: 'http://127.0.0.1:3000/home/signin-linkedin',
-  clientID: process.env.CLIENT_ID || secrets.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET || secrets.CLIENT_SECRET,
-  callbackURL: process.env.HEROKU ? 'https://damp-shelf-63214.herokuapp.com/home/signin-linkedin' : 'http://127.0.0.1:3000/home/signin-linkedin',
+	clientID: secrets.CLIENT_ID,
+	clientSecret: secrets.CLIENT_SECRET,
+	callbackURL: 'http://127.0.0.1:3000/home/signin-linkedin',
+  // clientID: process.env.CLIENT_ID || secrets.CLIENT_ID,
+  // clientSecret: process.env.CLIENT_SECRET || secrets.CLIENT_SECRET,
+  // callbackURL: process.env.HEROKU ? 'https://damp-shelf-63214.herokuapp.com/home/signin-linkedin' : 'http://127.0.0.1:3000/home/signin-linkedin',
 	scope: ['r_emailaddress', 'r_basicprofile']
 }, function(accessToken, refreshToken, profile, done){
+
 	const _profile = profile._json
 		Users.findOrCreate({
 		where: {
@@ -75,8 +76,24 @@ passport.use(new LinkedInStrategy({
 			location: _profile.location.name,
 			summary: _profile.summary
 		}
+  console.log('newUserObj', newUserObj)
+	Users.findOrCreate({
+		where: {
+      email: _profile.emailAddress,
+			// email: profile.emails[0].value,
+      firstName: _profile.firstName,
+			// firstName: profile.name.givenName,
+      lastName: _profile.lastName,
+			// lastName: profile.name.familyName,
+			headline: _profile.headline,
+			industry: _profile.industry,
+			location: _profile.location.name
+      // ,
+			// summary: _profile.summary
+		}
 	})
 	.then((createdUser) =>{
+    // console.log('createdUser', createdUser)
 		console.log(createdUser[0])
 	    return done(null, createdUser[0]);
 	})
@@ -92,10 +109,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //public routing
 app.use('/files', express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../node_modules/bootstrap/dist')))
 
 //api routes
 app.use('/home/signin-linkedin', apiRoutes);
-app.use('/api', apiRoutes)
+app.use('/api', apiRoutes);
+
 
 //serve up the html
 app.get('/*', function (req, res) {

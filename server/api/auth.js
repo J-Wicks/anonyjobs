@@ -7,9 +7,10 @@ const passport = require('passport');
 
 router.get('/me', (req, res, next) => {
 	let userId = req.user ? Number(req.user.id) : 0
-	
+
 	User.findOne({
-		where: {id: userId}, include: [
+		where: {id: userId}
+		, include: [
 			{model: Education}, {model: Experience}
 		]
 	})
