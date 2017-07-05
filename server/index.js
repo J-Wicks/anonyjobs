@@ -13,7 +13,12 @@ const Users = require('./models').User
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const dbStore = new SequelizeStore({ db: db });
-const secrets = require('../secrets')
+
+if (!process.env.HEROKU){
+var secrets = require('../secrets')
+}
+
+
 const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy
 
 
@@ -34,6 +39,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+//public routing
+app.use(express.static(path.resolve(__dirname, '..', 'public')));
+//api routes
+app.use('/home/signin-linkedin', apiRoutes);
+
 passport.serializeUser((user, done) => {
 	console.log('SERIALIZING')
   try {
@@ -51,14 +61,18 @@ passport.deserializeUser((id, done) => {
     .catch(done);
 });
 
+
 passport.use(new LinkedInStrategy({
-	clientID: secrets.CLIENT_ID,
-	clientSecret: secrets.CLIENT_SECRET,
-	callbackURL: 'http://127.0.0.1:3000/home/signin-linkedin',
+	// clientID: secrets.CLIENT_ID,
+	// clientSecret: secrets.CLIENT_SECRET,
+	// callbackURL: 'http://127.0.0.1:3000/home/signin-linkedin',
+  clientID: process.env.CLIENT_ID || secrets.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET || secrets.CLIENT_SECRET,
+  callbackURL: process.env.HEROKU ? 'https://damp-shelf-63214.herokuapp.com/home/signin-linkedin' : 'http://127.0.0.1:3000/home/signin-linkedin',
 	scope: ['r_emailaddress', 'r_basicprofile']
 }, function(accessToken, refreshToken, profile, done){
 	const _profile = profile._json
-	console.log('PROFILE',_profile.headline, _profile.industry, _profile.location.name, _profile.summary)
+	console.log('PROFILE', profile.headline, _profile.industry, _profile.location.name, _profile.summary)
 	Users.findOrCreate({
 		where: {
 			email: profile.emails[0].value,
@@ -70,34 +84,29 @@ passport.use(new LinkedInStrategy({
 			summary: _profile.summary
 		}
 	})
-	.then((createdUser) =>{
+	.then((createdUser) => {
 		console.log(createdUser[0])
 	    return done(null, createdUser[0]);
 	})
 
-
 }))
-//public routing
-app.use('/files', express.static(path.join(__dirname, '../public')));
-
-//api routes
-app.use('/home/signin-linkedin', apiRoutes);
 app.use('/api', apiRoutes)
 app.use((req, res, next) =>
   path.extname(req.path).length > 0 ? res.status(404).send('Not found') : next())
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, '../index.html'))
+app.use('*', function (req, res) {
+  res.sendFile(path.resolve(__dirname, '..', 'index.html'))
 });
 
 //serve up the html
 
 app.use(function (err, req, res, next) {
+  console.log(__dirname)
   console.error(err);
   console.error(err.stack);
   res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
 
-db.sync()
+db.sync({force: true})
 .then(() => {
 
 app.listen(process.env.PORT || 3000, function () {

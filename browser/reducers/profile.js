@@ -1,8 +1,6 @@
 import axios from 'axios';
 ///
 
-
-
 /* ----------------------- CONSTANTS -----------*/
 
 const SET_ALL_PROFILES = 'SET_ALL_PROFILES';

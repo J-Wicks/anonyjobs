@@ -1,8 +1,6 @@
 import axios from 'axios';
 ///
 
-
-
 /* ----------------------- CONSTANTS -----------*/
 // All applications for all users
 const SET_ALL_SKILLS = 'SET_ALL_SKILLS';
@@ -12,13 +10,9 @@ const initialState = {
 	allSkills: []
 }
 
-
-
 /*---- action cretors */
 
 const setAllSkills = skills => ({ type: SET_ALL_SKILLS, skills})
-
-
 
 /*-----thunk action creators*/
 
@@ -29,11 +23,9 @@ export const fetchAllSkills = () => {
 		dispatch => {
 			axios.get('/api/skills')
 			.then(res => {
-				console.log('hello from fetch all skills')
 				return res.data
 			})
 			.then(skills => {
-				console.log('hello from skills found', skills)
 				dispatch(setAllSkills(skills))
 			})
 		}

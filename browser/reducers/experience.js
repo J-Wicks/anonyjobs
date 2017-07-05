@@ -1,8 +1,6 @@
 import axios from 'axios';
 ///
 
-
-
 /* ----------------------- CONSTANTS -----------*/
 // All applications for all users
 

@@ -4,7 +4,7 @@ router.use('/users', require('./users')); // matches all requests to /api/users/
 router.use('/applications', require('./applications'));
 router.use('/companies', require('./companies'));
 router.use('/postings', require('./postings'));
-router.use('/login', require("./login"));
+router.use('/login', require('./login'));
 router.use('/skills', require('./skills'))
 // router.use('/auth', require('./auth'));
 router.use('/auth', require('./auth'));

@@ -1,7 +1,7 @@
 const db = require('../db');
 const Sequelize = require('sequelize');
 
-const Skills = db.define('skills', {
+const Skill = db.define('skill', {
   name: {
     type: Sequelize.STRING,
     allowNull: false
@@ -12,4 +12,4 @@ const Skills = db.define('skills', {
   }
 })
 
-module.exports = Skills
+module.exports = Skill
