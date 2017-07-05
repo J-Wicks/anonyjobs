@@ -9,7 +9,6 @@ import axios from 'axios';
 import AppContainer from './containers/AppContainer';
 import SignUpContainer from './containers/SignUpContainer';
 import HomeContainer from './containers/HomeContainer';
-import EmployerDashboardContainer from './containers/EmployerDashboardContainer';
 import SinglePostingContainer from './containers/SinglePostingContainer'
 import {UserDashboardContainer} from './containers/UserDashboardContainer'
 import {CreateProfileContainer} from './containers/CreateProfile';
@@ -25,6 +24,7 @@ import AllPostings from './components/AllPosting';
 import singlePosting from './components/singlePosting';
 import {UserProfileContainer} from './containers/UserProfileContainer';
 import {SelfProfileContainer} from './containers/SelfProfileContainer';
+import {EmployerDashboardContainer} from './containers/EmployerDashboardContainer';
 import {SelfDashboardContainer} from './containers/SelfDashboardContainer';
 
 
