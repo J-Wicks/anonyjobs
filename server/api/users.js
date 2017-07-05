@@ -1,5 +1,9 @@
 const router = require('express').Router();
-const User = require('../models').User
+const User = require('../models').User;
+const Experience = require('../models').Experience;
+const Education = require('../models').Education;
+const Skill = require('../models').Skill;
+const UserSkill = require('../models').UserSkill
 
 
 router.get('/', (req, res) => {
@@ -10,17 +14,119 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-	console.log('in post route', req)
-	// User.create(req.body)
-	// .then (createdUser => {
-	// 	res.send(createdUser)
-	// })
 	res.send('thanks')
 })
 
+router.post('/setSummary', (req, res) => {
+	let summary = req.body.summary;
+	let id = req.body.userId
+	User.findById(id)
+	.then(foundUser => {
+		foundUser.update({
+			summary: summary
+		})
+	})
+})
+
+router.post('/addexperience', (req, res) => {
+	let experience = req.body.experience;
+	let userId = req.body.userId;
+	let createdExperience;
+	Experience.create(experience)
+	.then(returnedExperience => {
+		createdExperience = returnedExperience;
+		return User.findById(userId)
+	})
+	.then(foundUser => {
+		return foundUser.addExperience(createdExperience)
+	})
+	.then(() => {
+		return User.findById(userId, {
+			include: [{model: Experience}]
+		})
+	})
+	.then(returnedUser => {
+		res.json(returnedUser)
+	})
+})
+
+router.post('/addEducation', (req, res) => {
+	let education = req.body.education;
+	let userId = req.body.userId;
+	let createdEducation;
+	Education.create(education)
+	.then(returnedEducation => {
+		createdEducation = returnedEducation;
+		return User.findById(userId)
+	})
+	.then(foundUser => {
+		return foundUser.addEducation(createdEducation)
+	})
+	.then(() => {
+		return User.findById(userId, {
+			include: [{model: Education}]
+		})
+	})
+	.then(returnedUser => {
+		res.json(returnedUser)
+	})
+})
+
+router.post('/addskills', (req, res) => {
+	let skills = req.body.skills;
+	let userId = req.body.userId
+	let createdEducation;
+	let skillPromiseArray;
+	let currentUser;
+	User.findById(userId)
+	.then(foundUser => {
+		skillPromiseArray = skills.map(skill => {
+			return Skill.findOne({where: {
+				category: skill.category,
+				name: skill.name
+			}})
+			.then(foundSkill => {
+				foundUser.addSkill(foundSkill)
+			})
+		})
+		return Promise.all(skillPromiseArray)
+	})
+	.then(() => {
+		return User.findById(userId, { include: [{model: Education}, {model: Experience}, {model: Skill}]
+		})
+	})
+	.then(foundUser => {
+		res.json(foundUser)
+	})
+})
+
+
+
 router.get('/:id', (req, res) => {
-	// res.send(+req.params.id)
-	User.findById(+req.params.id)
+	User.findById(+req.params.id, { include: [{model: Education}, {model: Experience}]
+	})
+	.then(foundUser => {
+		res.json(foundUser)
+	})
+})
+
+router.get('/:id/education', (req, res) => {
+	User.findById(req.params.id, {
+		include: [
+			{model: Education}, {model: Experience}
+		]
+	})
+	.then(foundUser => {
+		res.json(foundUser)
+	})
+})
+
+router.get('/:id/experience', (req, res) => {
+	User.findById(req.params.id, {
+		include: [
+			{model: Experience}, {model: Education}
+		]
+	})
 	.then(foundUser => {
 		res.json(foundUser)
 	})

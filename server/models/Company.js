@@ -29,6 +29,4 @@ var Company = db.define('company', {
 	}
 })
 
-
-
 module.exports = Company;

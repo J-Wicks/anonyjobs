@@ -4,7 +4,7 @@ import EmployerSignUp from '../components/employerSignUp';
 import ApplicantSignUp from '../components/ApplicantSignUp';
 import {connect} from 'react-redux';
 import { loginUser } from '../action-creators';
-import { hashHistory } from 'react-router'
+import { browserHistory } from 'react-router'
 
 
 class SignUpContainer extends Component{
@@ -71,33 +71,26 @@ class SignUpContainer extends Component{
 	signUpUser (event) {
 		event.preventDefault()
 		this.props.signUpUser({email: this.state.email, password: this.state.password})
-		hashHistory.push('/home')
+		browserHistory.push('/home')
 	}
 
 	signUpEmployer (event) {
 		event.preventDefault()
 		this.props.signUpEmployer({HRemail: this.state.email, companyName: this.state.companyName, industry: this.state.industry, password: this.state.password})
-		hashHistory.push('/home')
+		browserHistory.push('/home')
 	}
 
 	render () {
 		return(
 		<div>
-		{
-			this.props.userType == 'employer' ?
-			<EmployerSignUp 
+
+			<EmployerSignUp
 			handleCompany={this.handleCompany}
 			handleIndustry={this.handleIndustry}
-			signUpEmployer={this.signUpEmployer} 
-			handleEmail={this.handleEmail} 
+			signUpEmployer={this.signUpEmployer}
+			handleEmail={this.handleEmail}
 			handlePassword={this.handlePassword} />
-			:
-			<ApplicantSignUp 
-			signUpUser={this.signUpUser} 
-			handleEmail={this.handleEmail} 
-			handlePassword={this.handlePassword} />
-			
-		}
+
 		</div>
 		)
 	}
@@ -129,7 +122,7 @@ const mapDispatchToProps = function (dispatch) {
 				password:user.password
 			})
 			.then((result) => {
-				
+
 				return dispatch(loginUser(result.data))
 			})
 		},

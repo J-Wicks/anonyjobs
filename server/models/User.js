@@ -25,6 +25,18 @@ var Users = db.define('Users', {
 	lastName: {
 		type: Sequelize.STRING
 	},
+	headline: {
+		type: Sequelize.STRING
+	},
+	industry: {
+		type: Sequelize.STRING
+	},
+	location: {
+		type: Sequelize.STRING
+	},
+	summary:{
+		type: Sequelize.TEXT
+	}
 },{
 	instanceMethods: {
 		sanitize: function () {

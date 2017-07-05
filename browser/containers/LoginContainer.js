@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import { loginUser, modUser } from '../action-creators';
-import { hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import Login from '../components/Login.js'
 
 
@@ -35,6 +35,7 @@ class LoginContainer extends Component{
 	loginUser () {
 		event.preventDefault()
 		this.props.loginUser({email: this.state.email, password: this.state.password})
+		browserHistory.push('/home');
 	}
 
 	render () {

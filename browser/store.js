@@ -7,8 +7,9 @@ import { createLogger } from 'redux-logger';
 const store = createStore(
   reducer,
   applyMiddleware(
-    createLogger(),
-    thunkMiddleware
+    thunkMiddleware,
+    createLogger()
+
   )
 );
 

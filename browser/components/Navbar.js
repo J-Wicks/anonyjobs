@@ -8,30 +8,57 @@ export default function Navbar(props) {
 		      <nav className="navbar navbar-default" id="nav">
 		        <div className="container-fluid">
 		          </div>
-
 		          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		            <ul className="nav navbar-nav">
 		              <li className="dropdown">
-		                <a href="#" className="dropdown-toggle nav-region" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="nav-region">Maybe this will be something <span className="caret"></span></a>
-		                <ul id="nav-dropdown" className="dropdown-menu">
-		                </ul>
 		              </li>
 		              	<li>
-		               		<Link to='/home'>
-		                    <p className="yellow">Home</p>
-		                    </Link>
+	               		<Link to='/home'>
+	                    <p className="yellow">Home</p>
+	                    </Link>
 		                </li>
+		              	{
+		              		props.loggedInUser.email?
+			                  <li className="dropdown">
+			                        <a href="" id="nav-account" className="dropdown-toggle nav-region yellow" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+			                          {props.loggedInUser.email}<span className="caret"></span>
+			                        </a>
+			                    <ul className="dropdown-menu" id="account-dropdown">
+			                    	<li><button onClick={props.logout}> Logout </button> </li>
+			                    </ul>
+			                  </li>
+		              		:
+		              		<li>
+		              		<Link to='/login'>Employer Log In </Link>
+		              		</li>
+		              	}
+									</ul>
 		              	<li>
-		               		<Link to='/login'>
-		                    <p className="yellow">Login</p>
-		                    </Link>
+		              	{
+		              	 props.currentUser &&
+										 props.currentUser.email ?
+		              		<div>
+		              		<p>{props.currentUser.email}</p>
+		              		<button onClick={props.logout}> Log Out </button>
+		              		</div>
+		              		:
+		              		<Link to='/login'> Log In </Link>
+		              	}
 		                </li>
-		            </ul>
+										{
+											props.currentUser &&
+											props.currentUser.companyName &&
+											 <li>
+											 	<Link to='/newposting'>
+													<p className = "yellow"> Create a New Job Posting</p>
+												</Link>
+											 </li>
+										}
 		            <ul className="nav navbar-nav navbar-right">
 		              <li>
 		                <form className="navbar-form" id="search" >
 		                  <div className="form-group">
-		                    <input id="search-input" type="text" className="form-control" placeholder="Search Jobs"/>
+		                    <input id="search-input" type="text" className="form-control" placeholder="Search Jobs" />
 		                  </div>
 
 		                  <button id="search-btn" type="submit" className="btn btn-default">Search</button>

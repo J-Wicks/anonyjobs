@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   entry: './browser/index.js', // assumes your entry point is the index.js in the root of your project folder
   output: {
@@ -6,13 +8,18 @@ module.exports = {
   },
   devtool: 'source-map',
   module: {
+    loaders: [
+      { test: /\.js$/,
+      loader: 'babel',
+      exclude: path.join(__dirname, 'node_modules)')}
+    ],
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
         options: {
-          presets: ['react'] // if you aren't using 'babel-preset-es2015', then omit the 'es2015'
+          presets: ['react', 'es2015'] // if you aren't using 'babel-preset-es2015', then omit the 'es2015'
         }
       },
       {

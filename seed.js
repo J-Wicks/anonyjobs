@@ -1,7 +1,10 @@
 const Promise = require('bluebird');
 const db = require('./server/db');
 const User = require('./server/models/User');
+const Skill = require('./server/models/Skill')
 const createUser = require('./utils/seedUtils').createUser;
+const collectSkillsForDb = require('./utils/seedUtils').collectSkillsForDb;
+
 
 const amountOfUsers = 200;
 
@@ -15,17 +18,20 @@ function getCollectionOfUsers(n) {
   return users;
 }
 
-let newUsers = getCollectionOfUsers(600)
+let newUsers = getCollectionOfUsers(amountOfUsers);
+let sampleSkills = collectSkillsForDb();
 
 let data = {
-  Users: newUsers
+  Users: newUsers,
+  skill: sampleSkills
+  // skills: []
   // company: companies
 };
 
 
 function createData() {
 
-  db.sync({force: true})
+  db.sync()
   .then(function () {
     console.log("Dropped old data, now inserting data");
     return Promise.map(Object.keys(data), function (name) {
@@ -35,10 +41,31 @@ function createData() {
       })
     });
   })
-  .then(() => {
-    console.log('New users added to the database')
+  .then(function(){
+    console.log('New users and skills added to the database!')
   })
-
+  // .then(function() {
+  //    User.findAll()
+  //    .then(function(foundUsers){
+  //      let educationUsersArray = []
+  //      foundUsers.forEach(function(user){
+  //        let educationCredentials = []
+  //        let promiseEducationCredentials = educationCredentials.map(function(credential) {
+  //          let promiseUser = user.addEducation(credential);
+  //          return promiseUser;
+  //
+  //        })
+  //        return Promise.all(promiseEducationCredentials);
+  //        user.addEducation
+  //      }
+  //    })
+  //
+  // })
+  .finally(function() {
+    db.close()
+    console.log('connection closed');
+    return null;
+  })
 
 }
 

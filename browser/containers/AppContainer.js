@@ -4,7 +4,7 @@ import { hashHistory } from 'react-router';
 import Navbar from '../components/Navbar';
 // import AllProducts from '../components/AllProducts';
 import {connect} from 'react-redux';
-import { logoutUser, receiveProducts} from '../action-creators'
+import { logOut } from '../reducers/user'
 
 
 class AppContainer extends Component {
@@ -21,8 +21,10 @@ class AppContainer extends Component {
       <div id="entire-container">
       <div className="fullscreen-bg">
       </div>
-        <Navbar />
-        <div className="col-xs-12">
+
+        <Navbar logout={this.props.logout} loggedInUser={this.props.loggedInUser}/>
+        <div className="col-xs-12 app-body">
+
           { this.props.children }
         </div>
       </div>
@@ -30,10 +32,22 @@ class AppContainer extends Component {
   }
 }
 
-const mapStateToProps = function(state){
-  return {
-    props: 'props'
+const mapStateToProps = function(state) {
+    return {
+    loggedInUser: state.userReducer.currentUser
   }
 }
 
-export default connect(mapStateToProps)(AppContainer)
+
+
+
+const mapDispatchToProps = function(dispatch){
+  return{
+    logout: ()=>{
+      dispatch(logOut())
+    }
+  }
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer)

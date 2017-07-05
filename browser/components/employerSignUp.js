@@ -5,7 +5,7 @@ export default function employerLogin (props) {
 
 
 return (
-	<div className='col-xs-5 signup'>
+	<div className='center'>
 			<h1 className="fancy-type form-title">Looking to Hire?</h1>
 	  <h1 className="form-subtitle">Sign Up</h1>
 			<form onSubmit= {props.signUpEmployer} >

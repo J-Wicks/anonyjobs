@@ -5,10 +5,10 @@ export default function Login (props) {
 
 
   return (
-  	<div className='login-container'>
+  	<div className='login-container center'>
     	<div className="row">
 			<div className='col-xs-5 signup'>
-			<h1 className="fancy-type form-title">Log In</h1>
+			<h1 className="fancy-type form-title">Employer Log In</h1>
 
 			<form onSubmit= {props.loginUser} >
 	          <div className="signup-names">
