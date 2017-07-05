@@ -50,6 +50,9 @@ export const apply = (application) => {
 }
 
 
+export const checkApplication = (application) => {
+  // This is an API route to do the nasty with ML
+}
 
 
 /*------------------ REDUCER */
