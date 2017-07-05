@@ -10,6 +10,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-register": "^6.24.1",
     "body-parser": "^1.17.2",
+    "bootstrap": "^3.3.7",
     "connect-session-sequelize": "^4.1.0",
     "crypto": "0.0.3",
     "express": "^4.15.3",

@@ -11,8 +11,8 @@ import UserDashboard from '../components/users/UserDashboard'
 
 const mapStateToProps = state => {
   return ({
-    user: state.userReducer.relevantUser,
+    user: state.userReducer.currentUser
   })
 }
 
-export const UserDashboardContainer = connect(mapStateToProps, null)(UserDashboard);
+export const SelfDashboardContainer = connect(mapStateToProps, null)(UserDashboard);

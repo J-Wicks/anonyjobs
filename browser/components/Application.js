@@ -30,11 +30,12 @@ class Application extends Component  {
   }
   render() {
     return (
-      <div>
+      <div className="application">
         <h2>Application</h2>
           <form onSubmit={handleSubmit}>
             <label>Cover Letter: </label>
             <input
+              className="form-control"
               name="coverLetter"
               type="textarea"
               wrap="hard"
@@ -42,12 +43,15 @@ class Application extends Component  {
               onChange={this.handleChange}
               style={{height: '300px', width: '700px'}} />
             <label>Make sure your profile information is up to date before submitting your application.</label>
-            <button name="postingId" value={this.selectedPosting} type="submit">Submit Application</button>
+            <div>
+              <button name="postingId" className="btn btn-default" value={this.selectedPosting} type="submit">Submit Application</button>
+            </div>
           </form>
         </div>
     )
     }
   }
+
 const mapState = state => {
   return {
     selectedPosting: state.selectedPosting,

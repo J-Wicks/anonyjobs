@@ -32,7 +32,6 @@ export default function Navbar(props) {
 		              		<Link to='/login'>Employer Log In </Link>
 		              		</li>
 		              	}
-									</ul>
 		              	<li>
 		              	{
 		              	 props.currentUser &&
@@ -54,6 +53,7 @@ export default function Navbar(props) {
 												</Link>
 											 </li>
 										}
+									</ul>
 		            <ul className="nav navbar-nav navbar-right">
 		              <li>
 		                <form className="navbar-form" id="search" >

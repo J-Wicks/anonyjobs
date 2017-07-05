@@ -58,7 +58,10 @@ const setUserSkills = skills => ({
 
 /*--------------------Thunk Action Creators */
 
-export const fetchRelevantUser = (id) => { return (
+export const fetchRelevantUser = (id) => {
+
+
+  return (
 
   dispatch => {
     axios.get(`/api/users/${id}`)
@@ -158,7 +161,7 @@ export default function (state = initialState, action) {
       newState.currentUser = {};
       break;
     case SET_RELEVANT_USER:
-      newState.relevantUser = {};
+      newState.relevantUser = action.user;
       break;
     case SET_USER_SUMMARY:
       newState.currentUser.summary = action.summary;

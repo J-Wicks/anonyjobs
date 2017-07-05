@@ -19,18 +19,21 @@ import { logIn } from './reducers/user'
 import {getPostings} from './reducers/posting'
 import Application from './components/Application'
 import NewPosting from './components/NewPosting'
-// import UserDashboard from './components/users/UserDashboard/'
 import LoginContainer from './containers/LoginContainer'
-import AllPostings from './components/AllPosting'
+import AllPostings from './components/AllPosting';
 import singlePosting from './components/singlePosting';
-import {UserProfileContainer} from './containers/ProfileContainer'
+import {UserProfileContainer} from './containers/UserProfileContainer';
+import {SelfProfileContainer} from './containers/SelfProfileContainer';
+import {SelfDashboardContainer} from './containers/SelfDashboardContainer';
 
 const onUserEnter = (nextRouterState) => {
-	/* WE STILL NEED A PROFILE MODEL AND API ROUTE*/
 	const userId = nextRouterState.params.id;
 	store.dispatch(fetchRelevantUser(userId))
-	// store.dispatch(fetchCurrentProfile());
-	// store.dispatch(fetchApplications());
+}
+
+const onViewSomeoneElseEnter = (nextRouterState) => {
+	const userId = nextRouterState.params.id;
+	store.dispatch(fetchRelevantUser(userId))
 }
 
 const onPostingsEnter = () => {
@@ -62,8 +65,10 @@ ReactDOM.render(
 			<Route path ='/application' component={Application} />
 			<Route path="/createProfile" component={CreateProfile} onEnter={onCreateProfileEnter} />
 			<Route path="/editProfile" />
-			<Route path="/viewProfile" component={UserProfileContainer} />
-			<Route path='/userdashboard/:id' component={UserDashboardContainer} onEnter={onUserEnter} />
+			<Route path="/viewProfile" component={SelfProfileContainer} />
+			<Route path="/viewProfile/:id" component={UserProfileContainer} onEnter={onViewSomeoneElseEnter}/>
+			<Route path='/userdashboard/' component={SelfDashboardContainer} onEnter={onUserEnter} />
+			<Route path='/userdashboard/:id' component={UserDashboardContainer} onEnter={onViewSomeoneElseEnter} />
 			<Route path ='/postings' component={AllPostings} onEnter={onPostingsEnter}>
 				<Route path ='/:id' component={singlePosting} />
 			</Route>
