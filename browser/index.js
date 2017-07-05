@@ -74,12 +74,9 @@ ReactDOM.render(
 			<Route path="/editProfile" />
 			<Route path="/viewProfile" component={SelfProfileContainer} />
 			<Route path="/viewProfile/:id" component={UserProfileContainer} onEnter={onViewSomeoneElseEnter}/>
-			<Route path='/userdashboard/' component={SelfDashboardContainer} onEnter={onUserEnter} />
+			<Route path='/userdashboard' component={SelfDashboardContainer} onEnter={onUserEnter} />
 			<Route path='/userdashboard/:id' component={UserDashboardContainer} onEnter={onViewSomeoneElseEnter} />
 			<Route path ='/postings/:id' component={SinglePostingContainer} onEnter={onPostingEnter}/>
-			<Route path ='/postings' component={AllPostings} onEnter={onPostingsEnter}>
-				<Route path ='/:id' component={singlePosting} />
-			</Route>
 		</Route>
 	</Router>
 	</Provider>,
