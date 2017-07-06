@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 import sys
 
+pd.options.mode.chained_assignment = None
+
 # Vectorizers to transform data
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
@@ -13,7 +15,7 @@ url = 'https://serene-forest-99801.herokuapp.com/api/allData'
 dataset = pd.read_json(url)
 
 # Get the testing string from JS
-testString = sys.argv[0]
+testString = sys.argv[1]
 
 ### GENDER
 
@@ -47,8 +49,8 @@ yGender = genderData.gender
 genderTest = tfidf.transform(genderVectorizer.transform([testString]))
 
 # Train the genderModel and predict the submitted string
-from sklearn.neighbors import KNeighborsClassifier
-genderModel = KNeighborsClassifier(n_neighbors=16).fit(XGender, yGender)
+from sklearn.naive_bayes import MultinomialNB
+genderModel = MultinomialNB().fit(XGender, yGender)
 genderPrediction = genderModel.predict(genderTest)
 
 ### END GENDER
@@ -68,19 +70,19 @@ regex = '^((?!(^Straight$)).).+$'
 orientationData = dataset[dataset.orientation != 'unspecified']
 orientationData['orientation'] = orientationData['orientation'].replace(
     to_replace=regex,
-    value='Other',
+    value='LGBTQ+',
     regex=True
 )
 
 # Set variables to train the orientationModel and predict
 XOrientation = tfidf.fit_transform(orientationVectorizer.fit_transform(orientationData.writing))
-yOrientation = orientationData.race
+yOrientation = orientationData.orientation
 
 orientationTest = tfidf.transform(orientationVectorizer.transform([testString]))
 
 # Train the orientationModel and predict the submitted string
-from sklearn.naive_bayes import MultinomialNB
-orientationModel = MultinomialNB().fit(XOrientation, yOrientation)
+from sklearn.neighbors import KNeighborsClassifier
+orientationModel = KNeighborsClassifier(n_neighbors=25).fit(XOrientation, yOrientation)
 orientationPrediction = orientationModel.predict(orientationTest)
 
 ### END ORIENTATION
@@ -120,4 +122,4 @@ racePrediction = raceModel.predict(raceTest)
 ### END RACE
 
 # Return the predicted categories of all three models
-print(genderPrediction[0]+',', orientationPrediction[0]+',', racePrediction[0])
+print(genderPrediction[0]+','+orientationPrediction[0]+','+racePrediction[0])

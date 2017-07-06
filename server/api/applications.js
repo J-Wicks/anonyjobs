@@ -2,11 +2,8 @@ const router = require('express').Router();
 const Application = require('../models/Application')
 const Posting = require('../models/Posting')
 const PythonShell = require('python-shell')
-
-const options = { pythonPath: __dirname }
-const pyshell = new PythonShell('/server/machineLearning/ml.py', options, err => {
-  if (err) throw err
-})
+const path = require('path')
+const Promise = require('bluebird')
 
 router.get('/', (req, res) => {
 	Application.findAll()
@@ -29,19 +26,29 @@ router.post('/', (req, res) => {
 })
 
 router.post('/test', (req, res) => {
-  res.send(mlCheck(res.body.coverLetter))
+  mlCheck(req.body.coverLetter)
+  .then(predString => {
+    return predString.split(',')
+  })
+  .then(predictions => {
+    res.send(predictions)
+  })
+  .catch(console.error)
 })
 
 module.exports = router
 
 const mlCheck = application => {
-  let predictions = ''
-  pyshell.send(application)
-  pyshell.on('message', message => {
-    predictions = message
-  })
-  pyshell.end(err => {
-    if (err) throw err
-    return predictions
+  return new Promise((resolve, reject) => {
+    const options = {
+      pythonPath: '/bin/python3',
+      scriptPath: path.join(__dirname, '../machineLearning'),
+      args: application
+    }
+    PythonShell.run('ml.py', options, (err, result) => {
+      if (err) reject(err)
+      console.log(result[0])
+      resolve(result[0])
+    })
   })
 }
