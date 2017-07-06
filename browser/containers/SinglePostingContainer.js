@@ -10,7 +10,10 @@ class SinglePostingContainer extends Component {
   constructor(props){
     super(props);
     this.state = {
-      coverLetter: ''
+      coverLetter: '',
+      gender: '',
+      orientation: '',
+      race: ''
    };
    this.coverLetterHandler = this.coverLetterHandler.bind(this)
    this.applyHandler = this.applyHandler.bind(this)
@@ -18,8 +21,20 @@ class SinglePostingContainer extends Component {
   }
 
   testHandler(){
-    this.props.getDemos(this.state.coverLetter)
+
+    axios.post('/api/applications/test', {coverLetter: this.state.coverLetter})
+    .then( result => result.data)
+    .then(([gender, orientation, race]) => {
+      this.setState({
+        gender,
+        orientation,
+        race
+      })
+      console.log(this.state)
+    })
+
   }
+
   applyHandler () {
 
     this.props.apply({
@@ -66,10 +81,7 @@ const mapDispatchToProps = dispatch => {
       },
 
       getDemos: (coverLetter) =>{
-        axios.post('/api/applications/test')
-        .then( demos =>{
-          console.log(demos)
-        })
+        axios.post('/api/applications/test', {coverLetter: coverLetter})
       }
     }
 
