@@ -23,10 +23,7 @@ export default function Home (props) {
 			</div>
 			<div id='home' className='center'>
 				<h1> Welcome to Anonyjob </h1>
-				<h3> What you need, when you need it </h3>
-				<Link to='/signup'>
-					<button className ="btn btn-info"onClick={props.setERUser}> Employers Sign Up Here </button>
-				</Link>
+				<h3> Looking for a job? Sign Up Below</h3>
 				<br />
 				<a href="/api/auth/linkedin"><button className="btn btn-primary fa fa-linkedin-square" type="submit"> Login with LinkedIn</button></a>
 			</div>

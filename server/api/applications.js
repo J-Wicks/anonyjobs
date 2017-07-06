@@ -20,6 +20,30 @@ router.get('/', (req, res) => {
 	})
 })
 
+router.delete('/:id', (req, res) => {
+	const id = req.params.id
+	Application.findById(id)
+	.then( foundApplication => {
+		return foundApplication.destroy()
+
+	})
+	.then( destroyedApplication => {
+		return Application.findAll({
+			include: [
+				{
+					model: User, include:[
+					{model: Education}, {model: Experience}
+					]
+				}
+			]
+		})
+	})
+	.then( allApplications => {
+		res.send(allApplications)
+	})
+	.catch(console.log)
+})
+
 router.post('/', (req, res) => {
 	console.log('on server with', req.body.coverLetter)
 	Application.create({
