@@ -59,7 +59,10 @@ class SinglePostingContainer extends Component {
       applyHandler={this.applyHandler} 
       coverLetter={this.state.coverLetter || this.props.user.summary} 
       testHandler={this.testHandler}
-      coverLetterHandler={this.coverLetterHandler} />
+      coverLetterHandler={this.coverLetterHandler}
+      predictedGender={this.state.gender}
+      predictedRace={this.state.race}
+      predictedOrientation={this.state.orientation} />
 
       </div>
     )
