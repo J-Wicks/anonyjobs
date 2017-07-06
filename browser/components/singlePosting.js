@@ -18,7 +18,7 @@ export default function SinglePosting(props) {
 	    <p>{props.posting && ` ${props.posting.experienceField} ${props.posting.experienceLevel}+ years`}</p>
 	    <p className='label'> Your Cover Letter </p>
 	    <br/>
-	    <textarea type='textarea' value={props.coverLetter} onChange={props.coverLetterHandler}/>
+	    <textarea type='textarea' value={props.coverLetter} onChange={props.coverLetterHandler} className="form-control"/>
 	    <br/>
 	    <button onClick={props.applyHandler}className='btn btn-success'> Apply Now! </button>
 	    <button onClick={props.testHandler}className='btn btn-success'> Test </button>

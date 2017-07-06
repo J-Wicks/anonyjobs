@@ -318,7 +318,7 @@ class CreateProfile extends React.Component {
   render() {
     return (
       <div className="create-profile">
-        <h2 className="add-line-space botton-space">Create Profile</h2>
+        <h2 className="add-line-space botton-space">Update Profile</h2>
         <div className="button-space">
           <button onClick={this.toggleEducationClick} className="btn btn-default space-right">Add</button><span>Add Education</span>
         </div>
