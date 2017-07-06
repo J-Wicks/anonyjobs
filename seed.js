@@ -63,7 +63,7 @@ function createData() {
     allCompanies.forEach(function(company){
       let sector = company.industry;
       let newPostings = [];
-      let counter = 6;
+      let counter = 1;
       while (counter) {
         let newPosting = createPosting(sector);
         let newPostingPromise = (

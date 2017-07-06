@@ -63,7 +63,7 @@ body {
 		padding-left: 40px;
 		padding-right: 40px;;
 		font-family:  'Raleway', sans-serif;
-		top: 325px;
+		top: 620px;
 		color: black;
 		font-size: 60px;
 		font-weight: 1000;
@@ -125,7 +125,8 @@ body {
 		margin-top: 20px;
 		padding-top: 20px;
 		line-height: 30px;
-		margin-left: 20px;
+		margin-left: 40px;
+
 
 		width: 70%;
 		// margin: auto;
@@ -157,14 +158,16 @@ body {
 		// padding-left: 15px;
 	}
 
-	#editProfile-viewDashboard {
+	.bottom-profile-links {
+		margin-top: 10px;
 		display: flex;
 		justify-content: space-between;
-		width: 300px
+		width: 300px;
 	}
 
 	#summary-header {
-		margin-top: 20px
+		margin-top: 20px;
+		margin-bottom: 20px;
 	}
 	//
 	// .application h2 {
@@ -201,6 +204,20 @@ body {
 	cursor: pointer;
 }
 
+
+.dontStretch {
+	align-self: flex-start;
+}
+.skill-container {
+	display: flex;
+	align-items: flex-start;
+}
+#skills-categories {
+	margin-top: 10px;
+}
+.space-right {
+	margin-right: 10px
+}
 	// #slogan {
 	// 	margin-top: 15px;
 	// 	font-size: 30px
@@ -231,7 +248,7 @@ body {
 	}
 
 	.cover {
-		height: 500px;
+		height: 850px;
 		display: flex;
 		overflow: hidden;
 		align-items: center;
@@ -388,6 +405,52 @@ body {
 		margin-top: 30px;
 		margin-bottom: 15px;
 
+	}
+
+	.skills-container {
+		display: flex;
+		flex-wrap: wrap
+	}
+
+	.skill {
+		width: 20%;
+		margin-right: 10px;
+		margin-top: 10px;
+	}
+	.botton-space {
+		margin-bottom: 15px;
+	}
+
+	.button-space {
+		// margin-bottom: 8px;
+		// margin-top: 8px;
+		padding-top: 8px;
+	}
+
+	.checkboxes-flex {
+		display: flex;
+		align-items: flex-start
+	}
+
+	.space-above {
+		margin-top: 10px;
+
+	}
+
+	#personal-summary {
+		padding-bottom: 10px;
+		padding-top: 10px;
+	}
+
+	#professional-experience {
+		padding-top: 10px;
+	}
+
+	#skill-category {
+		font-size: 20px;
+	}
+	#skill-name {
+		font-size: 15px;
 	}
 }
 

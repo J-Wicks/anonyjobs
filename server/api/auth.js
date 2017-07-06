@@ -1,6 +1,8 @@
 const User = require ('../models').User
 const Education = require('../models').Education;
 const Experience = require('../models').Experience;
+const Skill = require('../models').Skill;
+
 var router = require('express').Router();
 const passport = require('passport');
 
@@ -11,7 +13,7 @@ router.get('/me', (req, res, next) => {
 	User.findOne({
 		where: {id: userId}
 		, include: [
-			{model: Education}, {model: Experience}
+			{model: Education}, {model: Experience}, {model: Skill}
 		]
 	})
 	.then((foundUser) => {

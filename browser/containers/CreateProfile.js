@@ -155,9 +155,10 @@ class CreateProfile extends React.Component {
     return skills.map((skill, index) => {
       let skillString = `${skill}Clicked`
       return (
-        <div  key={index}>
-        <button className="btn btn-default" value={skill} onClick={this.handleCategoryClick}>{skill}</button>
+        <div  key={index} className="button-space skill-container">
+        <button className="btn btn-default button-space space-right" value={skill} onClick={this.handleCategoryClick}>Add</button><span className="space-right">{skill}</span>
         {(this.state[skillString]) ? (
+
           <div>
             {this.renderCheckboxes(skill)}
             <button className="btn btn-default" onClick={this.handleSkillsSave(skill)}>Save</button>
@@ -174,6 +175,7 @@ class CreateProfile extends React.Component {
     return (
 
       <form>
+        <h4 id="personal-summary">Summary</h4>
         <textarea type="text" defaultValue="Describe your experience, background, and professional objectives." onChange={this.handleInputChange} name="summary" className="form-control"/>
         <button onClick={this.handleSummarySubmit} type="" className="btn btn-default">Save</button>
     </form>
@@ -222,8 +224,9 @@ class CreateProfile extends React.Component {
     renderExperienceInputs() {
       return (
           <form className="addExperience">
+            <h4 id="professional-experience">Professional Experience</h4>
             <div>
-              <label htmlFor="companyName">Employe Namer</label>
+              <label htmlFor="companyName">Employer Namer</label>
               <input type="text" name="companyName" defaultValue="Enter Employer Name Here" onChange={this.handleInputChange} className="form-control"/>
             </div>
             <div>
@@ -239,7 +242,7 @@ class CreateProfile extends React.Component {
               <input type="text" name="endYear" defaultValue="YYYY" onChange={this.handleInputChange} className="form-control"/>
             </div>
             <div>
-              <label htmlFor="responsibilities">End Year</label>
+              <label htmlFor="responsibilities">Responsibilities</label>
               <textarea name="responsibilities" type="text" defaultValue="Describe your roles and responsibilities here." onChange={this.handleInputChange} className="form-control"/>
             </div>
             <button onClick={this.handleExperienceSubmit} type="" className="btn btn-default">Save</button>
@@ -315,25 +318,26 @@ class CreateProfile extends React.Component {
   render() {
     return (
       <div className="create-profile">
-        <h2>Create Profile</h2>
-        <div>
-          <button onClick={this.toggleEducationClick} className="btn btn-default">Add</button><span>Add Education</span>
+        <h2 className="add-line-space botton-space">Create Profile</h2>
+        <div className="button-space">
+          <button onClick={this.toggleEducationClick} className="btn btn-default space-right">Add</button><span>Add Education</span>
         </div>
-          {(this.state.addEducationClicked) ? (<div>{this.renderEducationInputs()}</div>) : null }
-        <div>
-          <button onClick={this.handleSkillsClick} className="btn btn-default">Add</button><span>Add Skills</span>
+          {(this.state.addEducationClicked) ? (<div><h4 className="space-above"> Education</h4>{this.renderEducationInputs()}</div>) : null }
+        <div className="button-space">
+          <button onClick={this.handleSkillsClick} className="btn btn-default space-right">Add</button><span>Add Skills</span>
         </div>
-        {(this.state.addSkillsClicked) ? (<div><h3>Categories</h3>{this.renderSkillsCategories()}</div>) : null }
-        <div>
-          <button onClick={this.toggleExperienceClick} className="btn btn-default">Add</button><span>Add Professional Experience</span>
+        {(this.state.addSkillsClicked) ? (<div id="skills-categories"><h4> Skills</h4>{this.renderSkillsCategories()}</div>) : null }
+        <div className="button-space">
+          <button onClick={this.toggleExperienceClick} className="btn btn-default space-right">Add</button><span>Add Professional Experience</span>
         </div>
         {(this.state.addExperienceClicked) ? (<div>{this.renderExperienceInputs()}</div>) : null }
-        <div>
-          <button onClick={this.toggleSummaryClick} className="btn btn-default">Add</button><span>Add Personal Summary</span>
+        <div className="button-space">
+          <button onClick={this.toggleSummaryClick} className="btn btn-default space-right">Add</button><span>Add Personal Summary</span>
         </div>
-        {(this.state.addSummaryClicked) ? (<div>{this.renderSummaryInputs()}</div>) : null }
+        {(this.state.addSummaryClicked) ? (
+          <div>{this.renderSummaryInputs()}</div>) : null }
 
-        <div>
+        <div className="bottom-profile-links">
           <Link to="viewProfile"><h4>View Profile</h4></Link>
           <Link to={`userdashboard/${this.props.currentUser.id}`}><h4>View Dashboard</h4></Link>
         </div>
