@@ -83,8 +83,6 @@ passport.use(new LinkedInStrategy({
 	    return done(null, createdUser[0]);
 	})
 
-
-
 }))
 
 
@@ -94,16 +92,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //public routing
 app.use(express.static(path.join(__dirname, '../public')));
-app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, '../node_modules/bootstrap/dist')))
 
 //api routes
-app.use('/home/signin-linkedin', apiRoutes);
-app.use('/api', apiRoutes);
+app.use('/home/signin-linkedin', require('./api'));
+app.use('/api', require('./api'));
 
 
 //serve up the html
-app.use('/*', function (req, res) {
+app.use('*', function (req, res) {
   res.sendFile(path.join(__dirname, '../index.html'))
 });
 
@@ -113,11 +110,11 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
 
-db.sync({force:true})
-.then(() =>{
+db.sync()
+  .then(() =>{
 
-app.listen(process.env.PORT || 3000, function () {
-  console.log("listening on port 3000");
+  app.listen(process.env.PORT || 3000, function () {
+    console.log("listening on port 3000");
 })
 
 })

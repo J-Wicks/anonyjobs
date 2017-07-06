@@ -13,7 +13,6 @@ export default function SinglePosting(props) {
 	}
   return (
     <div>
-    
 	    <strong>Title </strong>
 	    <p>{props.posting && props.posting.positionTitle}</p>
 	    <strong> Company </strong>
@@ -27,7 +26,7 @@ export default function SinglePosting(props) {
 	    <p>{props.posting && props.posting.experienceField}</p>
 	    <p>{props.posting && `${props.posting.experienceLevel}+ years`}</p>
 	    <strong> Your Cover Letter </strong>
-	    <textarea type='textarea' value={props.user.summary} > </textarea>
+	    <textarea type='textarea' value={props.user.summary} />
 	    <button onClick={applyHandler}className='btn btn-success'> Apply Now! </button>
 	</div>
   )

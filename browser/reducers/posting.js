@@ -25,7 +25,7 @@ export const getPostings = dispatch => {
 //add test case to make sure this is getting a posting
 export const getPosting = postingId =>{
   return dispatch => {
-    axios.get(`api/postings/${postingId}`)
+    axios.get(`/api/postings/${postingId}`)
     .then( response =>{
       dispatch(receivePosting(response.data))
     })

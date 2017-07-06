@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 	})
 })
 
-router.post('/', (req, res) => {
+router.post('/test', (req, res) => {
 	console.log('on server with', req.body.coverLetter)
 	Application.create({
 		coverLetter: req.body.coverLetter,
