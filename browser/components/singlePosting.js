@@ -4,8 +4,8 @@ import {connect} from 'react-redux'
 export default function SinglePosting(props) {
 
   return (
+
     <div className='single-posting col-sm-8'>
-    
 	    <strong className='label'>Title </strong>
 	    <p>{props.posting && props.posting.positionTitle}</p>
 	    <strong className='label'> Company </strong>

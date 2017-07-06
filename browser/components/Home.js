@@ -3,7 +3,6 @@ import { Link } from 'react-router';
 
 export default function Home (props) {
 
-
 	return(
 		<div>
 			<div className="cover">
@@ -23,8 +22,6 @@ export default function Home (props) {
 			</div>
 			<div id='home' className='center'>
 				<h1> Welcome to Anonyjob </h1>
-				<h3> Looking for a job? Sign Up Below</h3>
-				<br />
 				<a href="/api/auth/linkedin"><button className="btn btn-primary fa fa-linkedin-square" type="submit"> Login with LinkedIn</button></a>
 			</div>
 		</div>

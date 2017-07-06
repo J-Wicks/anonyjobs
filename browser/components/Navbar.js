@@ -41,7 +41,12 @@ export default function Navbar(props) {
 								<p className = "yellow"> Employer Dashboard</p>
 							</Link>
 						 </li>
-										
+						 <li>
+						 	<Link to ='/postings'>
+								<p className = 'yellow'> Job Postings</p>
+							</Link>
+						</li>
+
 									</ul>
 		            <ul className="nav navbar-nav navbar-right">
 		              <li>

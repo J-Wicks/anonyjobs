@@ -6,7 +6,7 @@ import axios from 'axios'
 const MOD_POSTINGS = 'MOD_POSTINGS'
 
 //actions
-export const receivePostings = postings =>({
+export const receivePostings = postings => ({
   type: RECEIVE_POSTINGS,
   postings
 })
@@ -22,7 +22,7 @@ export const modPostings = posting => ({
 })
 //Thunk action creators
 export const getPostings = dispatch => {
-  return(
+  return (
     axios.get('/api/postings')
     .then(res => res.data)
     .then(postings => {
@@ -34,7 +34,7 @@ export const getPostings = dispatch => {
 
 
 //add test case to make sure this is getting a posting
-export const getPosting = postingId =>{
+export const getPosting = postingId => {
   return dispatch => {
     axios.get(`/api/postings/${postingId}`)
     .then( response =>{

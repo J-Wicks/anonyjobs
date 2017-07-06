@@ -15,7 +15,7 @@ export default function Home (props) {
 		return Object.assign(posting, {applications: matchingApplications})
 	})
 
-	return(
+	return (
 		<div>
 			<div className='col-sm-6 postings-div'>
 			<h1 className="job-posting-header">Your Open Postings</h1>

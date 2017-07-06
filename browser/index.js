@@ -20,7 +20,7 @@ import {getPostings, getPosting, receivePostings} from './reducers/posting'
 import Application from './components/Application'
 import NewPosting from './components/NewPosting'
 import LoginContainer from './containers/LoginContainer'
-import AllPostings from './components/AllPosting';
+import Postings from './components/Postings';
 import singlePosting from './components/singlePosting';
 import {receiveApplications} from './reducers/application';
 import {UserProfileContainer} from './containers/UserProfileContainer';
@@ -39,8 +39,12 @@ const onViewSomeoneElseEnter = (nextRouterState) => {
 	store.dispatch(fetchRelevantUser(userId))
 }
 
-const onPostingsEnter = (nextRouterState) => {
-	store.dispatch(getPostings())
+const onPostingsEnter = () => {
+	axios.get('/api/postings')
+	.then(res => res.data)
+	.then(postings => {
+			store.dispatch(receivePostings(postings))
+	})
 }
 
 const onPostingEnter = (nextRouterState) => {
@@ -88,6 +92,7 @@ ReactDOM.render(
 			<Route path="/viewProfile/:id" component={UserProfileContainer} onEnter={onViewSomeoneElseEnter}/>
 			<Route path='/userdashboard' component={SelfDashboardContainer} onEnter={onUserEnter} />
 			<Route path='/userdashboard/:id' component={UserDashboardContainer} onEnter={onViewSomeoneElseEnter} />
+			<Route path ='/postings' component={Postings} onEnter={onPostingsEnter} />
 			<Route path ='/postings/:id' component={SinglePostingContainer} onEnter={onPostingEnter}/>
 		</Route>
 	</Router>

@@ -31,33 +31,17 @@ export const receiveApplications = applications =>({
 })
 
 //Thunk Action Creators
-export const applyAndSetPosting = (coverLetter, postingId, userId) => dispatch => {
-  axios.post('/api/applications/', {coverLetter, postingId, userId})
-  .then(res => res.data)
-  .then(selectedPosting => {
-    dispatch(applyForJob(selectedPosting))
-  })
-  .catch(error => console.error(error))
-}
-
 
 export const apply = (application) => {
   return dispatch => {
     console.log('in apply thunk')
-    axios.post('/api/applications/', application)
+    axios.post('/api/applications/test', application)
     .then(res => res.data)
     .then (returnedPosting => {
-
       dispatch(applyForJob(returnedPosting))
     })
   }
 }
-
-
-export const checkApplication = (application) => {
-  // This is an API route to do the nasty with ML
-}
-
 
 /*------------------ REDUCER */
 
