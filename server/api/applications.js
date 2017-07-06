@@ -1,9 +1,20 @@
 const router = require('express').Router();
 const Application = require('../models/Application')
 const Posting = require('../models/Posting')
+const Education = require('../models').Education
+const User = require('../models').User
+const Experience = require('../models').Experience
 
 router.get('/', (req, res) => {
-	Application.findAll()
+	Application.findAll({
+		include: [
+			{
+				model: User, include:[
+				{model: Education}, {model: Experience}
+				]
+			}
+		]
+	})
 	.then( foundApplications => {
 		res.send(foundApplications)
 	})
