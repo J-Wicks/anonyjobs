@@ -12,10 +12,10 @@ const Posting = db.define('posting', {
 		allowNull: false,
 	},
 	educationLevel: {
-		type: Sequelize.ENUM('Some High School', 'High School Diploma or Equivalent', 'Some College', 'B.A.', 'B.S.', 'M.S.')
+		type: Sequelize.STRING
 	},
 	educationField: {
-		type: Sequelize.ENUM('Computer Science', 'Education', 'Physics', 'Media Studies')
+		type: Sequelize.STRING
 	},
 	experienceLevel: {
 		type: Sequelize.INTEGER,
@@ -23,7 +23,7 @@ const Posting = db.define('posting', {
 		max: 99
 	},
 	experienceField: {
-		type: Sequelize.ENUM('Computer Science', 'Education', 'Surfing')
+		type: Sequelize.STRING
 	}
 
 })

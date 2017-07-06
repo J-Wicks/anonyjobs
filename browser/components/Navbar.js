@@ -24,7 +24,8 @@ export default function Navbar(props) {
 			                          {props.loggedInUser.email}<span className="caret"></span>
 			                        </a>
 			                    <ul className="dropdown-menu" id="account-dropdown">
-			                    	<li><button onClick={props.logout}> Logout </button> </li>
+			                    	<li><Link to='/viewProfile'> My Profile</Link> </li>
+			                    	<li onClick={props.logout}> <Link to='/home'>Logout </Link>  </li>
 			                    </ul>
 			                  </li>
 		              		:
@@ -36,7 +37,7 @@ export default function Navbar(props) {
 		                </li>
 
 						<li>
-							<Link to='/newposting'>
+							<Link to='/employerdashboard'>
 								<p className = "yellow"> Employer Dashboard</p>
 							</Link>
 						 </li>

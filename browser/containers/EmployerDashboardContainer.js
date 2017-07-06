@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { hashHistory } from 'react-router';
 import NewPosting from '../components/NewPosting';
-// import AllProducts from '../components/AllProducts';
 import {connect} from 'react-redux';
 import { logoutUser, receiveProducts} from '../action-creators'
 
@@ -82,8 +81,7 @@ class EmployerDashboardContainer extends Component {
 
   render () {
     return (
-      <div id="entire-container">
-      <p> What's up</p>
+    <div>
       <NewPosting
       handleJobTitle={this.handleJobTitle}
       handleJobDescription={this.handleJobDescription}
@@ -93,7 +91,7 @@ class EmployerDashboardContainer extends Component {
 	  handleExperienceLevel={this.handleExperienceLevel}
 	  submitHandler={this.handleSubmit}
       />
-      </div>
+	</div>
     )
   }
 }
