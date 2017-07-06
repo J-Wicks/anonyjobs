@@ -1,11 +1,12 @@
 const router = require('express').Router();
 const Application = require('../models/Application')
 const Posting = require('../models/Posting')
-const spawn = require('child_process').spawn
-const Promise = require('bluebird')
+const PythonShell = require('python-shell')
 
-const mlScriptPath = '../machineLearning/ml.py'
-const py = spawn('python', [mlScriptPath])
+const options = { pythonPath: __dirname }
+const pyshell = new PythonShell('/server/machineLearning/ml.py', options, err => {
+  if (err) throw err
+})
 
 router.get('/', (req, res) => {
 	Application.findAll()
@@ -28,28 +29,19 @@ router.post('/', (req, res) => {
 })
 
 router.post('/test', (req, res) => {
-  promisifiedMlCheck(req.body.coverLetter)
-  .then(predictions => {
-    res.send(predictions)
-  })
-  .catch(console.error)
+  res.send(mlCheck(res.body.coverLetter))
 })
 
 module.exports = router
 
-// Send the application to the Python script
-// and return the predictions
-const mlCheck = (application) => {
-  let predictions = []
-  py.stdout.on('data', data => {
-    console.log(data)
-    predictions = data
+const mlCheck = application => {
+  let predictions = ''
+  pyshell.send(application)
+  pyshell.on('message', message => {
+    predictions = message
   })
-  py.stdout.on('end', end => {
+  pyshell.end(err => {
+    if (err) throw err
     return predictions
   })
-  py.stdin.write(JSON.stringify(application))
-  py.stdin.end()
 }
-
-promisifiedMlCheck = Promise.promisify(mlCheck)
