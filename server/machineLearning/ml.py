@@ -11,7 +11,7 @@ from sklearn.feature_extraction.text import TfidfTransformer
 tfidf = TfidfTransformer()
 
 # Get the dataset from Heroku
-url = 'http://localhost:8080/api/allData'
+url = 'https://serene-forest-99801.herokuapp.com/api/allData'
 dataset = pd.read_json(url)
 
 # Get the testing string from JS
