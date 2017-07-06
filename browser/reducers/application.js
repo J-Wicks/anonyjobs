@@ -25,6 +25,10 @@ export const applyForJob = newApplication => ({
   newApplication
 })
 
+export const receiveApplications = applications =>({
+  type: SET_ALL_APPLICATIONS,
+  applications
+})
 
 //Thunk Action Creators
 

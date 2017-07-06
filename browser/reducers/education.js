@@ -7,11 +7,6 @@ import axios from 'axios';
 // All applications for all users
 
 const ADD_USER_EDUCATION = 'ADD_USER_EDUCATION'
-      // const SET_ALL_APPLICATIONS = 'SET_ALL_APPLICATIONS';
-      // // All applications for one user
-      // const SET_USER_APPLICATIONS = 'SET_USER_APPLICATIONS';
-      // // One single application for one user;
-      // const SET_USER_APPLICATION = 'SET_USER_APPLICATION';
 
 const initialState = {
 	userEducation: [],

@@ -9,7 +9,7 @@ import Home from '../components/Home.js'
 
 const mapStateToProps = function (state) {
 	return {
-		state: 'state'
+		currentUser: state.userReducer.currentUser
 		}
 	}
 

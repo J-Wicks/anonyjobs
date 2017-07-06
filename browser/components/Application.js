@@ -23,7 +23,6 @@ class Application extends Component  {
   }
 
   handleChange(event) {
-    console.log(event.target.value)
     this.setState({
       currentSummary: event.target.value
     })

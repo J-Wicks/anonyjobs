@@ -5,6 +5,46 @@ import {apply}from '../reducers/application'
 import { hashHistory } from 'react-router';
 import Posting from '../components/singlePosting'
 
+class SinglePostingContainer extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      coverLetter: ''
+   };
+   this.coverLetterHandler = this.coverLetterHandler.bind(this)
+   this.applyHandler = this.applyHandler.bind(this)
+  }
+
+  applyHandler () {
+    console.log(this.props.posting.id, this.props.user.id, this.state.coverLetter)
+    this.props.apply({
+      postingId: this.props.posting.id,
+      userId: this.props.user.id,
+      coverLetter: this.state.coverLetter
+    })
+  }
+
+  coverLetterHandler (event) {
+    console.log(event.target.value)
+    this.setState({
+      coverLetter: event.target.value
+    })
+  }
+
+  render () {
+    return (
+      <div id="entire-container">
+      <Posting 
+      posting={this.props.posting} 
+      applyHandler={this.applyHandler} 
+      coverLetter={this.state.coverLetter || this.props.user.summary} 
+      coverLetterHandler={this.coverLetterHandler} />
+      </div>
+    )
+  }
+}
+
 const mapStateToProps = state => {
   return ({
     posting: state.postingReducer.selectedPosting,
@@ -24,4 +64,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Posting);
+export default connect(mapStateToProps, mapDispatchToProps)(SinglePostingContainer);

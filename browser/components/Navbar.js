@@ -20,11 +20,12 @@ export default function Navbar(props) {
 		              	{
 		              		props.loggedInUser.email?
 			                  <li className="dropdown">
-			                        <a href="" id="nav-account" className="dropdown-toggle nav-region yellow" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+			                        <a href="" id="nav-account" className="dropdown-toggle nav-region" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 			                          {props.loggedInUser.email}<span className="caret"></span>
 			                        </a>
 			                    <ul className="dropdown-menu" id="account-dropdown">
-			                    	<li><button onClick={props.logout}> Logout </button> </li>
+			                    	<li><Link to='/viewProfile'> My Profile</Link> </li>
+			                    	<li onClick={props.logout}> <Link to='/home'>Logout </Link>  </li>
 			                    </ul>
 			                  </li>
 		              		:
@@ -33,26 +34,19 @@ export default function Navbar(props) {
 		              		</li>
 		              	}
 		              	<li>
-		              	{
-		              	 props.currentUser &&
-										 props.currentUser.email ?
-		              		<div>
-		              		<p>{props.currentUser.email}</p>
-		              		<button onClick={props.logout}> Log Out </button>
-		              		</div>
-		              		:
-		              		<Link to='/login'> Log In </Link>
-		              	}
 		                </li>
-										{
-											props.currentUser &&
-											props.currentUser.companyName &&
-											 <li>
-											 	<Link to='/newposting'>
-													<p className = "yellow"> Create a New Job Posting</p>
-												</Link>
-											 </li>
-										}
+
+						<li>
+							<Link to='/employerdashboard'>
+								<p className = "yellow"> Employer Dashboard</p>
+							</Link>
+						 </li>
+						 <li>
+						 	<Link to ='/postings'>
+								<p className = 'yellow'> Job Postings</p>
+							</Link>
+						</li>
+
 									</ul>
 		            <ul className="nav navbar-nav navbar-right">
 		              <li>

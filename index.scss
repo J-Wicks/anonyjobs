@@ -12,6 +12,37 @@ body {
 		box-sizing: border-box;
 	}
 
+	.postings-div{
+		display: table-cell;
+		vertical-align: middle;
+	}
+
+	.badge {
+		background-color: #68f442;
+	}
+
+	.dropdown-menu li {
+		border: 1px solid;
+	}
+
+	.label{
+		color: #CF0050;
+		font-size:1.2em;
+		font-weight: bold;
+	}
+	.schoolName {
+		font-weight: bold;
+	}
+	.experience p{
+		padding: 2px;
+	}
+
+	.education p{
+		padding:2px;
+	}
+	.coverLetter p {
+		padding: 2px;
+	}
 	.cover-text {
 		position: absolute;
 		display: flex;
@@ -52,7 +83,21 @@ body {
 
 	}
 
+	.positionTitle {
+		font-size: 1.5em;
+		font-weight: bolder;
+	}
+
+	.positionDescription {
+		font-size: .9em;
+		font-weight: lighter;
+	}
 	#job-posting-header {
+		margin: 10px;
+		text-align: center
+	}
+
+	.job-posting-header {
 		margin: 10px;
 		text-align: center
 	}
@@ -69,8 +114,28 @@ body {
 		margin-top: 20px;
 		padding-top: 20px;
 		line-height: 30px;
-		width: 80%;
+		margin-left: 20px;
+
+		width: 70%;
+		// margin: auto;
+	}
+	.profile-container {
+		margin-top: 20px;
+		// padding-top: x;
+		line-height: 30px;
+		margin-left: 20px;
+		width: 70%;
+		// margin: auto;
+	}
+
+	.educationUpdate {
+		width: 50%
+	}
+
+	.skills-box {
+		width: 50%;
 		margin: auto;
+		display: flex;
 	}
 	//
 	// .application h2 {
@@ -272,6 +337,14 @@ body {
 		font-size: 1.3em;
 	}
 
+	input[type='checkbox'] {
+		float: left;
+		width: 20px;
+	}
+	input[type='checkbox'] + label {
+		display: block;
+		width: 30px;
+	}
 }
 
 

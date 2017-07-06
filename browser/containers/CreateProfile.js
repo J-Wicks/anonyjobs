@@ -137,7 +137,7 @@ class CreateProfile extends React.Component {
       return (
         <div key={index}>
         <label>
-          {subSkill} :
+          {`  ${subSkill}`}
           <input className="checkbox-inline"
             name={`${subSkill}`}
             type="checkbox"
@@ -303,8 +303,8 @@ class CreateProfile extends React.Component {
 
 
   handleInputChange(event) {
-    const value = target.type === 'checkbox' ? target.checked : target.value;
     const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
     this.setState({

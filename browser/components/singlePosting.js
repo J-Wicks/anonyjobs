@@ -3,14 +3,6 @@ import {connect} from 'react-redux'
 
 export default function SinglePosting(props) {
 
-	let applyHandler = function () {
-		console.log('in apply handler')
-		props.apply({
-			postingId: props.posting.id,
-			userId: props.user.id,
-			coverLetter: props.user.summary
-		})
-	}
   return (
     <div>
 	    <strong>Title </strong>
@@ -26,8 +18,8 @@ export default function SinglePosting(props) {
 	    <p>{props.posting && props.posting.experienceField}</p>
 	    <p>{props.posting && `${props.posting.experienceLevel}+ years`}</p>
 	    <strong> Your Cover Letter </strong>
-	    <textarea type='textarea' value={props.user.summary} />
-	    <button onClick={applyHandler}className='btn btn-success'> Apply Now! </button>
+	    <textarea type='textarea' value={props.coverLetter} onChange={props.coverLetterHandler}/>
+	    <button onClick={props.applyHandler}className='btn btn-success'> Apply Now! </button>
 	</div>
   )
 }
