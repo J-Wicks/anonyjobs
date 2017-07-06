@@ -16,7 +16,6 @@ dataset = pd.read_json(url)
 
 # Get the testing string from JS
 testString = sys.argv[1]
-
 ### GENDER
 
 # Buckets are 'Man', 'Woman', 'Other'
