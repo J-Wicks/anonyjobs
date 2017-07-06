@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-
+const beforeDb = require('../db');
 const User = require('./User');
 const Application = require('./Application')
 const Posting = require('./Posting')
@@ -8,6 +8,8 @@ const Education = require('./Education')
 const Experience = require('./Experience');
 const Skill = require('./Skill');
 const UserSkill = require('./UserSkill');
+
+const db = require('../db');
 
 
 //Associate application with user. User has zero to many applications.
@@ -28,4 +30,4 @@ User.hasMany(Experience)
 User.belongsToMany(Skill, {through: UserSkill})
 Skill.belongsToMany(User, {through: UserSkill})
 
-module.exports = {User, Application, Posting, Company, Education, Experience, Skill, UserSkill};
+module.exports = {User, Application, Posting, Company, Education, Experience, Skill, UserSkill, db};
