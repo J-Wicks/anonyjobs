@@ -1,4 +1,6 @@
 const faker = require('faker');
+let summaries = require('./genericSummaries').summaries;
+
 // const chance = require('chance');
 // const randomName = require('node-random-name');
 // const createName = require('./nameUtils').createFullName
@@ -12,6 +14,12 @@ const genderSelect = function () {
      return "female";
   }
 }
+
+const assignRandomSummary = function() {
+  return summaries[Math.floor(Math.random()*summaries.length)]
+}
+
+
 const createUser = function () {
   let randomGender = genderSelect();
   var currentName = createFullName(randomGender);
@@ -19,7 +27,8 @@ const createUser = function () {
     firstName: currentName.split(' ')[0],
     lastName: currentName.split(' ')[1],
     email: faker.internet.email(),
-    password: faker.internet.password()
+    password: faker.internet.password(),
+    summary: assignRandomSummary()
     // gender: randomGender,
     // ,
     // isAdmin: false
@@ -54,7 +63,6 @@ function collectSkillsForDb() {
       skillsForDB.push(newSkillEntry)
     })
   })
-  console.log('skillsForDB', skillsForDB)
   return skillsForDB
 }
 
@@ -106,7 +114,7 @@ var skills = {
       'Recruiting', 'Screening', 'Onboarding', 'Scheduling', 'Performance Management', 'Employee Relations']
   },
   writing: {
-    name: 'Writing',
+    name: 'Journalism',
     exampleSkills: [
       'Editorials', 'Blogging', 'Editing', 'Press Releases']
   },

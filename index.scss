@@ -1,28 +1,436 @@
-.navbar-collapse {
-	background-color: #CF0050;
-
-}
-
-.navbar-default .navbar-nav>li>a{
-	color: #E3E3E3;
-	font-size: 1.5em;
-}
 
 body {
-	font-family:  'Halant', serif;
+	font-family:  'Raleway', sans-serif;
+	margin: 0;
+	padding: 0;
+	border: none;
+	box-sizing: border-box;
+	* {
+		margin: 0;
+		padding: 0;
+		border: none;
+		box-sizing: border-box;
+	}
+	.single-posting p {
+		padding: .2em .6em .3em;
+	}
+
+	.single-posting textarea {
+		padding: .2em .6em .3em;
+		width: 50vw;
+		height: 30vh;
+	}
+
+	.postings-div{
+		display: table-cell;
+		vertical-align: middle;
+	}
+
+	.badge {
+		background-color: #68f442;
+	}
+
+	.dropdown-menu li {
+		border: 1px solid;
+	}
+
+	.label{
+		color: #CF0050;
+		font-size:1.2em;
+		font-weight: bold;
+	}
+	.schoolName {
+		font-weight: bold;
+	}
+	.experience p{
+		padding: 2px;
+	}
+
+	.education p{
+		padding:2px;
+	}
+	.coverLetter p {
+		padding: 2px;
+	}
+	.cover-text {
+		position: absolute;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		// margin-left: auto;
+		// margin-right: auto;
+		margin: auto;
+		padding-left: 40px;
+		padding-right: 40px;;
+		font-family:  'Raleway', sans-serif;
+		top: 325px;
+		color: black;
+		font-size: 60px;
+		font-weight: 1000;
+		font-size: 60px;
+		// font-style: italic;
+
+
+		letter-spacing: 4px;
+	}
+
+
+	.cover-text h3 {
+		padding-top: 30px;
+		text-align: center;
+	}
+
+	.cover-text h1 {
+		font-size: 60px;
+		text-align: center;
+	}
+
+	.posting-form {
+		margin: auto;
+		width: 40%;
+		// margin-left: 100px;
+
+	}
+
+	.positionTitle {
+		font-size: 1.5em;
+		font-weight: bolder;
+	}
+
+	.positionDescription {
+		font-size: .9em;
+		font-weight: lighter;
+	}
+	#job-posting-header {
+		margin: 10px;
+		text-align: center
+	}
+
+	.job-posting-header {
+		margin: 10px;
+		text-align: center
+	}
+
+	.application {
+		margin-top: 20px;
+		padding-top: 20px;
+		line-height: 30px;
+		width: 80%;
+		margin: auto;
+	}
+
+	.create-profile {
+		margin-top: 20px;
+		padding-top: 20px;
+		line-height: 30px;
+		margin-left: 20px;
+
+		width: 70%;
+		// margin: auto;
+	}
+	.profile-container {
+		margin-top: 20px;
+		// padding-top: x;
+		line-height: 30px;
+		margin-left: 20px;
+		width: 70%;
+		// margin: auto;
+	}
+
+	.educationUpdate {
+		width: 50%
+	}
+
+	.skills-box {
+		width: 50%;
+		margin: auto;
+		display: flex;
+	}
+	//
+	// .application h2 {
+	// 	// text-align: center
+	// }
+
+	// .profile-form {
+	// background-color: #F6F7F8;
+	// border: 1px solid #D6D9DC;
+	// border-radius: 3px;
+	// width: 80%;
+	// padding: 15px;
+	// margin: auto;
+	// color: #5D6063;
+	// background-color: #EAEDF0;
+	// 	font-family:  'Raleway', sans-serif;
+	// font-size: 16px;
+	// display: flex;
+	// flex-direction: column;
+	// align-items: center;
+// }
+
+	.form-row button {
+	font-size: 16px;
+	font-weight: bold;
+
+	color: #FFFFFF;
+	background-color: #5995DA;
+
+	border: none;
+	border-radius: 3px;
+
+	padding: 10px 40px;
+	cursor: pointer;
 }
 
-#home div{
-	align-content: center
+	// #slogan {
+	// 	margin-top: 15px;
+	// 	font-size: 30px
+	// }
 
+
+	.navbar-collapse {
+		background-color: #CF0050;
+	}
+
+	.navbar-default .navbar-nav>li>a{
+		color: #E3E3E3;
+		font-size: 1.5em;
+	}
+
+	#home div{
+		align-content: center
+
+	}
+
+	.form-flex {
+		display: flex;
+		justify-content: center
+	}
+
+	.single-posting {
+		align-content: center;
+	}
+
+	.cover {
+		height: 500px;
+		display: flex;
+		overflow: hidden;
+		align-items: center;
+		justify-content: center;
+		justify-text: center;
+	}
+
+	.wide-image {
+	    width: 100%;
+			height: 100%;
+	    opacity: 0.6
+	 }
+
+	.center{
+	 margin: auto;
+	 width: 50%;
+	 border: 3px solid green;
+	 padding: 10px;
+	 align-content: center;
+	 // text-align: center;
+	}
+
+	.login-form {
+		width: 33%;
+		// display: flex;
+		// align-items: row-reverse;
+		justify-content: center
+	}
+
+	.login-box {
+		// width: 33%
+		display: flex;
+		justify-content: center;
+		// justify-content: center
+	}
+
+
+	.col-xs-1 {
+	 margin: 0;
+	 padding: 0;
+	 border: none;
+	 box-sizing: border-box;
+	}
+	.col-xs-2 {
+	 margin: 0;
+	 padding: 0;
+	 border: none;
+	 box-sizing: border-box;
+	}
+
+	.col-xs-3 {
+	 margin: 0;
+	 padding: 0;
+	 border: none;
+	 box-sizing: border-box;
+	}
+
+	.col-xs-4 {
+	 margin: 0;
+	 padding: 0;
+	 border: none;
+	 box-sizing: border-box;
+	}
+
+	.col-xs-5 {
+	 margin: 0;
+	 padding: 0;
+	 border: none;
+	 box-sizing: border-box;
+	}
+
+	.col-xs-6 {
+	 margin: 0;
+	 padding: 0;
+	 border: none;
+	 box-sizing: border-box;
+	}
+
+	.col-xs-7 {
+	 margin: 0;
+	 padding: 0;
+	 border: none;
+	 box-sizing: border-box;
+	}
+	.col-xs-8 {
+	 margin: 0;
+	 padding: 0;
+	 border: none;
+	 box-sizing: border-box;
+	}
+	.col-xs-9 {
+	 margin: 0;
+	 padding: 0;
+	 border: none;
+	 box-sizing: border-box;
+	}
+	.col-xs-10 {
+	 margin: 0;
+	 padding: 0;
+	 border: none;
+	 box-sizing: border-box;
+	}
+	.col-xs-11 {
+	 margin: 0;
+	 padding: 0;
+	 border: none;
+	 box-sizing: border-box;
+	}
+	.col-xs-12 {
+	 margin: 0;
+	 padding: 0;
+	 border: none;
+	 box-sizing: border-box;
+	}
+	.navbar {
+	 margin: 0;
+	 padding: 0;
+	 border: none;
+	 box-sizing: border-box;
+	}
+
+	.home-page-marketing {
+		padding-top: 15px;
+		padding-bottom:15px;
+		// overflow: hidden;
+		margin-bottom: 20px;
+		background-color: #CF0050;
+		color: #E3E3E3;
+
+	}
+
+
+	.home-page-marketing h1 {
+		text-align: center;
+		// 	font-family:  'Raleway', sans-serif;
+		font-size: 1.3em;
+	}
+
+	input[type='checkbox'] {
+		float: left;
+		width: 20px;
+	}
+	input[type='checkbox'] + label {
+		display: block;
+		width: 30px;
+	}
 }
 
 
 
 
-.center{
-	margin: auto;
-	width: 50%;
-	border: 3px solid green;
-	padding: 10px;
-}
+	// .center{
+	// 	margin: auto;
+	// 	width: 50%;
+	// 	border: 3px solid green;
+	// 	padding: 10px;
+	// }
+
+
+	// .navbar-collapse {
+	// 	background-color: #CF0050;
+	//
+	// }
+	//
+	// // .navbar-default .navbar-nav>li>a{
+	// // 	color: #E3E3E3;
+	// // 	font-size: 1.5em;
+	// // }
+	//
+	// .above {
+	// 	color: #E3E3E3;
+	// 	font-size: 1.5em;
+	// }
+	//
+	// body {
+// 		font-family:  'Raleway', sans-serif;
+	// }
+	//
+	// #home div{
+	// 	align-content: center
+	//
+	// }
+	//
+	//
+	//
+	//
+	//
+	//
+	// * {
+	// 	margin: 0;
+	// 	padding: 0;
+	// 	// border: none;
+	// 	box-sizing: border-box;
+	// 	line-height: 1.2em;
+	// 	//	font-family:  'Raleway', sans-serif;
+	// }
+	//
+	//
+
+	// //
+
+	// //
+	// // .navbar-collapse {
+	// // 	background-color: #CF0050;
+	// //
+	// // }
+	// //
+	// // .navbar-default .navbar-nav>li>a{
+	// // 	color: #E3E3E3;
+	// // 	font-size: 1.5em;
+	// // }
+	// //
+	// // body {
+// // 		font-family:  'Raleway', sans-serif;
+	// // }
+	// //
+	// //
+	// // .centering-nav-util {
+	// // 	display: flex;
+	// // 	align-items: center
+	// // }
+	// //

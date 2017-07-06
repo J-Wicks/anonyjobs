@@ -23,7 +23,6 @@ class CreateProfile extends React.Component {
     this.handleSkillsClick = this.handleSkillsClick.bind(this);
     this.renderSkillsCategories = this.renderSkillsCategories.bind(this);
     this.handleCategoryClick = this.handleCategoryClick.bind(this);
-    this.handleEducationClick = this.handleEducationClick.bind(this);
     this.toggleSkillsClick = this.toggleSkillsClick.bind(this);
     this.toggleEducationClick = this.toggleEducationClick.bind(this);
     this.renderEducationInputs = this.renderEducationInputs.bind(this);
@@ -60,7 +59,6 @@ class CreateProfile extends React.Component {
   }
 
   toggleExperienceClick(){
-
     if (this.state.addExperienceClicked === false) {
         this.setState({addExperienceClicked: true});
     } else if (this.state.addExperienceClicked === true) {
@@ -75,7 +73,6 @@ class CreateProfile extends React.Component {
       this.setState({addSummaryClicked: false});
     }
   }
-
 
   handleSkillsClick () {
     if (!Object.keys(this.state.skillsObj).length) {
@@ -94,13 +91,9 @@ class CreateProfile extends React.Component {
     }
     this.toggleSkillsClick();
     this.createSkillsTickedObj()
-
   }
 
-
-
   handleCategoryClick(event){
-    console.log('handle Category click')
     let skill = event.target.value;
     let skillString = `${skill}Clicked`
     if (this.state[skillString] === undefined) {
@@ -111,9 +104,6 @@ class CreateProfile extends React.Component {
       this.setState({[skillString]: true})
     }
   }
-
-
-
 
   createSkillsTickedObj(){
     let skillsArr = this.props.skills;
@@ -127,10 +117,7 @@ class CreateProfile extends React.Component {
       }
     })
     this.setState({skillsTickedObj})
-    console.log(this.state)
   }
-
-
 
   handleTick(event) {
     let subSkill = event.target.name;
@@ -142,18 +129,16 @@ class CreateProfile extends React.Component {
       currentSkillsObj[category][subSkill] = false
     }
     this.setState({skillsTickedObj: currentSkillsObj})
-
   }
 
   renderCheckboxes(skill) {
-    console.log('rendering checkboxes...')
     let subCategories = this.state.skillsObj[skill];
     let categoryBoxes = subCategories.map((subSkill, index) => {
       return (
         <div key={index}>
         <label>
-          {subSkill} :
-          <input
+          {`  ${subSkill}`}
+          <input className="checkbox-inline"
             name={`${subSkill}`}
             type="checkbox"
             onChange={this.handleTick}
@@ -165,18 +150,17 @@ class CreateProfile extends React.Component {
     return categoryBoxes
   }
 
-
   renderSkillsCategories(){
     let skills = Object.keys(this.state.skillsObj)
     return skills.map((skill, index) => {
       let skillString = `${skill}Clicked`
       return (
         <div  key={index}>
-        <button value={skill} onClick={this.handleCategoryClick}>{skill}</button>
+        <button className="btn btn-default" value={skill} onClick={this.handleCategoryClick}>{skill}</button>
         {(this.state[skillString]) ? (
           <div>
             {this.renderCheckboxes(skill)}
-            <button onClick={this.handleSkillsSave(skill)}>Save</button>
+            <button className="btn btn-default" onClick={this.handleSkillsSave(skill)}>Save</button>
           </div>
         )
            : null }
@@ -185,20 +169,13 @@ class CreateProfile extends React.Component {
     })
   }
 
-
-
-  // handleEducationClick() {
-  //   this.toggleEducationClick()
-  //
-  // }
-
   renderSummaryInputs(){
 
     return (
 
       <form>
-        <textarea type="text" defaultValue="Describe your experience, background, and professional objectives." onChange={this.handleInputChange} name="summary"/>
-        <button onClick={this.handleSummarySubmit} type="">Save</button>
+        <textarea type="text" defaultValue="Describe your experience, background, and professional objectives." onChange={this.handleInputChange} name="summary" className="form-control"/>
+        <button onClick={this.handleSummarySubmit} type="" className="btn btn-default">Save</button>
     </form>
     )
 
@@ -210,15 +187,15 @@ class CreateProfile extends React.Component {
         <form className="educationUpdate">
           <div>
             <label htmlFor="schoolName">Add School</label>
-            <input name="schoolName" defaultValue="Enter School Here" type="text" onChange={this.handleInputChange}/>
+            <input name="schoolName" defaultValue="Enter School Here" type="text" className="form-control" onChange={this.handleInputChange}/>
           </div>
           <div>
             <label htmlFor="yearGraduated">Add Graduation Year</label>
-            <input name="yearGraduated" defaultValue="YYYY" type="text" onChange={this.handleInputChange}/>
+            <input name="yearGraduated" defaultValue="YYYY" type="text" onChange={this.handleInputChange} className="form-control"/>
           </div>
           <div>
             <label htmlFor="degree" type="text" >Add Degree</label>
-            <select name="degree" onChange={this.handleInputChange}>
+            <select name="degree" onChange={this.handleInputChange} className="form-control">
               <option value="Bachelor of Arts">Bachelor of Arts</option>
               <option value="Bachelor of Science">Bachelor of Science</option>
               <option value="Associates">Associates</option>
@@ -230,13 +207,13 @@ class CreateProfile extends React.Component {
           </div>
           <div>
             <label htmlFor="degreeName">Degree Name</label>
-            <input name="degreeName" defaultValue="Add Degree Name Here" onChange={this.handleInputChange} />
+            <input name="degreeName" defaultValue="Add Degree Name Here" onChange={this.handleInputChange} className="form-control"/>
           </div>
           <div>
             <label htmlFor="finalGPA">GPA</label>
-            <input name="finalGPA " defaultValue="Add GPA Here" onChange={this.handleInputChange}/>
+            <input name="finalGPA " defaultValue="Add GPA Here" onChange={this.handleInputChange} className="form-control"/>
           </div>
-          <button onClick={this.handleEducationSubmit} >Save</button>
+          <button className="btn btn-default" onClick={this.handleEducationSubmit} >Save</button>
         </form>
     )
   }
@@ -247,25 +224,25 @@ class CreateProfile extends React.Component {
           <form className="addExperience">
             <div>
               <label htmlFor="companyName">Employe Namer</label>
-              <input type="text" name="companyName" defaultValue="Enter Employer Name Here" onChange={this.handleInputChange}/>
+              <input type="text" name="companyName" defaultValue="Enter Employer Name Here" onChange={this.handleInputChange} className="form-control"/>
             </div>
             <div>
               <label htmlFor="role">Job Title </label>
-              <input type="text" name="role" defaultValue="YYYY" onChange={this.handleInputChange}/>
+              <input type="text" name="role" defaultValue="YYYY" onChange={this.handleInputChange} className="form-control"/>
             </div>
             <div>
               <label htmlFor="startYear">Start Year</label>
-              <input type="text" name="startYear" defaultValue="YYYY" onChange={this.handleInputChange}/>
+              <input type="text" name="startYear" defaultValue="YYYY" onChange={this.handleInputChange} className="form-control"/>
             </div>
             <div>
               <label htmlFor="endYear">End Year</label>
-              <input type="text" name="endYear" defaultValue="YYYY" onChange={this.handleInputChange}/>
+              <input type="text" name="endYear" defaultValue="YYYY" onChange={this.handleInputChange} className="form-control"/>
             </div>
             <div>
               <label htmlFor="responsibilities">End Year</label>
-              <textarea name="responsibilities" type="text" defaultValue="Describe your roles and responsibilities here." onChange={this.handleInputChange} />
+              <textarea name="responsibilities" type="text" defaultValue="Describe your roles and responsibilities here." onChange={this.handleInputChange} className="form-control"/>
             </div>
-            <button onClick={this.handleExperienceSubmit} type="">Save</button>
+            <button onClick={this.handleExperienceSubmit} type="" className="btn btn-default">Save</button>
           </form>
       )
     }
@@ -326,8 +303,8 @@ class CreateProfile extends React.Component {
 
 
   handleInputChange(event) {
-    const value = target.type === 'checkbox' ? target.checked : target.value;
     const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
     this.setState({
@@ -337,34 +314,32 @@ class CreateProfile extends React.Component {
 
   render() {
     return (
-      <div className="profileClass">
-        <button>(Possibly) Import LinkedIn Profile</button>
-        <button>Manually Create Profile</button>
+      <div className="create-profile">
+        <h2>Create Profile</h2>
         <div>
-          <button onClick={this.toggleEducationClick}>Add Education</button>
+          <button onClick={this.toggleEducationClick} className="btn btn-default">Add Education</button>
         </div>
           {(this.state.addEducationClicked) ? (<div>{this.renderEducationInputs()}</div>) : null }
         <div>
-          <button onClick={this.handleSkillsClick}>Add Skills</button>
+          <button onClick={this.handleSkillsClick} className="btn btn-default">Add Skills</button>
         </div>
         {(this.state.addSkillsClicked) ? (<div><h3>Categories</h3>{this.renderSkillsCategories()}</div>) : null }
         <div>
-          <button onClick={this.toggleExperienceClick}>Add Professional Experience</button>
+          <button onClick={this.toggleExperienceClick} className="btn btn-default">Add Professional Experience</button>
         </div>
         {(this.state.addExperienceClicked) ? (<div>{this.renderExperienceInputs()}</div>) : null }
         {(!this.props.currentUser.summary) ? (    <div>
-          <button onClick={this.toggleSummaryClick}>Add Personal Summary</button>
+          <button onClick={this.toggleSummaryClick} className="btn btn-default">Add Personal Summary</button>
         </div>) : null }
         {(this.state.addSummaryClicked) ? (<div>{this.renderSummaryInputs()}</div>) : null }
 
         <div>
-          <Link to="viewProfile"><h2>View Profile</h2></Link>
-          <Link to={`userdashboard/${this.props.currentUser.id}`}><h2>View Dashboard</h2></Link>
+          <Link to="viewProfile"><h4>View Profile</h4></Link>
+          <Link to={`userdashboard/${this.props.currentUser.id}`}><h4>View Dashboard</h4></Link>
         </div>
       </div>
     )
   }
-
 }
 
 const mapDispatchToProps = dispatch => {
