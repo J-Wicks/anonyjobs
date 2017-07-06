@@ -1,6 +1,6 @@
 
 body {
-	font-family:  'Halant', serif;
+	font-family:  'Raleway', sans-serif;
 	margin: 0;
 	padding: 0;
 	border: none;
@@ -10,6 +10,15 @@ body {
 		padding: 0;
 		border: none;
 		box-sizing: border-box;
+	}
+	.single-posting p {
+		padding: .2em .6em .3em;
+	}
+
+	.single-posting textarea {
+		padding: .2em .6em .3em;
+		width: 50vw;
+		height: 30vh;
 	}
 
 	.postings-div{
@@ -53,7 +62,7 @@ body {
 		margin: auto;
 		padding-left: 40px;
 		padding-right: 40px;;
-		font-family: 'Open Sans';
+		font-family:  'Raleway', sans-serif;
 		top: 325px;
 		color: black;
 		font-size: 60px;
@@ -64,6 +73,8 @@ body {
 
 		letter-spacing: 4px;
 	}
+
+
 
 
 	.cover-text h3 {
@@ -120,10 +131,10 @@ body {
 		// margin: auto;
 	}
 	.profile-container {
-		margin-top: 20px;
+		margin-top: 40px;
 		// padding-top: x;
-		line-height: 30px;
-		margin-left: 20px;
+		line-height: 50px;
+		margin-left: 40px;
 		width: 70%;
 		// margin: auto;
 	}
@@ -136,6 +147,24 @@ body {
 		width: 50%;
 		margin: auto;
 		display: flex;
+	}
+
+	.profile-container h1 {
+		line-height: 20px
+	}
+
+	#profile-summary {
+		// padding-left: 15px;
+	}
+
+	#editProfile-viewDashboard {
+		display: flex;
+		justify-content: space-between;
+		width: 300px
+	}
+
+	#summary-header {
+		margin-top: 20px
 	}
 	//
 	// .application h2 {
@@ -151,7 +180,7 @@ body {
 	// margin: auto;
 	// color: #5D6063;
 	// background-color: #EAEDF0;
-	// font-family: "Helvetica", "Arial", sans-serif;
+	// 	font-family:  'Raleway', sans-serif;
 	// font-size: 16px;
 	// display: flex;
 	// flex-direction: column;
@@ -195,6 +224,10 @@ body {
 	.form-flex {
 		display: flex;
 		justify-content: center
+	}
+
+	.single-posting {
+		align-content: center;
 	}
 
 	.cover {
@@ -333,7 +366,7 @@ body {
 
 	.home-page-marketing h1 {
 		text-align: center;
-		// font-family: 'open sans', sans-serif;
+		// 	font-family:  'Raleway', sans-serif;
 		font-size: 1.3em;
 	}
 
@@ -344,6 +377,17 @@ body {
 	input[type='checkbox'] + label {
 		display: block;
 		width: 30px;
+	}
+
+	.add-line-space {
+		margin-bottom: 5px;
+
+	}
+
+	h1.add-line-space {
+		margin-top: 30px;
+		margin-bottom: 15px;
+
 	}
 }
 
@@ -374,7 +418,7 @@ body {
 	// }
 	//
 	// body {
-	// 	font-family:  'Halant', serif;
+// 		font-family:  'Raleway', sans-serif;
 	// }
 	//
 	// #home div{
@@ -393,7 +437,7 @@ body {
 	// 	// border: none;
 	// 	box-sizing: border-box;
 	// 	line-height: 1.2em;
-	// 	// font-family: 'Open Sans', sans-serif;
+	// 	//	font-family:  'Raleway', sans-serif;
 	// }
 	//
 	//
@@ -412,7 +456,7 @@ body {
 	// // }
 	// //
 	// // body {
-	// // 	font-family:  'Halant', serif;
+// // 		font-family:  'Raleway', sans-serif;
 	// // }
 	// //
 	// //

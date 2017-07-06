@@ -15,7 +15,6 @@ export default function Home (props) {
 		return Object.assign(posting, {applications: matchingApplications})
 	})
 
-
 	return (
 		<div>
 			<div className='col-sm-6 postings-div'>
@@ -76,11 +75,16 @@ export default function Home (props) {
 									<div className='coverLetter'>
 										<p className='label'>Cover Letter</p>
 										<p>{application.coverLetter } </p>
+										<form >
+						                <button value={application.id} onClick={props.handleRemove} className='btn btn-success'> Accept </button>
+						                <button value={application.id} onClick={props.handleRemove} className='btn btn-danger'> Decline </button>
+										</form>
 									</div>
 									</li>
 	                    			)
 	                    	})
 		                }
+
 		                </div>
 						)
 				})

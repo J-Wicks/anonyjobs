@@ -17,7 +17,7 @@ class SinglePostingContainer extends Component {
   }
 
   applyHandler () {
-    console.log(this.props.posting.id, this.props.user.id, this.state.coverLetter)
+
     this.props.apply({
       postingId: this.props.posting.id,
       userId: this.props.user.id,

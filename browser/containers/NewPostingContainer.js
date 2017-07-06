@@ -3,6 +3,7 @@ import axios from 'axios';
 import { hashHistory } from 'react-router';
 import NewPosting from '../components/NewPosting';
 import {connect} from 'react-redux';
+import {receiveApplications} from '../reducers/application'
 import {modPostings} from '../reducers/posting';
 import { logoutUser, receiveProducts} from '../action-creators'
 
@@ -25,6 +26,7 @@ class NewPostingContainer extends Component {
 		this.handleExperienceLevel = this.handleExperienceLevel.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleApps = this.handleApps.bind(this);
+		this.handleRemove = this.handleRemove.bind(this)
 	}
 
 	handleSubmit(event){
@@ -38,6 +40,11 @@ class NewPostingContainer extends Component {
 				experienceField: this.state.experienceField,
 				showApps: false
 			})
+	}
+
+	handleRemove (event) {
+		event.preventDefault()
+		this.props.removeApplication(event.target.value)
 	}
 
 	handleJobTitle (event) {
@@ -97,6 +104,7 @@ class NewPostingContainer extends Component {
 			applications={this.props.applications}
 			handleApps={this.handleApps}
 			showApps={this.state.showApps}
+			handleRemove={this.handleRemove}
 			/>			
       	</div>
 			)
@@ -112,6 +120,14 @@ const mapStateToProps = function (state) {
 
 const mapDispatchToProps = function (dispatch) {
 	return {
+		removeApplication: (applicationId) =>{
+			axios.delete(`/api/applications/${applicationId}`)
+			.then( result => {
+				console.log(result.data)
+				return dispatch(receiveApplications(result.data))
+			})
+		},
+
 		addPosting: (user) => {
 			axios.post('/api/postings',{
 				positionTitle: user.positionTitle,
