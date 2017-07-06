@@ -21,6 +21,7 @@ export default function SinglePosting(props) {
 	    <textarea type='textarea' value={props.coverLetter} onChange={props.coverLetterHandler}/>
 	    <br/>
 	    <button onClick={props.applyHandler}className='btn btn-success'> Apply Now! </button>
+	    <button onClick={props.testHandler}className='btn btn-success'> Test </button>
 	</div>
   )
 }

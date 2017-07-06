@@ -14,8 +14,12 @@ class SinglePostingContainer extends Component {
    };
    this.coverLetterHandler = this.coverLetterHandler.bind(this)
    this.applyHandler = this.applyHandler.bind(this)
+   this.testHandler = this.testHandler.bind(this)
   }
 
+  testHandler(){
+    this.props.getDemos(this.state.coverLetter)
+  }
   applyHandler () {
 
     this.props.apply({
@@ -39,7 +43,9 @@ class SinglePostingContainer extends Component {
       posting={this.props.posting} 
       applyHandler={this.applyHandler} 
       coverLetter={this.state.coverLetter || this.props.user.summary} 
+      testHandler={this.testHandler}
       coverLetterHandler={this.coverLetterHandler} />
+
       </div>
     )
   }
@@ -57,6 +63,13 @@ const mapDispatchToProps = dispatch => {
 
       apply: (application) => {
       dispatch(apply(application))
+      },
+
+      getDemos: (coverLetter) =>{
+        axios.post('/api/applications/test')
+        .then( demos =>{
+          console.log(demos)
+        })
       }
     }
 
