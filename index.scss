@@ -216,9 +216,14 @@ body {
 		font-size: 1.5em;
 	}
 
-	#home div{
-		align-content: center
-
+	#home{
+		align-items: center;
+		justify-content: center;
+		clear: both;
+	}
+	#button-div {
+		display: flex;
+		justify-content: center;
 	}
 
 	.form-flex {

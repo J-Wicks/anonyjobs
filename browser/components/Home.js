@@ -21,8 +21,10 @@ export default function Home (props) {
 				<h1>Are you a recruiter searching for top talent? Anonyjob can help you find the best and brightest.</h1>
 			</div>
 			<div id='home' className='center'>
-				<h1> Welcome to Anonyjob </h1>
-				<a href="/api/auth/linkedin"><button className="btn btn-primary fa fa-linkedin-square" type="submit"> Login with LinkedIn</button></a>
+				<h1 className='text-center'> Welcome to Anonyjob </h1>
+				<div id = 'button-div'>
+					<a href="/api/auth/linkedin"><button id = 'login-button' className="btn btn-primary fa fa-linkedin-square" type="submit"> Login with LinkedIn</button></a>
+				</div>
 			</div>
 		</div>
 	</div>
