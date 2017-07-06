@@ -75,6 +75,8 @@ body {
 	}
 
 
+
+
 	.cover-text h3 {
 		padding-top: 30px;
 		text-align: center;
@@ -129,10 +131,10 @@ body {
 		// margin: auto;
 	}
 	.profile-container {
-		margin-top: 20px;
+		margin-top: 40px;
 		// padding-top: x;
-		line-height: 30px;
-		margin-left: 20px;
+		line-height: 50px;
+		margin-left: 40px;
 		width: 70%;
 		// margin: auto;
 	}
@@ -145,6 +147,24 @@ body {
 		width: 50%;
 		margin: auto;
 		display: flex;
+	}
+
+	.profile-container h1 {
+		line-height: 20px
+	}
+
+	#profile-summary {
+		// padding-left: 15px;
+	}
+
+	#editProfile-viewDashboard {
+		display: flex;
+		justify-content: space-between;
+		width: 300px
+	}
+
+	#summary-header {
+		margin-top: 20px
 	}
 	//
 	// .application h2 {
@@ -357,6 +377,17 @@ body {
 	input[type='checkbox'] + label {
 		display: block;
 		width: 30px;
+	}
+
+	.add-line-space {
+		margin-bottom: 5px;
+
+	}
+
+	h1.add-line-space {
+		margin-top: 30px;
+		margin-bottom: 15px;
+
 	}
 }
 

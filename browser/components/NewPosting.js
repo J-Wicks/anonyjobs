@@ -25,7 +25,7 @@ export default function Home (props) {
 					return (
 						<div>
 						<li key={posting.id} className ='list-group-item justifycontent-between'>
-							<p className='positionTitle'>{posting.positionTitle} </p> 
+							<p className='positionTitle'>{posting.positionTitle} </p>
 							<a href='#' className=' badge badge-default badge-pill' onClick={props.handleApps}>
 							{posting.applications.length}
 							</a>
@@ -37,7 +37,7 @@ export default function Home (props) {
 	                    		let experiences = application.User.experiences
 	                    		let educations = application.User.education
 	                    		return (
-									<li className ='list-group-item justifycontent-between' key={application.id}> 
+									<li className ='list-group-item justifycontent-between' key={application.id}>
 									<div className='education'>
 									<p className='label'>Education</p>
 
@@ -72,7 +72,7 @@ export default function Home (props) {
 										}
 
 									</div>
-									<div className='coverLetter'> 
+									<div className='coverLetter'>
 										<p className='label'>Cover Letter</p>
 										<p>{application.coverLetter } </p>
 										<form >

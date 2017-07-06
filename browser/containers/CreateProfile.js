@@ -317,20 +317,20 @@ class CreateProfile extends React.Component {
       <div className="create-profile">
         <h2>Create Profile</h2>
         <div>
-          <button onClick={this.toggleEducationClick} className="btn btn-default">Add Education</button>
+          <button onClick={this.toggleEducationClick} className="btn btn-default">Add</button><span>Add Education</span>
         </div>
           {(this.state.addEducationClicked) ? (<div>{this.renderEducationInputs()}</div>) : null }
         <div>
-          <button onClick={this.handleSkillsClick} className="btn btn-default">Add Skills</button>
+          <button onClick={this.handleSkillsClick} className="btn btn-default">Add</button><span>Add Skills</span>
         </div>
         {(this.state.addSkillsClicked) ? (<div><h3>Categories</h3>{this.renderSkillsCategories()}</div>) : null }
         <div>
-          <button onClick={this.toggleExperienceClick} className="btn btn-default">Add Professional Experience</button>
+          <button onClick={this.toggleExperienceClick} className="btn btn-default">Add</button><span>Add Professional Experience</span>
         </div>
         {(this.state.addExperienceClicked) ? (<div>{this.renderExperienceInputs()}</div>) : null }
-        {(!this.props.currentUser.summary) ? (    <div>
-          <button onClick={this.toggleSummaryClick} className="btn btn-default">Add Personal Summary</button>
-        </div>) : null }
+        <div>
+          <button onClick={this.toggleSummaryClick} className="btn btn-default">Add</button><span>Add Personal Summary</span>
+        </div>
         {(this.state.addSummaryClicked) ? (<div>{this.renderSummaryInputs()}</div>) : null }
 
         <div>

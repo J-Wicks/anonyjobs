@@ -65,20 +65,20 @@ export default class UserProfile extends React.Component {
 
 
       <div className="profile-container">
-        {(!this.props.user.firstName) ? <h1>User Not Found</h1> : null}
-        <h1>{this.props.user.firstName} {this.props.user.lastName}</h1>
+        {(!this.props.user.firstName) ? <h1 className="add-line-space">User Not Found</h1> : null}
+        <h1 className="add-line-space">{this.props.user.firstName} {this.props.user.lastName}</h1>
         {this.props.user.headline ?
-          <h2>{this.props.user.headline}</h2> : null
+          <h3 className="add-line-space">{this.props.user.headline}</h3> : null
 
         }
         {this.props.user.location ?
-          <h2>{this.props.user.location}</h2> : null
+          <h3 className="add-line-space">{this.props.user.location}</h3> : null
 
         }
 
         {this.props.user.education ? (this.props.user.education.length ? (
 
-                  <div>
+                  <div className="add-line-space">
                   <h2>Education</h2>
                   <table className="table">
                     <thead>
@@ -116,7 +116,7 @@ export default class UserProfile extends React.Component {
   {this.props.user.experiences ? (this.props.user.experiences.length ?
     (
 
-      <div>
+      <div className="add-line-space">
       <h2>Experience</h2>
       <table className="table">
         <thead>
@@ -147,13 +147,20 @@ export default class UserProfile extends React.Component {
       </div>
     ) : null) : null}
 
+    {this.props.user.summary ? (
+      <div id="summary-header" className="add-line-space">
+        <h2 className="add-line-space"><strong>Summary</strong></h2>
+        <h3 className="add-line-space" id="profile-summary">{this.props.user.summary}</h3>
+      </div>
+    ) : null}
+
     {this.props.user.skills ? (this.props.user.skills.length ?
       this.renderSkills(this.props.user.skills) : null) : null}
 
 
-    {(!this.props.notSelf) ? (  <div>
-        <Link to="createProfile"><h2>Edit Profile</h2></Link>
-        <Link to={`userdashboard/${this.props.user.id}`}><h2>View Dashboard</h2></Link>
+    {(!this.props.notSelf) ? (  <div id="editProfile-viewDashboard">
+        <Link to="createProfile"><h3>Edit Profile</h3></Link>
+        <Link to={`userdashboard/${this.props.user.id}`}><h3>View Dashboard</h3></Link>
       </div>
     )
     : null }
