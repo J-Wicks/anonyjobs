@@ -20,6 +20,15 @@ export default function SinglePosting(props) {
 	    <br/>
 	    <textarea type='textarea' value={props.coverLetter} onChange={props.coverLetterHandler}/>
 	    <br/>
+	    {
+	    	props.predictedGender &&
+	    	<div>
+	    	<p className='label'>Prediction:</p>
+	    	<p>{`Gender: ${props.predictedGender}`}</p>
+	    	<p>{` Orientation: ${props.predictedOrientation}`} </p>
+	    	<p>{` Race: ${props.predictedRace}`}</p>
+	    	</div>
+	    }
 	    <button onClick={props.applyHandler}className='btn btn-success'> Apply Now! </button>
 	    <button onClick={props.testHandler}className='btn btn-success'> Test </button>
 	</div>
