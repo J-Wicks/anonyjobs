@@ -10,7 +10,9 @@ export default class UserProfile extends React.Component {
   constructor(props){
     super(props);
     this.renderOrNot = this.renderOrNot.bind(this)
- }
+    this.skillsArrayToObj = this.skillsArrayToObj.bind(this);
+    this.renderSkills = this.renderSkills.bind(this)
+  }
 
  renderOrNot(array){
    let counter = 0;
@@ -22,14 +24,47 @@ export default class UserProfile extends React.Component {
    return counter
  }
 
+ skillsArrayToObj(array) {
+   let skillsObj = {}
+   array.forEach(function(skill){
+     if (!skillsObj[skill.category]) {
+       skillsObj[skill.category] = [];
+     } else {
+       skillsObj[skill.category].push(skill.name)
+     }
+   })
+  return skillsObj;
+
+ }
+
+ renderSkills(array){
+   let skillsObj = this.skillsArrayToObj(array);
+   let skillsCategories = Object.keys(skillsObj);
+   let newDivs = []
+   skillsCategories.forEach(function(category, index){
+     let skills = skillsObj[category];
+     let newDiv = (
+       <div className="skill" key={index}>
+         <h3><strong>{category}</strong></h3>
+         {
+           skills.map(function(skill, index){
+             return <h4 key={index}>{skill}</h4>
+           })
+         }
+       </div>
+     )
+  newDivs.push(newDiv)
+   })
+   return newDivs
+ }
+
 
   render () {
 
-    // console.log(this.props.user.education.length)
     return (
 
 
-      <div id="entire-container">
+      <div className="profile-container">
         {(!this.props.user.firstName) ? <h1>User Not Found</h1> : null}
         <h1>{this.props.user.firstName} {this.props.user.lastName}</h1>
         {this.props.user.headline ?
@@ -111,6 +146,9 @@ export default class UserProfile extends React.Component {
       </table>
       </div>
     ) : null) : null}
+
+    {this.props.user.skills ? (this.props.user.skills.length ?
+      this.renderSkills(this.props.user.skills) : null) : null}
 
 
     {(!this.props.notSelf) ? (  <div>

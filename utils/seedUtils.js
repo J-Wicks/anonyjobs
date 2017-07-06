@@ -63,7 +63,6 @@ function collectSkillsForDb() {
       skillsForDB.push(newSkillEntry)
     })
   })
-  console.log('skillsForDB', skillsForDB)
   return skillsForDB
 }
 
@@ -115,7 +114,7 @@ var skills = {
       'Recruiting', 'Screening', 'Onboarding', 'Scheduling', 'Performance Management', 'Employee Relations']
   },
   writing: {
-    name: 'Writing',
+    name: 'Journalism',
     exampleSkills: [
       'Editorials', 'Blogging', 'Editing', 'Press Releases']
   },
