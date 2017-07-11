@@ -15,4 +15,4 @@ const mapStateToProps = state => {
   })
 }
 
-export const SelfDashboardContainer = connect(mapStateToProps, null)(UserDashboard);
+export default connect(mapStateToProps, null)(UserDashboard);

@@ -1,10 +1,29 @@
 const faker = require('faker');
 let summaries = require('./genericSummaries').summaries;
 
-// const chance = require('chance');
-// const randomName = require('node-random-name');
-// const createName = require('./nameUtils').createFullName
+const createUser = function () {
+  let randomGender = genderSelect();
+  var currentName = createFullName(randomGender);
+  return {
+    firstName: currentName.split(' ')[0],
+    lastName: currentName.split(' ')[1],
+    email: faker.internet.email(),
+    password: faker.internet.password(),
+    summary: assignRandomSummary()
+  };
+}
 
+const createLastName = function () {
+  return lastNames[Math.floor(Math.random()*lastNames.length)]
+}
+
+const createFullName = function (gender){
+  let firstName, lastName
+  if (gender === "male") firstName = maleNames[Math.floor(Math.random()*maleNames.length)];
+  if (gender === "female") firstName = femaleNames[Math.floor(Math.random()*femaleNames.length)];
+  lastName = createLastName();
+  return  firstName + ' ' + lastName
+}
 
 const genderSelect = function () {
   let randomIdx = Math.floor(Math.random()*2);
@@ -19,39 +38,9 @@ const assignRandomSummary = function() {
   return summaries[Math.floor(Math.random()*summaries.length)]
 }
 
-
-const createUser = function () {
-  let randomGender = genderSelect();
-  var currentName = createFullName(randomGender);
-  return {
-    firstName: currentName.split(' ')[0],
-    lastName: currentName.split(' ')[1],
-    email: faker.internet.email(),
-    password: faker.internet.password(),
-    summary: assignRandomSummary()
-    // gender: randomGender,
-    // ,
-    // isAdmin: false
-  };
-}
-
-
-function createLastName () {
-  return lastNames[Math.floor(Math.random()*lastNames.length)]
-}
-
-function createFullName(gender){
-  let firstName, lastName
-  if (gender === "male") firstName = maleNames[Math.floor(Math.random()*maleNames.length)];
-  if (gender === "female") firstName = femaleNames[Math.floor(Math.random()*femaleNames.length)];
-  lastName = createLastName();
-  return  firstName + ' ' + lastName
-}
-
-function collectSkillsForDb() {
+const collectSkillsForDb = function () {
   let skillsForDB = [];
   let categories = Object.keys(skills);
-
   categories.forEach(function(category){
     let currentSkillObj = skills[category];
     let skillCategory = currentSkillObj.name;
@@ -66,72 +55,62 @@ function collectSkillsForDb() {
   return skillsForDB
 }
 
-
-function createUnderGradYear(){
-
-}
-
-function createMastersYear () {
-
-}
-
-function createPhDYear () {
-
-}
-
-function createEducationAndSkills(){
+const createEducationAndSkills = function () {
   let subjects = Object.keys(skills);
   let subjectIdx = Math.floor(Math.random()*skills.length)
   let randomSubject = subjects[subjectIdx];
 }
 
-
-
-function createSkills(subject, degree) {
+const createSkills = function (subject, degree) {
   let skillsPossibilities = skills[subject]
 }
-
 
 var skills = {
   technology: {
     name: 'Technology',
     exampleSkills: [
-        'Algorithms', 'Product Management', 'Front-End Development', 'Back-End Development', 'JavaScript', 'Ruby on Rails', 'Java', 'Python', 'HTML', 'CSS', 'Test-Driven Development', 'Database Management', 'Data Visualization']
+        "Algorithms", "Back-End Development", "CSS", "Data Visualization", "Database Management", "Front-End Development", "HTML", "Java", "JavaScript", "Product Management", "Python", "Ruby on Rails", "Test-Driven Development"
+      ]
   },
   finance: {
     name: 'Finance',
     exampleSkills: [
-      'Auditing', 'Internal Controls', 'Accounting', 'Budgeting', 'GAAP', 'Financial Forecasting']
+      "Accounting", "Auditing", "Budgeting", "Financial Forecasting", "GAAP", "Internal Controls"
+    ]
   },
   consulting: {
     name: 'Consulting',
     exampleSkills: [
-      'Proposal Development', 'Strategic Planning', 'Project Management', 'Monitoring & Evaluation']
+      "Monitoring & Evaluation", "Project Management", "Proposal Development", "Strategic Planning"
+    ]
   },
   humanResources: {
     name: 'Human Resources',
     exampleSkills: [
-      'Recruiting', 'Screening', 'Onboarding', 'Scheduling', 'Performance Management', 'Employee Relations']
+      "Employee Relations", "Onboarding", "Performance Management", "Recruiting", "Scheduling", "Screening"
+    ]
   },
   writing: {
     name: 'Journalism',
     exampleSkills: [
-      'Editorials', 'Blogging', 'Editing', 'Press Releases']
+      "Blogging", "Editing", "Editorials", "Press Releases"
+    ]
   },
   marketing: {
     name: 'Marketing',
     exampleSkills: [
-      'Social Media', 'Storytelling', 'Photoshop', 'Graphic Design', 'Photography', 'Market Analysis']
+      "Graphic Design", "Market Analysis", "Photography", "Photoshop", "Social Media", "Storytelling"
+    ]
   },
   foreignLanguage: {
     name: 'Foreign Language',
     exampleSkills: [
-      'French', 'Spanish', 'Italian', 'Russian', 'Mandarin', 'German', 'Thai', 'Greek', 'Hindi', 'Portuguese'
+      "French", "German", "Greek", "Hindi", "Italian", "Mandarin", "Portuguese", "Russian", "Spanish", "Thai"
     ]
   }
 }
 
-var lastNames = ['Abbott',
+const lastNames = ['Abbott',
   'Acevedo',
   'Acosta',
   'Adams',
@@ -1132,7 +1111,7 @@ var lastNames = ['Abbott',
   'Zamora',
   'Zimmerman'];
 
-var maleNames = ['Preston',
+const maleNames = ['Preston',
 'Hunter',
 'Michael',
 'Cole',
@@ -1172,7 +1151,7 @@ var maleNames = ['Preston',
 'Jean-Paul',
 'Donovan']
 
-let femaleNames = [
+const femaleNames = [
   'Edda',
   'Agnes',
   'Amanda',
@@ -1211,8 +1190,5 @@ let femaleNames = [
   'Puja',
   'Claire'
 ]
-
-
-
 
 module.exports = {genderSelect, createUser, createFullName, createLastName, femaleNames, maleNames, collectSkillsForDb}
