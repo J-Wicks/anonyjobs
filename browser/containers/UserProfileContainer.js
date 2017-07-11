@@ -16,4 +16,4 @@ const mapStateToProps = state => {
   })
 }
 
-export const UserProfileContainer = connect(mapStateToProps)(UserProfile);
+export default connect(mapStateToProps)(UserProfile);

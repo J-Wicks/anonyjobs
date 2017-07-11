@@ -3,7 +3,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {apply}from '../reducers/application'
 import { hashHistory } from 'react-router';
-import Posting from '../components/singlePosting'
+import Posting from '../components/SinglePosting'
 
 class SinglePostingContainer extends Component {
 
@@ -54,10 +54,10 @@ class SinglePostingContainer extends Component {
   render () {
     return (
       <div id="entire-container">
-      <Posting 
-      posting={this.props.posting} 
-      applyHandler={this.applyHandler} 
-      coverLetter={this.state.coverLetter || this.props.user.summary} 
+      <Posting
+      posting={this.props.posting}
+      applyHandler={this.applyHandler}
+      coverLetter={this.state.coverLetter || this.props.user.summary}
       testHandler={this.testHandler}
       coverLetterHandler={this.coverLetterHandler}
       predictedGender={this.state.gender}
