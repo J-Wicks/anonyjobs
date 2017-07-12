@@ -3,7 +3,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {apply}from '../reducers/application'
 import { hashHistory } from 'react-router';
-import Posting from '../components/SinglePosting'
+import Posting from '../components/singlePosting'
 
 class SinglePostingContainer extends Component {
 
@@ -12,8 +12,11 @@ class SinglePostingContainer extends Component {
     this.state = {
       coverLetter: '',
       gender: '',
+      genderWidth: '0%',
       orientation: '',
-      race: ''
+      orientationWidth: '0%',
+      race: '',
+      raceWidth: '0%'
    };
    this.coverLetterHandler = this.coverLetterHandler.bind(this)
    this.applyHandler = this.applyHandler.bind(this)
@@ -24,11 +27,14 @@ class SinglePostingContainer extends Component {
 
     axios.post('/api/applications/test', {coverLetter: this.state.coverLetter})
     .then( result => result.data)
-    .then(([gender, orientation, race]) => {
+    .then(([gender, genderProb, orientation, orientationProb, race, raceProb]) => {
       this.setState({
         gender,
+        genderWidth: Math.floor(genderProb*100)+'%',
         orientation,
-        race
+        orientationWidth: Math.floor(orientationProb*100)+'%',
+        race,
+        raceWidth: Math.floor(raceProb*100)+'%'
       })
       console.log(this.state)
     })
@@ -54,15 +60,19 @@ class SinglePostingContainer extends Component {
   render () {
     return (
       <div id="entire-container">
-      <Posting
-      posting={this.props.posting}
-      applyHandler={this.applyHandler}
-      coverLetter={this.state.coverLetter || this.props.user.summary}
+      <Posting 
+      posting={this.props.posting} 
+      applyHandler={this.applyHandler} 
+      coverLetter={this.state.coverLetter || this.props.user.summary} 
       testHandler={this.testHandler}
       coverLetterHandler={this.coverLetterHandler}
       predictedGender={this.state.gender}
       predictedRace={this.state.race}
-      predictedOrientation={this.state.orientation} />
+      predictedOrientation={this.state.orientation}
+      genderWidth={this.state.genderWidth}
+      orientationWidth={this.state.orientationWidth}
+      raceWidth={this.state.raceWidth}
+       />
 
       </div>
     )
