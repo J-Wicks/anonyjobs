@@ -1,3 +1,4 @@
+
 import numpy as np
 import pandas as pd
 import sys
@@ -40,10 +41,10 @@ genderData['gender'] = genderData['gender'].replace(
     value='Other',
     regex=True
 )
-
+gdf = genderData.drop(['orientation', 'race'], 1)
 # Set variables to train the genderModel and predict
-XGender = tfidf.fit_transform(genderVectorizer.fit_transform(genderData.writing))
-yGender = genderData.gender
+XGender = tfidf.fit_transform(genderVectorizer.fit_transform(gdf.writing))
+yGender = gdf.gender
 
 genderTest = tfidf.transform(genderVectorizer.transform([testString]))
 
@@ -51,7 +52,7 @@ genderTest = tfidf.transform(genderVectorizer.transform([testString]))
 from sklearn.naive_bayes import MultinomialNB
 genderModel = MultinomialNB().fit(XGender, yGender)
 genderPrediction = genderModel.predict(genderTest)
-
+genderProbs = genderModel.predict_proba(genderTest)
 ### END GENDER
 
 ### ORIENTATION
@@ -72,10 +73,11 @@ orientationData['orientation'] = orientationData['orientation'].replace(
     value='LGBTQ+',
     regex=True
 )
+df = orientationData.drop(['gender', 'race'], 1)
 
 # Set variables to train the orientationModel and predict
-XOrientation = tfidf.fit_transform(orientationVectorizer.fit_transform(orientationData.writing))
-yOrientation = orientationData.orientation
+XOrientation = tfidf.fit_transform(orientationVectorizer.fit_transform(df.writing))
+yOrientation = df.orientation
 
 orientationTest = tfidf.transform(orientationVectorizer.transform([testString]))
 
@@ -83,6 +85,7 @@ orientationTest = tfidf.transform(orientationVectorizer.transform([testString]))
 from sklearn.neighbors import KNeighborsClassifier
 orientationModel = KNeighborsClassifier(n_neighbors=25).fit(XOrientation, yOrientation)
 orientationPrediction = orientationModel.predict(orientationTest)
+orientationProbs = orientationModel.predict_proba(orientationTest)
 
 ### END ORIENTATION
 
@@ -104,21 +107,19 @@ raceData['race'] = raceData['race'].replace(
     value='PoC',
     regex=True
 )
-
+rdf = raceData.drop(['gender', 'orientation'], 1)
  # Set variables to train the raceModel and predict
-XRace = tfidf.fit_transform(raceVectorizer.fit_transform(raceData.writing))
-yRace = raceData.race
+XRace = tfidf.fit_transform(raceVectorizer.fit_transform(rdf.writing))
+yRace = rdf.race
 
 raceTest = tfidf.transform(raceVectorizer.transform([testString]))
 
 # Train the raceModel and predict the submitted string
 from sklearn.linear_model import SGDClassifier
-raceModel = SGDClassifier(loss='hinge', penalty='l2',
-                          alpha=1e-3, n_iter=5,
-                          random_state=1).fit(XRace, yRace)
+raceModel = MultinomialNB().fit(XRace, yRace)
 racePrediction = raceModel.predict(raceTest)
-
+raceProbs = raceModel.predict_proba(raceTest)
 ### END RACE
 
 # Return the predicted categories of all three models
-print(genderPrediction[0]+','+orientationPrediction[0]+','+racePrediction[0])
+print(genderPrediction[0]+',' + str(genderProbs[0].max()) + ',' + orientationPrediction[0] + ',' + str(orientationProbs[0].max()) + ',' + racePrediction[0] + ',' + str(raceProbs[0].max()))
