@@ -21,6 +21,24 @@ body {
 		height: 30vh;
 	}
 
+	.fullbar{
+		position: absolute;
+		background-color: gray;
+		height: 20px;
+		border-radius: 20px;
+		width: 100%;
+		z-index: -1;
+	}
+
+
+	.confidence {
+		z-index: 1;
+		display: inline-block;
+		height: 20px;
+		background-color: #69D1C5;
+		border-radius: 20px;
+	}
+	
 	.postings-div{
 		display: table-cell;
 		vertical-align: middle;
