@@ -78,7 +78,7 @@ const mlCheck = application => {
   console.log(application)
   return new Promise((resolve, reject) => {
     const options = {
-      pythonPath: '/usr/local/bin/python3',
+      // pythonPath: '/usr/local/bin/python3',
       scriptPath: path.join(__dirname, '../machineLearning'),
       args: application
     }
