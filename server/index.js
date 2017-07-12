@@ -56,8 +56,8 @@ passport.deserializeUser((id, done) => {
 
 
 passport.use(new LinkedInStrategy({
-	clientID: secrets.CLIENT_ID,
-	clientSecret: secrets.CLIENT_SECRET,
+	clientID: process.env.CLIENT_ID||secrets.CLIENT_ID,
+	clientSecret: process.env.CLIENT_SECRET||secrets.CLIENT_SECRET,
 	callbackURL: 'http://127.0.0.1:3000/home/signin-linkedin',
   // clientID: process.env.CLIENT_ID || secrets.CLIENT_ID,
   // clientSecret: process.env.CLIENT_SECRET || secrets.CLIENT_SECRET,
