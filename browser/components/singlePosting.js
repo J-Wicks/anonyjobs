@@ -29,8 +29,12 @@ export default function SinglePosting(props) {
 	    	<p>{` Race: ${props.predictedRace}`}</p>
 	    	</div>
 	    }
+	    <div>
 	    <button onClick={props.applyHandler}className='btn btn-success'> Apply Now! </button>
+	    </div>
+	    <div>
 	    <button onClick={props.testHandler}className='btn btn-success'> Test </button>
+	    </div>
 	</div>
   )
 }

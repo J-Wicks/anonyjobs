@@ -77,18 +77,16 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return ({
-
+  return {
       apply: (application) => {
+      
       dispatch(apply(application))
       },
 
       getDemos: (coverLetter) =>{
         axios.post('/api/applications/test', {coverLetter: coverLetter})
       }
-    }
-
-  )
+  }
 }
 
 
