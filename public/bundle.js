@@ -17063,7 +17063,7 @@ exports.default = UserProfile;
 
 
 Object.defineProperty(exports, "__esModule", {
-		value: true
+	value: true
 });
 exports.default = SinglePosting;
 
@@ -17077,111 +17077,149 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function SinglePosting(props) {
 
-		return _react2.default.createElement(
+	return _react2.default.createElement(
+		'div',
+		null,
+		_react2.default.createElement(
+			'div',
+			{ className: 'single-posting col-sm-6' },
+			_react2.default.createElement(
+				'strong',
+				{ className: 'label' },
+				'Title '
+			),
+			_react2.default.createElement(
+				'p',
+				null,
+				props.posting && props.posting.positionTitle
+			),
+			_react2.default.createElement(
+				'strong',
+				{ className: 'label' },
+				' Company '
+			),
+			_react2.default.createElement(
+				'p',
+				null,
+				' Hooli '
+			),
+			_react2.default.createElement(
+				'strong',
+				{ className: 'label' },
+				' Description '
+			),
+			_react2.default.createElement(
+				'p',
+				null,
+				props.posting && props.posting.positionDescription
+			),
+			_react2.default.createElement(
+				'strong',
+				{ className: 'label' },
+				' Education Required '
+			),
+			_react2.default.createElement(
+				'p',
+				null,
+				props.posting && props.posting.educationLevel + ' ' + props.posting.educationField
+			),
+			_react2.default.createElement(
+				'strong',
+				{ className: 'label' },
+				'Experience Required '
+			),
+			_react2.default.createElement(
+				'p',
+				null,
+				props.posting && ' ' + props.posting.experienceField + ' ' + props.posting.experienceLevel + '+ years'
+			),
+			_react2.default.createElement(
+				'p',
+				{ className: 'label' },
+				' Your Cover Letter '
+			),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement('textarea', { type: 'textarea', value: props.coverLetter, onChange: props.coverLetterHandler }),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement(
 				'div',
-				{ className: 'single-posting col-sm-8' },
+				null,
 				_react2.default.createElement(
-						'strong',
-						{ className: 'label' },
-						'Title '
-				),
-				_react2.default.createElement(
-						'p',
-						null,
-						props.posting && props.posting.positionTitle
-				),
-				_react2.default.createElement(
-						'strong',
-						{ className: 'label' },
-						' Company '
-				),
-				_react2.default.createElement(
-						'p',
-						null,
-						' Hooli '
-				),
-				_react2.default.createElement(
-						'strong',
-						{ className: 'label' },
-						' Description '
-				),
-				_react2.default.createElement(
-						'p',
-						null,
-						props.posting && props.posting.positionDescription
-				),
-				_react2.default.createElement(
-						'strong',
-						{ className: 'label' },
-						' Education Required '
-				),
-				_react2.default.createElement(
-						'p',
-						null,
-						props.posting && props.posting.educationLevel + ' ' + props.posting.educationField
-				),
-				_react2.default.createElement(
-						'strong',
-						{ className: 'label' },
-						'Experience Required '
-				),
-				_react2.default.createElement(
-						'p',
-						null,
-						props.posting && ' ' + props.posting.experienceField + ' ' + props.posting.experienceLevel + '+ years'
-				),
-				_react2.default.createElement(
-						'p',
-						{ className: 'label' },
-						' Your Cover Letter '
-				),
-				_react2.default.createElement('br', null),
-				_react2.default.createElement('textarea', { type: 'textarea', value: props.coverLetter, onChange: props.coverLetterHandler, className: 'form-control' }),
-				_react2.default.createElement('br', null),
-				props.predictedGender && _react2.default.createElement(
-						'div',
-						null,
-						_react2.default.createElement(
-								'p',
-								{ className: 'label' },
-								'Prediction:'
-						),
-						_react2.default.createElement(
-								'p',
-								null,
-								'Gender: ' + props.predictedGender
-						),
-						_react2.default.createElement(
-								'p',
-								null,
-								' Orientation: ' + props.predictedOrientation,
-								' '
-						),
-						_react2.default.createElement(
-								'p',
-								null,
-								' Race: ' + props.predictedRace
-						)
-				),
-				_react2.default.createElement(
-						'div',
-						null,
-						_react2.default.createElement(
-								'button',
-								{ onClick: props.applyHandler, className: 'btn btn-success' },
-								' Apply Now! '
-						)
-				),
-				_react2.default.createElement(
-						'div',
-						null,
-						_react2.default.createElement(
-								'button',
-								{ onClick: props.testHandler, className: 'btn btn-success' },
-								' Test '
-						)
+					'button',
+					{ onClick: props.applyHandler, className: 'btn btn-success' },
+					' Apply Now! '
 				)
-		);
+			),
+			_react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'button',
+					{ onClick: props.testHandler, className: 'btn btn-success' },
+					' Test '
+				)
+			)
+		),
+		_react2.default.createElement(
+			'div',
+			{ className: 'analysis col-sm-4' },
+			_react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'p',
+					{ className: 'label' },
+					'Prediction:'
+				),
+				_react2.default.createElement(
+					'p',
+					null,
+					'Gender: ' + props.predictedGender + ' ' + props.genderWidth
+				),
+				_react2.default.createElement(
+					'span',
+					{ className: 'fullbar' },
+					' '
+				),
+				_react2.default.createElement(
+					'span',
+					{ id: 'genderbar', className: 'confidence ' + (props.genderWidth > 55 ? 'danger' : null), style: { width: props.genderWidth } },
+					' '
+				),
+				_react2.default.createElement(
+					'p',
+					null,
+					' Orientation: ' + props.predictedOrientation + ' ' + props.orientationWidth,
+					' '
+				),
+				_react2.default.createElement(
+					'span',
+					{ className: 'fullbar' },
+					' '
+				),
+				_react2.default.createElement(
+					'span',
+					{ id: 'orientationbar', className: 'confidence ' + (props.orientationWidth == '64%' ? 'danger' : null), style: { width: props.orientationWidth } },
+					' '
+				),
+				_react2.default.createElement(
+					'p',
+					null,
+					' Race: ' + props.predictedRace + ' ' + props.raceWidth
+				),
+				_react2.default.createElement(
+					'span',
+					{ className: 'fullbar' },
+					' '
+				),
+				_react2.default.createElement(
+					'span',
+					{ id: 'racebar', className: 'confidence ' + (props.raceWidth == '68%' ? 'caution' : null), style: { width: props.raceWidth } },
+					' '
+				)
+			)
+		)
+	);
 }
 
 /***/ }),
@@ -51743,28 +51781,6 @@ function Home(props) {
 					null,
 					'Are you a recruiter searching for top talent? JobFair can help you find the best and brightest.'
 				)
-			),
-			_react2.default.createElement(
-				'div',
-				{ id: 'home', className: 'center' },
-				_react2.default.createElement(
-					'h1',
-					{ className: 'text-center' },
-					'Welcome to Job Fair'
-				),
-				_react2.default.createElement(
-					'div',
-					{ id: 'button-div' },
-					_react2.default.createElement(
-						'a',
-						{ href: '/api/auth/linkedin' },
-						_react2.default.createElement(
-							'button',
-							{ id: 'login-button', className: 'btn btn-primary fa fa-linkedin-square', type: 'submit' },
-							' Login with LinkedIn'
-						)
-					)
-				)
 			)
 		)
 	);
@@ -52558,9 +52574,9 @@ var _application = __webpack_require__(40);
 
 var _reactRouter = __webpack_require__(7);
 
-var _SinglePosting = __webpack_require__(151);
+var _singlePosting = __webpack_require__(151);
 
-var _SinglePosting2 = _interopRequireDefault(_SinglePosting);
+var _singlePosting2 = _interopRequireDefault(_singlePosting);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -52581,8 +52597,11 @@ var SinglePostingContainer = function (_Component) {
     _this.state = {
       coverLetter: '',
       gender: '',
+      genderWidth: '0%',
       orientation: '',
-      race: ''
+      orientationWidth: '0%',
+      race: '',
+      raceWidth: '0%'
     };
     _this.coverLetterHandler = _this.coverLetterHandler.bind(_this);
     _this.applyHandler = _this.applyHandler.bind(_this);
@@ -52598,15 +52617,21 @@ var SinglePostingContainer = function (_Component) {
       _axios2.default.post('/api/applications/test', { coverLetter: this.state.coverLetter }).then(function (result) {
         return result.data;
       }).then(function (_ref) {
-        var _ref2 = _slicedToArray(_ref, 3),
+        var _ref2 = _slicedToArray(_ref, 6),
             gender = _ref2[0],
-            orientation = _ref2[1],
-            race = _ref2[2];
+            genderProb = _ref2[1],
+            orientation = _ref2[2],
+            orientationProb = _ref2[3],
+            race = _ref2[4],
+            raceProb = _ref2[5];
 
         _this2.setState({
           gender: gender,
+          genderWidth: Math.floor(genderProb * 100) + '%',
           orientation: orientation,
-          race: race
+          orientationWidth: Math.floor(orientationProb * 100) + '%',
+          race: race,
+          raceWidth: Math.floor(raceProb * 100) + '%'
         });
         console.log(_this2.state);
       });
@@ -52635,7 +52660,7 @@ var SinglePostingContainer = function (_Component) {
       return _react2.default.createElement(
         'div',
         { id: 'entire-container' },
-        _react2.default.createElement(_SinglePosting2.default, {
+        _react2.default.createElement(_singlePosting2.default, {
           posting: this.props.posting,
           applyHandler: this.applyHandler,
           coverLetter: this.state.coverLetter || this.props.user.summary,
@@ -52643,7 +52668,11 @@ var SinglePostingContainer = function (_Component) {
           coverLetterHandler: this.coverLetterHandler,
           predictedGender: this.state.gender,
           predictedRace: this.state.race,
-          predictedOrientation: this.state.orientation })
+          predictedOrientation: this.state.orientation,
+          genderWidth: this.state.genderWidth,
+          orientationWidth: this.state.orientationWidth,
+          raceWidth: this.state.raceWidth
+        })
       );
     }
   }]);
@@ -52807,12 +52836,12 @@ Object.defineProperty(exports, 'Postings', {
   }
 });
 
-var _SinglePosting = __webpack_require__(151);
+var _singlePosting = __webpack_require__(151);
 
 Object.defineProperty(exports, 'SinglePosting', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_SinglePosting).default;
+    return _interopRequireDefault(_singlePosting).default;
   }
 });
 
