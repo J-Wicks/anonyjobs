@@ -42,7 +42,7 @@ router.post('/addexperience', (req, res) => {
 	})
 	.then(() => {
 		return User.findById(userId, {
-			include: [{model: Experience}]
+			include: [{model: Experience}, {model: Skill}, {model: Education}]
 		})
 	})
 	.then(returnedUser => {

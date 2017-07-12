@@ -164,7 +164,7 @@ export default class UserProfile extends React.Component {
 
 
     {(!this.props.notSelf) ? (  <div className="bottom-profile-links">
-        <Link to="createProfile"><h4>Edit Profile</h4></Link>
+        <Link to="/createProfile"><h4>Update Profile</h4></Link>
         <Link to={`userdashboard/${this.props.user.id}`}><h4>View Dashboard</h4></Link>
       </div>
     )

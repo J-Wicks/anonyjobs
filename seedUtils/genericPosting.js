@@ -1,83 +1,30 @@
-const technology = 'technology';
-const media = 'media';
-const finance = 'finance';
-const consulting = 'consulting';
-const journalism = 'journalism';
-const marketing = 'marketing';
-const education = 'education';
-
-let postings = {
-  technology: [],
-  media: [],
-  finance: [],
-  consulting: [],
-  journalism: [],
-  marketing: [],
-  education: []
+const createPosting = function (sector) {
+    if (sector === 'Human Resources') sector = 'humanResources'
+    let experienceRanking = createExperienceRanking();
+    let possibilities = Object.assign({}, jobFields[sector][experienceRanking]);
+    let educationLevel = possibilities['educationLevel'][Math.floor(Math.random()*possibilities['educationLevel'].length)];
+    let educationField = possibilities['educationField'][Math.floor(Math.random()*possibilities['educationField'].length)];
+    let experienceField = possibilities['experienceField'][Math.floor(Math.random()*possibilities['experienceField'].length)];
+    let experienceLevel = createExperienceLevel(experienceRanking)
+    let wholePosition = possibilities['positions'][Math.floor(Math.random()*possibilities['positions'].length)];
+    let positionTitle = wholePosition.title;
+    let positionDescription = wholePosition.description;
+    return {positionTitle, positionDescription, educationLevel, educationField, experienceLevel, experienceField}
 }
 
-function createJobPosting(sector){
-  switch (sector) {
-    case technology:
-      return createTechPosting();
-    case media:
-      return createMediaPosting();
-    case finance:
-      return createFinancePosting();
-    case consulting:
-      return createConsultingPosting();
-    case journalism:
-      return createJournalismPosting();
-    case marketing:
-      return createMarketingPosting();
-    case education:
-      return createEducationPosting();
-    default:
-      return 'job not created'
-  }
-
-}
-
-
-function createExperienceRanking(){
+const createExperienceRanking = function () {
   let levels = ['one', 'two', 'three']
-
-  // return levels[Math.floor(Math.random()*levels.length) - 1]
   let idx = Math.floor(Math.random()*levels.length);
-  // console.log(levels[idx])
   return levels[idx]
-  // console.log(idx);
-  // console.log(levels[idx])
-  // console.log(Math.floor(Math.random()*levels.length) )
-  // console.log( levels[Math.floor(Math.random()*levels.length)])
-
 };
 
-createExperienceRanking()
-
-function createExperienceLevel(ranking){
+const createExperienceLevel = function (ranking) {
   if (ranking === 'one') return 2
   if (ranking === 'two') return 8
   if (ranking === 'three') return 15
 }
 
-function createTechPosting() {
-  // determine experience level;
-    // this will spit out the  experience level, educationLevel,
-    let experienceLevel = createExperienceLevel();
-    let possibilities = Object.assign({}, jobFields[sector][experiencelevel]);
-    let positionTitle;
-}
-
-
-
-
-// createPosting('Education');
-// console.log(dog)
-// var dog ={cat: 'hi'};
-
-
-var jobFields = {
+const jobFields = {
   Technology: {
     one: {
       educationLevel: ['B.A.', 'B.S.'],
@@ -195,7 +142,6 @@ var jobFields = {
       ]
     },
     three: {
-
       educationLevel: ['M.S.', 'PhD'],
       educationField: ['Business', 'Accounting', 'Finance'],
       experienceField: ['Consulting', 'Business Advisory'],
@@ -227,7 +173,6 @@ var jobFields = {
       ]
     },
     three: {
-
       educationLevel: ['M.S.', 'PhD'],
       educationField: ['Journalism', 'Media Studies', 'Communication'],
       experienceField: ['Journalism'],
@@ -299,34 +244,9 @@ var jobFields = {
       positions: [
         {title: 'Director of Education Services', description: 'We are seeking a dynamic and innovative educator and leader to fill our role of Director of Education Services. The new Director will lead the successful operation of our growing and innovative education programs, develop curriculum, maintain contracts, and manage a staff of more than a dozen teachers. He or she will: provides thought leadership and leads the growth of educational vision services; develop and maintain relationships with Education Directors, school systems, and other key education influencers; manage requests for services and staff caseloads; collaborate with Early Supports and Services agencies to provide for vision needs of children ages birth to three; contributes to marketing, business development, and grant proposal efforts.' },
         {title: 'Educational Leadership Director', description: 'We are seeking an Educational Services Advisor to join our Staff Development Solutions Team. For the right motivated individual, there is an excellent opportunity for career development and advancement. Consultants work in a deadline-oriented, fast paced environment as part of a growing team consisting of consulting and operations staff. This position revolves around technology, policy and financial management functions. Consultants are vital in achieving stated business objectives. Responsibilities include leading current projects and working with project managers to develop new business in a fast-paced and demanding environment. The selected candidate will be responsible for: preparing written status reports for clients; assisting proposal teams, including writing sections, coordinating efforts, and preparing proposal submissions; and leading clients through implementation processes for our web-based technologies.'},
-
       ]
     }
   }
 }
 
-// console.log(jobFields['Education'])
-
-function createPosting(sector) {
-  // determine experience level;
-    // this will spit out the  experience level, educationLevel,
-    // let sector= sector;
-    if (sector === 'Human Resources') sector = 'humanResources'
-
-    let experienceRanking = createExperienceRanking();
-    console.log('experienceRanking', experienceRanking)
-    let possibilities = Object.assign({}, jobFields[sector][experienceRanking]);
-    let educationLevel = possibilities['educationLevel'][Math.floor(Math.random()*possibilities['educationLevel'].length)];
-    let educationField = possibilities['educationField'][Math.floor(Math.random()*possibilities['educationField'].length)];
-    let experienceField = possibilities['experienceField'][Math.floor(Math.random()*possibilities['experienceField'].length)];
-    let experienceLevel = createExperienceLevel(experienceRanking)
-    let wholePosition = possibilities['positions'][Math.floor(Math.random()*possibilities['positions'].length)];
-    let positionTitle = wholePosition.title;
-    let positionDescription = wholePosition.description;
-    return {positionTitle, positionDescription, educationLevel, educationField, experienceLevel, experienceField}
-
-}
-
-
 module.exports = {createPosting, jobFields}
-// create a

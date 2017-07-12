@@ -1,13 +1,4 @@
-//**** create random Company
-
-//
-// create random Posting
-// assign posting to companu
-
-let company = []
-
-
-
+const company = []
 
 company.push({
   HRemail: 'hr@hoooli.com',
@@ -16,7 +7,6 @@ company.push({
   hrFirstName: 'Jane',
   hrLastName: 'Doe'
 })
-
 
 company.push({
   HRemail: 'hr@techwizard.com',
@@ -42,7 +32,6 @@ company.push({
   hrLastName: 'Doe'
 })
 
-
 company.push({
   HRemail: 'hr@technovations.com',
   companyName: 'TechNovations',
@@ -50,7 +39,6 @@ company.push({
   hrFirstName: 'Jane',
   hrLastName: 'Doe'
 })
-
 
 company.push({
   HRemail: 'hr@fin-solve.com',
