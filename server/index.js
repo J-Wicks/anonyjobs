@@ -58,7 +58,7 @@ passport.deserializeUser((id, done) => {
 passport.use(new LinkedInStrategy({
 	clientID: process.env.CLIENT_ID||secrets.CLIENT_ID,
 	clientSecret: process.env.CLIENT_SECRET||secrets.CLIENT_SECRET,
-	callbackURL: 'http://127.0.0.1:3000/home/signin-linkedin',
+	callbackURL: 'https://jobfairapp.herokuapp/home/signin-linkedin',
   // clientID: process.env.CLIENT_ID || secrets.CLIENT_ID,
   // clientSecret: process.env.CLIENT_SECRET || secrets.CLIENT_SECRET,
   // callbackURL: process.env.HEROKU ? 'https://damp-shelf-63214.herokuapp.com/home/signin-linkedin' : 'http://127.0.0.1:3000/home/signin-linkedin',
